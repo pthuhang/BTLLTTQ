@@ -1,0 +1,68 @@
+﻿using QUANLYNHANSU.BLL;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace QUANLYNHANSU.GUI
+{
+    public partial class frmLogin : Form
+    {
+        TaiKhoanBLL taiKhoanBLL = new TaiKhoanBLL();
+
+        public frmLogin()
+        {
+            InitializeComponent();
+
+            // Đặt form ra giữa màn hình
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // Đặt kích thước cố định
+            this.Size = new System.Drawing.Size(650, 420);
+
+            // Không cho resize
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            // Ẩn nút phóng to
+            this.MaximizeBox = false;
+
+
+        }
+
+
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            string user = txtTenDangNhap.Text.Trim();
+            string pass = txtMatKhau.Text.Trim();
+
+            if (taiKhoanBLL.DangNhap(user, pass))
+            {
+                MessageBox.Show("Đăng nhập thành công!");
+                this.Hide();
+                new frmMain().Show();
+            }
+            else
+            {
+                lblThongBao.Visible = true;
+                lblThongBao.Text = "Sai tên đăng nhập hoặc mật khẩu!";
+                lblThongBao.ForeColor = System.Drawing.Color.Red;
+                lblThongBao.Left = (panel7.Width - lblThongBao.Width) / 2;
+            }
+        }
+
+        private void chbHienMK_CheckedChanged(object sender, EventArgs e)
+        {
+            txtMatKhau.UseSystemPasswordChar = !chbHienMK.Checked;
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
