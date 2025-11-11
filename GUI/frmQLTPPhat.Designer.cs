@@ -1,6 +1,6 @@
 ﻿namespace QUANLYNHANSU.GUI
 {
-    partial class frmQLNSKiLuat
+    partial class frmQLTPPhat
     {
         /// <summary>
         /// Required designer variable.
@@ -47,11 +47,13 @@
             this.txtMaKiLuat = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtMaNVTimKiem = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
             this.XemDSKL = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnLoc = new System.Windows.Forms.Button();
@@ -60,8 +62,6 @@
             this.txtThangLoc = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvKiLuat = new System.Windows.Forms.DataGridView();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -71,9 +71,9 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKiLuat)).BeginInit();
-            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -99,7 +99,6 @@
             this.btnThoat.TabIndex = 12;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
-            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnLuu
             // 
@@ -110,7 +109,6 @@
             this.btnLuu.TabIndex = 11;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
-            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnXoa
             // 
@@ -121,7 +119,6 @@
             this.btnXoa.TabIndex = 10;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -132,7 +129,6 @@
             this.btnSua.TabIndex = 9;
             this.btnSua.Text = "Sửa thông tin";
             this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -143,7 +139,6 @@
             this.btnThem.TabIndex = 8;
             this.btnThem.Text = "Thêm mới";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // panel2
             // 
@@ -310,6 +305,20 @@
             this.panel6.Size = new System.Drawing.Size(700, 125);
             this.panel6.TabIndex = 1;
             // 
+            // label9
+            // 
+            this.label9.AllowDrop = true;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(35)))), ((int)(((byte)(100)))));
+            this.label9.Location = new System.Drawing.Point(182, 60);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(30, 13, 30, 10);
+            this.label9.Size = new System.Drawing.Size(275, 48);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "Nhập thông tin kỉ luật";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // txtMaNVTimKiem
             // 
             this.txtMaNVTimKiem.Location = new System.Drawing.Point(400, 27);
@@ -336,7 +345,6 @@
             this.btnTimKiem.TabIndex = 12;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // panel5
             // 
@@ -359,6 +367,15 @@
             this.panel3.Size = new System.Drawing.Size(894, 75);
             this.panel3.TabIndex = 13;
             // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.btnTimKiem);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel12.Location = new System.Drawing.Point(744, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(150, 75);
+            this.panel12.TabIndex = 13;
+            // 
             // XemDSKL
             // 
             this.XemDSKL.Dock = System.Windows.Forms.DockStyle.Left;
@@ -369,7 +386,6 @@
             this.XemDSKL.TabIndex = 13;
             this.XemDSKL.Text = "Xem danh sách kỉ luật";
             this.XemDSKL.UseVisualStyleBackColor = true;
-            this.XemDSKL.Click += new System.EventHandler(this.XemDSKL_Click);
             // 
             // panel4
             // 
@@ -396,7 +412,6 @@
             this.btnLoc.TabIndex = 13;
             this.btnLoc.Text = "Lọc";
             this.btnLoc.UseVisualStyleBackColor = true;
-            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
             // txtNamLoc
             // 
@@ -444,32 +459,8 @@
             this.dgvKiLuat.RowTemplate.Height = 24;
             this.dgvKiLuat.Size = new System.Drawing.Size(894, 367);
             this.dgvKiLuat.TabIndex = 15;
-            this.dgvKiLuat.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKiLuat_CellClick);
             // 
-            // label9
-            // 
-            this.label9.AllowDrop = true;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(35)))), ((int)(((byte)(100)))));
-            this.label9.Location = new System.Drawing.Point(182, 60);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(30, 13, 30, 10);
-            this.label9.Size = new System.Drawing.Size(275, 48);
-            this.label9.TabIndex = 36;
-            this.label9.Text = "Nhập thông tin kỉ luật";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.btnTimKiem);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(744, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(150, 75);
-            this.panel12.TabIndex = 13;
-            // 
-            // frmQLNSKiLuat
+            // frmQLTPPhat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -481,9 +472,9 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmQLNSKiLuat";
+            this.Name = "frmQLTPPhat";
             this.Text = "frmQLNSKiLuat";
-            this.Load += new System.EventHandler(this.frmQLNSKiLuat_Load);
+            this.Load += new System.EventHandler(this.frmQLTPPhat_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
@@ -500,10 +491,10 @@
             this.panel6.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel12.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKiLuat)).EndInit();
-            this.panel12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

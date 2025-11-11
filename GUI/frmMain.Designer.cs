@@ -42,11 +42,13 @@ namespace QUANLYNHANSU.GUI
         }
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.llbDangXuat = new System.Windows.Forms.LinkLabel();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnQLTaiKhoan = new System.Windows.Forms.Button();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.btnThuongPhat = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDangXuat = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnQLLuong = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -56,10 +58,13 @@ namespace QUANLYNHANSU.GUI
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelView = new System.Windows.Forms.Panel();
             this.panelMenu.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -67,33 +72,12 @@ namespace QUANLYNHANSU.GUI
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(60)))), ((int)(((byte)(140)))));
-            this.label1.Location = new System.Drawing.Point(136, 36);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // llbDangXuat
-            // 
-            this.llbDangXuat.AutoSize = true;
-            this.llbDangXuat.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(60)))), ((int)(((byte)(140)))));
-            this.llbDangXuat.Location = new System.Drawing.Point(127, 68);
-            this.llbDangXuat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.llbDangXuat.Name = "llbDangXuat";
-            this.llbDangXuat.Size = new System.Drawing.Size(56, 13);
-            this.llbDangXuat.TabIndex = 0;
-            this.llbDangXuat.TabStop = true;
-            this.llbDangXuat.Text = "Đăng xuất";
-            // 
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(35)))), ((int)(((byte)(100)))));
             this.panelMenu.Controls.Add(this.panel2);
+            this.panelMenu.Controls.Add(this.panel10);
+            this.panelMenu.Controls.Add(this.panel1);
             this.panelMenu.Controls.Add(this.panel7);
             this.panelMenu.Controls.Add(this.panel6);
             this.panelMenu.Controls.Add(this.panel5);
@@ -101,20 +85,18 @@ namespace QUANLYNHANSU.GUI
             this.panelMenu.Controls.Add(this.panel3);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(218, 594);
+            this.panelMenu.Size = new System.Drawing.Size(290, 731);
             this.panelMenu.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnQLTaiKhoan);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 262);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Location = new System.Drawing.Point(0, 370);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(218, 41);
-            this.panel2.TabIndex = 6;
+            this.panel2.Size = new System.Drawing.Size(290, 50);
+            this.panel2.TabIndex = 12;
             // 
             // btnQLTaiKhoan
             // 
@@ -123,22 +105,64 @@ namespace QUANLYNHANSU.GUI
             this.btnQLTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLTaiKhoan.ForeColor = System.Drawing.Color.White;
             this.btnQLTaiKhoan.Location = new System.Drawing.Point(0, 0);
-            this.btnQLTaiKhoan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnQLTaiKhoan.Name = "btnQLTaiKhoan";
-            this.btnQLTaiKhoan.Size = new System.Drawing.Size(218, 41);
-            this.btnQLTaiKhoan.TabIndex = 1;
+            this.btnQLTaiKhoan.Size = new System.Drawing.Size(290, 50);
+            this.btnQLTaiKhoan.TabIndex = 3;
             this.btnQLTaiKhoan.Text = "Quản lý tài khoản";
             this.btnQLTaiKhoan.UseVisualStyleBackColor = false;
-            this.btnQLTaiKhoan.Click += new System.EventHandler(this.btnQLTaiKhoan_Click);
+            this.btnQLTaiKhoan.Click += new System.EventHandler(this.btnQLTaiKhoan_Click_1);
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.btnThuongPhat);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 320);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(290, 50);
+            this.panel10.TabIndex = 11;
+            // 
+            // btnThuongPhat
+            // 
+            this.btnThuongPhat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(60)))), ((int)(((byte)(140)))));
+            this.btnThuongPhat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnThuongPhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThuongPhat.ForeColor = System.Drawing.Color.White;
+            this.btnThuongPhat.Location = new System.Drawing.Point(0, 0);
+            this.btnThuongPhat.Name = "btnThuongPhat";
+            this.btnThuongPhat.Size = new System.Drawing.Size(290, 50);
+            this.btnThuongPhat.TabIndex = 2;
+            this.btnThuongPhat.Text = "Khen thưởng và kỉ luật";
+            this.btnThuongPhat.UseVisualStyleBackColor = false;
+            this.btnThuongPhat.Click += new System.EventHandler(this.btnThuongPhat_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnDangXuat);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 631);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(290, 100);
+            this.panel1.TabIndex = 8;
+            // 
+            // btnDangXuat
+            // 
+            this.btnDangXuat.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnDangXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(35)))), ((int)(((byte)(100)))));
+            this.btnDangXuat.Location = new System.Drawing.Point(73, 28);
+            this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.Size = new System.Drawing.Size(145, 45);
+            this.btnDangXuat.TabIndex = 9;
+            this.btnDangXuat.Text = "Đăng xuất";
+            this.btnDangXuat.UseVisualStyleBackColor = true;
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // panel7
             // 
             this.panel7.Controls.Add(this.btnQLLuong);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 221);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Location = new System.Drawing.Point(0, 270);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(218, 41);
+            this.panel7.Size = new System.Drawing.Size(290, 50);
             this.panel7.TabIndex = 4;
             // 
             // btnQLLuong
@@ -148,9 +172,8 @@ namespace QUANLYNHANSU.GUI
             this.btnQLLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLLuong.ForeColor = System.Drawing.Color.White;
             this.btnQLLuong.Location = new System.Drawing.Point(0, 0);
-            this.btnQLLuong.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnQLLuong.Name = "btnQLLuong";
-            this.btnQLLuong.Size = new System.Drawing.Size(218, 41);
+            this.btnQLLuong.Size = new System.Drawing.Size(290, 50);
             this.btnQLLuong.TabIndex = 1;
             this.btnQLLuong.Text = "Quản lý lương";
             this.btnQLLuong.UseVisualStyleBackColor = false;
@@ -160,10 +183,9 @@ namespace QUANLYNHANSU.GUI
             // 
             this.panel6.Controls.Add(this.btnQLCong);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 180);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Location = new System.Drawing.Point(0, 220);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(218, 41);
+            this.panel6.Size = new System.Drawing.Size(290, 50);
             this.panel6.TabIndex = 3;
             // 
             // btnQLCong
@@ -173,9 +195,8 @@ namespace QUANLYNHANSU.GUI
             this.btnQLCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLCong.ForeColor = System.Drawing.Color.White;
             this.btnQLCong.Location = new System.Drawing.Point(0, 0);
-            this.btnQLCong.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnQLCong.Name = "btnQLCong";
-            this.btnQLCong.Size = new System.Drawing.Size(218, 41);
+            this.btnQLCong.Size = new System.Drawing.Size(290, 50);
             this.btnQLCong.TabIndex = 1;
             this.btnQLCong.Text = "Quản lý công";
             this.btnQLCong.UseVisualStyleBackColor = false;
@@ -185,10 +206,9 @@ namespace QUANLYNHANSU.GUI
             // 
             this.panel5.Controls.Add(this.btnQLNhanSu);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 139);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Location = new System.Drawing.Point(0, 170);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(218, 41);
+            this.panel5.Size = new System.Drawing.Size(290, 50);
             this.panel5.TabIndex = 2;
             // 
             // btnQLNhanSu
@@ -198,9 +218,8 @@ namespace QUANLYNHANSU.GUI
             this.btnQLNhanSu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLNhanSu.ForeColor = System.Drawing.Color.White;
             this.btnQLNhanSu.Location = new System.Drawing.Point(0, 0);
-            this.btnQLNhanSu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnQLNhanSu.Name = "btnQLNhanSu";
-            this.btnQLNhanSu.Size = new System.Drawing.Size(218, 41);
+            this.btnQLNhanSu.Size = new System.Drawing.Size(290, 50);
             this.btnQLNhanSu.TabIndex = 0;
             this.btnQLNhanSu.Text = "Quản lý nhân sự";
             this.btnQLNhanSu.UseVisualStyleBackColor = false;
@@ -210,10 +229,9 @@ namespace QUANLYNHANSU.GUI
             // 
             this.panel4.Controls.Add(this.label2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 98);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Location = new System.Drawing.Point(0, 120);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(218, 41);
+            this.panel4.Size = new System.Drawing.Size(290, 50);
             this.panel4.TabIndex = 1;
             // 
             // label2
@@ -224,10 +242,9 @@ namespace QUANLYNHANSU.GUI
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(22, 11, 22, 8);
-            this.label2.Size = new System.Drawing.Size(221, 41);
+            this.label2.Padding = new System.Windows.Forms.Padding(40, 13, 40, 10);
+            this.label2.Size = new System.Drawing.Size(290, 49);
             this.label2.TabIndex = 0;
             this.label2.Text = "Chức năng quản lý";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -235,53 +252,61 @@ namespace QUANLYNHANSU.GUI
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel3.Controls.Add(this.llbDangXuat);
+            this.panel3.Controls.Add(this.panel8);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.panel9);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(218, 98);
+            this.panel3.Size = new System.Drawing.Size(290, 120);
             this.panel3.TabIndex = 0;
+            this.panel3.Resize += new System.EventHandler(this.panel3_Resize);
             // 
-            // panel9
+            // panel8
             // 
-            this.panel9.AllowDrop = true;
-            this.panel9.BackgroundImage = global::QUANLYNHANSU.Properties.Resources.Ảnh_chụp_màn_hình_2025_10_27_143933;
-            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(90, 98);
-            this.panel9.TabIndex = 2;
+            this.panel8.AllowDrop = true;
+            this.panel8.BackgroundImage = global::QUANLYNHANSU.Properties.Resources.Ảnh_chụp_màn_hình_2025_10_27_143933;
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel8.Location = new System.Drawing.Point(100, 4);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(82, 81);
+            this.panel8.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cascadia Code", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(60)))), ((int)(((byte)(140)))));
+            this.label1.Location = new System.Drawing.Point(112, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 22);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "label1";
             // 
             // panelView
             // 
             this.panelView.BackColor = System.Drawing.Color.White;
             this.panelView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelView.Location = new System.Drawing.Point(218, 0);
-            this.panelView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelView.Location = new System.Drawing.Point(290, 0);
             this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(845, 594);
+            this.panelView.Size = new System.Drawing.Size(1127, 731);
             this.panelView.TabIndex = 1;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(1063, 594);
+            this.ClientSize = new System.Drawing.Size(1417, 731);
             this.Controls.Add(this.panelView);
             this.Controls.Add(this.panelMenu);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmMain";
             this.Text = "Trang chủ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panelMenu.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -298,7 +323,6 @@ namespace QUANLYNHANSU.GUI
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelView;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button btnQLTaiKhoan;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnQLLuong;
         private System.Windows.Forms.Panel panel5;
@@ -306,10 +330,14 @@ namespace QUANLYNHANSU.GUI
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnQLNhanSu;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel llbDangXuat;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private Label label1;
+        private Panel panel1;
+        private Button btnDangXuat;
+        private Panel panel8;
+        private Panel panel10;
+        private Panel panel2;
+        private Button btnQLTaiKhoan;
+        private Button btnThuongPhat;
     }
 }

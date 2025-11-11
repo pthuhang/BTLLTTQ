@@ -12,49 +12,51 @@ namespace QUANLYNHANSU.GUI
 {
     public partial class frmMain : Form
     {
+        private string tenDangNhap;
+        public frmMain(string tenDangNhap)
+        {
+            InitializeComponent();
+            this.tenDangNhap = tenDangNhap;
+
+            label1.Text = "Xin chào, " + tenDangNhap + "!";
+            label1.Left = (panel3.ClientSize.Width - label1.Width) / 2;
+
+        }
         public frmMain()
         {
             InitializeComponent();
         }
-        private void CaiDatButton(Button btn)
-        {
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = Color.FromArgb(39, 58, 115);
-            btn.ForeColor = Color.White;
-            btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            btn.Height = 50;
-            btn.Cursor = Cursors.Hand;
 
-            // Hiệu ứng hover
-            btn.MouseEnter += (s, e) =>
-            {
-                btn.BackColor = Color.FromArgb(58, 87, 176);
-            };
-            btn.MouseLeave += (s, e) =>
-            {
-                btn.BackColor = Color.FromArgb(39, 58, 115);
-            };
-        }
-        
 
         private void MoFormCon(Form childForm)
         {
-            // Xóa form con cũ trong panel (nếu có)
             panelView.Controls.Clear();
 
-            // Cấu hình form con
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
 
-            // Thêm form con vào panel
             panelView.Controls.Add(childForm);
             panelView.Tag = childForm;
 
-            // Hiển thị form con
             childForm.Show();
         }
+        private void HighlightTab(Button selectedButton)
+        {
+            Button[] tabs = { btnQLNhanSu, btnQLLuong, btnQLCong, btnThuongPhat, btnQLTaiKhoan };
+
+            foreach (Button btn in tabs)
+            {
+                btn.BackColor = Color.FromArgb(33, 150, 243);
+                btn.ForeColor = Color.White;
+                btn.FlatAppearance.BorderSize = 0;
+                btn.FlatStyle = FlatStyle.Flat;
+            }
+
+            selectedButton.BackColor = Color.MediumSeaGreen;
+            selectedButton.ForeColor = Color.White;
+        }
+
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -62,7 +64,9 @@ namespace QUANLYNHANSU.GUI
             StyleButton(btnQLCong);
             StyleButton(btnQLLuong);
             StyleButton(btnQLTaiKhoan);
+            StyleButton(btnThuongPhat);
         }
+
         private void btnQLNhanSu_Click(object sender, EventArgs e)
         {
             MoFormCon(new frmQLNhanSu());
@@ -80,49 +84,38 @@ namespace QUANLYNHANSU.GUI
             MoFormCon(new frmQLLuong());
             HighlightTab(btnQLLuong);
         }
-
-        private void btnQLTaiKhoan_Click(object sender, EventArgs e)
+        private void btnThuongPhat_Click(object sender, EventArgs e)
+        {
+            MoFormCon(new frmQLThuongPhat());
+            HighlightTab(btnThuongPhat);
+        }
+        private void btnQLTaiKhoan_Click_1(object sender, EventArgs e)
         {
             MoFormCon(new frmQLTaiKhoan());
             HighlightTab(btnQLTaiKhoan);
         }
-        //Link label Đăng xuất
-        private void llbDangXuat_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
                 "Bạn có chắc chắn muốn đăng xuất không?",
-                "Xác nhận",
+                "Xác nhận đăng xuất",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
+                MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                this.Hide();
-
-                frmLogin loginForm = new frmLogin();
-                loginForm.Show();
-
+                this.Close();
+                frmLogin frm = new frmLogin();
+                frm.Show();
             }
         }
-        private void HighlightTab(Button selectedButton)
+
+        private void panel3_Resize(object sender, EventArgs e)
         {
-            // Danh sách các nút tab
-            Button[] tabs = { btnQLNhanSu, btnQLLuong, btnQLCong, btnQLTaiKhoan };
-
-            // Reset màu tất cả tab
-            foreach (Button btn in tabs)
-            {
-                btn.BackColor = Color.FromArgb(33, 150, 243); // Màu xanh mặc định
-                btn.ForeColor = Color.White;
-                btn.FlatAppearance.BorderSize = 0;
-                btn.FlatStyle = FlatStyle.Flat;
-            }
-
-            // Làm nổi bật tab được chọn
-            selectedButton.BackColor = Color.MediumSeaGreen; // Màu nổi bật (hoặc màu bạn chọn)
-            selectedButton.ForeColor = Color.White;
+            label1.Left = (panel3.ClientSize.Width - label1.Width) / 2;
         }
 
+        
     }
 }

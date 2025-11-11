@@ -12,15 +12,16 @@ namespace QUANLYNHANSU.BLL
     public class TaiKhoanBLL
     {
         private TaiKhoanDAL dal = new TaiKhoanDAL();
-
-        public bool DangNhap(string tenDangNhap, string matKhau)
+        //
+        public DataRow DangNhap(string tenDangNhap, string matKhau)
         {
             if (string.IsNullOrWhiteSpace(tenDangNhap) || string.IsNullOrWhiteSpace(matKhau))
-                return false;
+                return null;
 
             DataRow row = dal.KiemTraDangNhap(tenDangNhap, matKhau);
-            return row != null;
+            return row;
         }
+        //
         public DataTable LayDanhSach()
         {
             return dal.LayDanhSachTaiKhoan();

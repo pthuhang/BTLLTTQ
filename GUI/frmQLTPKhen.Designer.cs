@@ -1,6 +1,6 @@
 ﻿namespace QUANLYNHANSU.GUI
 {
-    partial class frmQLNSKiLuat
+    partial class frmQLTPKhen
     {
         /// <summary>
         /// Required designer variable.
@@ -32,36 +32,36 @@
             this.btnThem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.txtTienKL = new System.Windows.Forms.TextBox();
+            this.txtTienKhen = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.txtNoiDung = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.dtpNgayKL = new System.Windows.Forms.DateTimePicker();
+            this.dtpNgayKhen = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.txtMaKiLuat = new System.Windows.Forms.TextBox();
+            this.txtMaKT = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtMaNVTimKiem = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.XemDSKL = new System.Windows.Forms.Button();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.btnXemDSKT = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnLoc = new System.Windows.Forms.Button();
             this.txtNamLoc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtThangLoc = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.dgvKiLuat = new System.Windows.Forms.DataGridView();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.dgvKhenThuong = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -71,9 +71,9 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKiLuat)).BeginInit();
             this.panel12.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKhenThuong)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -84,10 +84,10 @@
             this.panel1.Controls.Add(this.btnSua);
             this.panel1.Controls.Add(this.btnThem);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 492);
+            this.panel1.Location = new System.Drawing.Point(0, 516);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1694, 90);
+            this.panel1.Size = new System.Drawing.Size(1692, 90);
             this.panel1.TabIndex = 2;
             // 
             // btnThoat
@@ -99,7 +99,6 @@
             this.btnThoat.TabIndex = 12;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
-            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnLuu
             // 
@@ -110,7 +109,6 @@
             this.btnLuu.TabIndex = 11;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
-            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnXoa
             // 
@@ -121,7 +119,6 @@
             this.btnXoa.TabIndex = 10;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -132,7 +129,6 @@
             this.btnSua.TabIndex = 9;
             this.btnSua.Text = "Sửa thông tin";
             this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -143,7 +139,6 @@
             this.btnThem.TabIndex = 8;
             this.btnThem.Text = "Thêm mới";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // panel2
             // 
@@ -157,12 +152,12 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(700, 492);
+            this.panel2.Size = new System.Drawing.Size(700, 516);
             this.panel2.TabIndex = 3;
             // 
             // panel11
             // 
-            this.panel11.Controls.Add(this.txtTienKL);
+            this.panel11.Controls.Add(this.txtTienKhen);
             this.panel11.Controls.Add(this.label5);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 365);
@@ -171,22 +166,22 @@
             this.panel11.Size = new System.Drawing.Size(700, 60);
             this.panel11.TabIndex = 6;
             // 
-            // txtTienKL
+            // txtTienKhen
             // 
-            this.txtTienKL.Location = new System.Drawing.Point(200, 20);
-            this.txtTienKL.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTienKL.Name = "txtTienKL";
-            this.txtTienKL.Size = new System.Drawing.Size(351, 22);
-            this.txtTienKL.TabIndex = 2;
+            this.txtTienKhen.Location = new System.Drawing.Point(247, 19);
+            this.txtTienKhen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTienKhen.Name = "txtTienKhen";
+            this.txtTienKhen.Size = new System.Drawing.Size(351, 22);
+            this.txtTienKhen.TabIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(69, 22);
+            this.label5.Location = new System.Drawing.Point(109, 22);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 16);
+            this.label5.Size = new System.Drawing.Size(109, 16);
             this.label5.TabIndex = 1;
-            this.label5.Text = "Tiền kỉ luật";
+            this.label5.Text = "Tiền khen thưởng";
             // 
             // panel10
             // 
@@ -201,8 +196,9 @@
             // 
             // txtNoiDung
             // 
-            this.txtNoiDung.Location = new System.Drawing.Point(200, 20);
+            this.txtNoiDung.Location = new System.Drawing.Point(247, 19);
             this.txtNoiDung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNoiDung.Multiline = true;
             this.txtNoiDung.Name = "txtNoiDung";
             this.txtNoiDung.Size = new System.Drawing.Size(351, 22);
             this.txtNoiDung.TabIndex = 2;
@@ -210,7 +206,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(69, 22);
+            this.label4.Location = new System.Drawing.Point(109, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 16);
             this.label4.TabIndex = 1;
@@ -218,7 +214,7 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.dtpNgayKL);
+            this.panel9.Controls.Add(this.dtpNgayKhen);
             this.panel9.Controls.Add(this.label3);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 245);
@@ -227,22 +223,22 @@
             this.panel9.Size = new System.Drawing.Size(700, 60);
             this.panel9.TabIndex = 4;
             // 
-            // dtpNgayKL
+            // dtpNgayKhen
             // 
-            this.dtpNgayKL.Location = new System.Drawing.Point(200, 20);
-            this.dtpNgayKL.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpNgayKL.Name = "dtpNgayKL";
-            this.dtpNgayKL.Size = new System.Drawing.Size(351, 22);
-            this.dtpNgayKL.TabIndex = 3;
+            this.dtpNgayKhen.Location = new System.Drawing.Point(247, 22);
+            this.dtpNgayKhen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpNgayKhen.Name = "dtpNgayKhen";
+            this.dtpNgayKhen.Size = new System.Drawing.Size(351, 22);
+            this.dtpNgayKhen.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 22);
+            this.label3.Location = new System.Drawing.Point(109, 27);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 16);
+            this.label3.Size = new System.Drawing.Size(115, 16);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Ngày kỉ luật";
+            this.label3.Text = "Ngày khen thưởng";
             // 
             // panel8
             // 
@@ -257,7 +253,7 @@
             // 
             // txtMaNV
             // 
-            this.txtMaNV.Location = new System.Drawing.Point(200, 18);
+            this.txtMaNV.Location = new System.Drawing.Point(247, 16);
             this.txtMaNV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(351, 22);
@@ -266,7 +262,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(69, 22);
+            this.label2.Location = new System.Drawing.Point(109, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 16);
             this.label2.TabIndex = 1;
@@ -274,7 +270,7 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.txtMaKiLuat);
+            this.panel7.Controls.Add(this.txtMaKT);
             this.panel7.Controls.Add(this.label1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 125);
@@ -283,22 +279,22 @@
             this.panel7.Size = new System.Drawing.Size(700, 60);
             this.panel7.TabIndex = 2;
             // 
-            // txtMaKiLuat
+            // txtMaKT
             // 
-            this.txtMaKiLuat.Location = new System.Drawing.Point(200, 20);
-            this.txtMaKiLuat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtMaKiLuat.Name = "txtMaKiLuat";
-            this.txtMaKiLuat.Size = new System.Drawing.Size(351, 22);
-            this.txtMaKiLuat.TabIndex = 1;
+            this.txtMaKT.Location = new System.Drawing.Point(247, 16);
+            this.txtMaKT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtMaKT.Name = "txtMaKT";
+            this.txtMaKT.Size = new System.Drawing.Size(351, 22);
+            this.txtMaKT.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 22);
+            this.label1.Location = new System.Drawing.Point(109, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 16);
+            this.label1.Size = new System.Drawing.Size(101, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Mã kỉ luật";
+            this.label1.Text = "Mã khen thưởng";
             // 
             // panel6
             // 
@@ -309,6 +305,20 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(700, 125);
             this.panel6.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AllowDrop = true;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(35)))), ((int)(((byte)(100)))));
+            this.label9.Location = new System.Drawing.Point(182, 60);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(30, 13, 30, 10);
+            this.label9.Size = new System.Drawing.Size(337, 48);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Nhập thông tin khen thưởng";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtMaNVTimKiem
             // 
@@ -336,15 +346,14 @@
             this.btnTimKiem.TabIndex = 12;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(1594, 0);
+            this.panel5.Location = new System.Drawing.Point(1592, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(100, 492);
+            this.panel5.Size = new System.Drawing.Size(100, 516);
             this.panel5.TabIndex = 7;
             // 
             // panel3
@@ -356,24 +365,32 @@
             this.panel3.Location = new System.Drawing.Point(700, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(894, 75);
+            this.panel3.Size = new System.Drawing.Size(892, 75);
             this.panel3.TabIndex = 13;
             // 
-            // XemDSKL
+            // panel12
             // 
-            this.XemDSKL.Dock = System.Windows.Forms.DockStyle.Left;
-            this.XemDSKL.Location = new System.Drawing.Point(0, 0);
-            this.XemDSKL.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.XemDSKL.Name = "XemDSKL";
-            this.XemDSKL.Size = new System.Drawing.Size(200, 50);
-            this.XemDSKL.TabIndex = 13;
-            this.XemDSKL.Text = "Xem danh sách kỉ luật";
-            this.XemDSKL.UseVisualStyleBackColor = true;
-            this.XemDSKL.Click += new System.EventHandler(this.XemDSKL_Click);
+            this.panel12.Controls.Add(this.btnTimKiem);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel12.Location = new System.Drawing.Point(742, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(150, 75);
+            this.panel12.TabIndex = 13;
+            // 
+            // btnXemDSKT
+            // 
+            this.btnXemDSKT.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnXemDSKT.Location = new System.Drawing.Point(0, 0);
+            this.btnXemDSKT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnXemDSKT.Name = "btnXemDSKT";
+            this.btnXemDSKT.Size = new System.Drawing.Size(200, 50);
+            this.btnXemDSKT.TabIndex = 13;
+            this.btnXemDSKT.Text = "Xem danh sách khen thưởng";
+            this.btnXemDSKT.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.XemDSKL);
+            this.panel4.Controls.Add(this.btnXemDSKT);
             this.panel4.Controls.Add(this.btnLoc);
             this.panel4.Controls.Add(this.txtNamLoc);
             this.panel4.Controls.Add(this.label7);
@@ -383,20 +400,19 @@
             this.panel4.Location = new System.Drawing.Point(700, 75);
             this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(894, 50);
+            this.panel4.Size = new System.Drawing.Size(892, 50);
             this.panel4.TabIndex = 14;
             // 
             // btnLoc
             // 
             this.btnLoc.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnLoc.Location = new System.Drawing.Point(744, 0);
+            this.btnLoc.Location = new System.Drawing.Point(742, 0);
             this.btnLoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoc.Name = "btnLoc";
             this.btnLoc.Size = new System.Drawing.Size(150, 50);
             this.btnLoc.TabIndex = 13;
             this.btnLoc.Text = "Lọc";
             this.btnLoc.UseVisualStyleBackColor = true;
-            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
             // txtNamLoc
             // 
@@ -432,58 +448,34 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "Tháng";
             // 
-            // dgvKiLuat
+            // dgvKhenThuong
             // 
-            this.dgvKiLuat.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvKiLuat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKiLuat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvKiLuat.Location = new System.Drawing.Point(700, 125);
-            this.dgvKiLuat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvKiLuat.Name = "dgvKiLuat";
-            this.dgvKiLuat.RowHeadersWidth = 51;
-            this.dgvKiLuat.RowTemplate.Height = 24;
-            this.dgvKiLuat.Size = new System.Drawing.Size(894, 367);
-            this.dgvKiLuat.TabIndex = 15;
-            this.dgvKiLuat.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKiLuat_CellClick);
+            this.dgvKhenThuong.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvKhenThuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKhenThuong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvKhenThuong.Location = new System.Drawing.Point(700, 125);
+            this.dgvKhenThuong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvKhenThuong.Name = "dgvKhenThuong";
+            this.dgvKhenThuong.RowHeadersWidth = 51;
+            this.dgvKhenThuong.RowTemplate.Height = 24;
+            this.dgvKhenThuong.Size = new System.Drawing.Size(892, 391);
+            this.dgvKhenThuong.TabIndex = 15;
             // 
-            // label9
-            // 
-            this.label9.AllowDrop = true;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(35)))), ((int)(((byte)(100)))));
-            this.label9.Location = new System.Drawing.Point(182, 60);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(30, 13, 30, 10);
-            this.label9.Size = new System.Drawing.Size(275, 48);
-            this.label9.TabIndex = 36;
-            this.label9.Text = "Nhập thông tin kỉ luật";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.btnTimKiem);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(744, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(150, 75);
-            this.panel12.TabIndex = 13;
-            // 
-            // frmQLNSKiLuat
+            // frmQLTPKhen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1694, 582);
-            this.Controls.Add(this.dgvKiLuat);
+            this.ClientSize = new System.Drawing.Size(1692, 606);
+            this.Controls.Add(this.dgvKhenThuong);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmQLNSKiLuat";
-            this.Text = "frmQLNSKiLuat";
-            this.Load += new System.EventHandler(this.frmQLNSKiLuat_Load);
+            this.Name = "frmQLTPKhen";
+            this.Text = "frmQLNSKhenThuong";
+            this.Load += new System.EventHandler(this.frmQLTPKhen_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
@@ -500,10 +492,10 @@
             this.panel6.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel12.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKiLuat)).EndInit();
-            this.panel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKhenThuong)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -518,19 +510,19 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.TextBox txtTienKL;
+        private System.Windows.Forms.TextBox txtTienKhen;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtNoiDung;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtMaKiLuat;
+        private System.Windows.Forms.TextBox txtMaKT;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.DateTimePicker dtpNgayKL;
+        private System.Windows.Forms.DateTimePicker dtpNgayKhen;
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.TextBox txtMaNVTimKiem;
         private System.Windows.Forms.Label label8;
@@ -543,9 +535,9 @@
         private System.Windows.Forms.TextBox txtNamLoc;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtThangLoc;
-        private System.Windows.Forms.DataGridView dgvKiLuat;
-        private System.Windows.Forms.Button XemDSKL;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView dgvKhenThuong;
+        private System.Windows.Forms.Button btnXemDSKT;
         private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label9;
     }
 }

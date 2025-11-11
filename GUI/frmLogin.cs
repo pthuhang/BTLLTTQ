@@ -18,40 +18,60 @@ namespace QUANLYNHANSU.GUI
         public frmLogin()
         {
             InitializeComponent();
-
             // Đặt form ra giữa màn hình
             this.StartPosition = FormStartPosition.CenterScreen;
-
             // Đặt kích thước cố định
             this.Size = new System.Drawing.Size(650, 420);
-
             // Không cho resize
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-
             // Ẩn nút phóng to
             this.MaximizeBox = false;
-
-
         }
-
-
+        //
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             string user = txtTenDangNhap.Text.Trim();
             string pass = txtMatKhau.Text.Trim();
 
-            if (taiKhoanBLL.DangNhap(user, pass))
+            if (string.IsNullOrEmpty(user))
             {
-                MessageBox.Show("Đăng nhập thành công!");
+                lblThongBao.Text = "Vui lòng nhập tên đăng nhập!";
+                lblThongBao.ForeColor = Color.Red;
+                lblThongBao.Visible = true;
+                lblThongBao.Left = (paBoxDangNhap.Width - lblThongBao.Width) / 2;
+                txtTenDangNhap.Focus();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(pass))
+            {
+                lblThongBao.Text = "Vui lòng nhập  mật khẩu!";
+                lblThongBao.ForeColor = Color.Red;
+                lblThongBao.Visible = true;
+                lblThongBao.Left = (paBoxDangNhap.Width - lblThongBao.Width) / 2;
+                txtMatKhau.Focus();
+                return;
+            }
+
+            DataRow userRow = taiKhoanBLL.DangNhap(user, pass);
+            if (userRow != null)
+            {
+                string vaiTro = userRow["VaiTro"].ToString();
+
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
-                new frmMain().Show();
+                if (vaiTro.Equals("Quản trị viên", StringComparison.OrdinalIgnoreCase))
+                    new frmMain(user).Show();
+                else
+                    new frmMainNhanVien(user).Show();
             }
             else
             {
                 lblThongBao.Visible = true;
                 lblThongBao.Text = "Sai tên đăng nhập hoặc mật khẩu!";
                 lblThongBao.ForeColor = System.Drawing.Color.Red;
-                lblThongBao.Left = (panel7.Width - lblThongBao.Width) / 2;
+                lblThongBao.Left = (paBoxDangNhap.Width - lblThongBao.Width) / 2;
             }
         }
 

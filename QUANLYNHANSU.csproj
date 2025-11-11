@@ -98,6 +98,30 @@
     <Compile Include="DAL\TangCaDAL.cs" />
     <Compile Include="DAL\TangCa_NhanVienDAL.cs" />
     <Compile Include="DAL\TrinhDoDAL.cs" />
+    <Compile Include="GUI\frmBangCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmBangCong.Designer.cs">
+      <DependentUpon>frmBangCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmBangLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmBangLuong.Designer.cs">
+      <DependentUpon>frmBangLuong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmBoSungKhauTru.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmBoSungKhauTru.Designer.cs">
+      <DependentUpon>frmBoSungKhauTru.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmHopDong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmHopDong.Designer.cs">
+      <DependentUpon>frmHopDong.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +133,12 @@
     </Compile>
     <Compile Include="GUI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmMainNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmMainNhanVien.Designer.cs">
+      <DependentUpon>frmMainNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmQLCDuLieuChamCong.cs">
       <SubType>Form</SubType>
@@ -133,6 +163,18 @@
     </Compile>
     <Compile Include="GUI\frmQLCTangCa.Designer.cs">
       <DependentUpon>frmQLCTangCa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLLBangLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLLBangLuong.Designer.cs">
+      <DependentUpon>frmQLLBangLuong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLLPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLLPhuCap.Designer.cs">
+      <DependentUpon>frmQLLPhuCap.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmQLLuong.cs">
       <SubType>Form</SubType>
@@ -182,6 +224,42 @@
     <Compile Include="GUI\frmQLTaiKhoan.Designer.cs">
       <DependentUpon>frmQLTaiKhoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmQLTaiKhoanCaNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLTaiKhoanCaNhan.Designer.cs">
+      <DependentUpon>frmQLTaiKhoanCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLTaiKhoanNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLTaiKhoanNhanVien.Designer.cs">
+      <DependentUpon>frmQLTaiKhoanNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLThuongPhat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLThuongPhat.Designer.cs">
+      <DependentUpon>frmQLThuongPhat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLTPKhen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLTPKhen.Designer.cs">
+      <DependentUpon>frmQLTPKhen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLTPPhat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLTPPhat.Designer.cs">
+      <DependentUpon>frmQLTPPhat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmThongTinCaNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmThongTinCaNhan.Designer.cs">
+      <DependentUpon>frmThongTinCaNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BangLuong.cs" />
     <Compile Include="Models\HopDong.cs" />
     <Compile Include="Models\KhenThuong.cs" />
@@ -200,11 +278,26 @@
     <Compile Include="Models\TrinhDo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\frmBangCong.resx">
+      <DependentUpon>frmBangCong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmBangLuong.resx">
+      <DependentUpon>frmBangLuong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmBoSungKhauTru.resx">
+      <DependentUpon>frmBoSungKhauTru.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmHopDong.resx">
+      <DependentUpon>frmHopDong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmMainNhanVien.resx">
+      <DependentUpon>frmMainNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLCDuLieuChamCong.resx">
       <DependentUpon>frmQLCDuLieuChamCong.cs</DependentUpon>
@@ -217,6 +310,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLCTangCa.resx">
       <DependentUpon>frmQLCTangCa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLLBangLuong.resx">
+      <DependentUpon>frmQLLBangLuong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLLPhuCap.resx">
+      <DependentUpon>frmQLLPhuCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLLuong.resx">
+      <DependentUpon>frmQLLuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLNhanSu.resx">
       <DependentUpon>frmQLNhanSu.cs</DependentUpon>
@@ -235,6 +337,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLNSPhongBan.resx">
       <DependentUpon>frmQLNSPhongBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTaiKhoan.resx">
+      <DependentUpon>frmQLTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTaiKhoanCaNhan.resx">
+      <DependentUpon>frmQLTaiKhoanCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTaiKhoanNhanVien.resx">
+      <DependentUpon>frmQLTaiKhoanNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLThuongPhat.resx">
+      <DependentUpon>frmQLThuongPhat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTPKhen.resx">
+      <DependentUpon>frmQLTPKhen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTPPhat.resx">
+      <DependentUpon>frmQLTPPhat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmThongTinCaNhan.resx">
+      <DependentUpon>frmThongTinCaNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -261,14 +384,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="QLNhanSuDB.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="QLNhanSuDB_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>QLNhanSuDB.mdf</DependentUpon>
-    </Content>
-    <None Include="Resources\Ảnh chụp màn hình 2025-10-27 143933.png" />
+    <None Include="Resources\IconAccount.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

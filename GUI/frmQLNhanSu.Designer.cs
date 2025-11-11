@@ -39,10 +39,6 @@ namespace QUANLYNHANSU.GUI
             this.header = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.menuChucNangQLNS = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.btnKiLuat = new System.Windows.Forms.Button();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.btnKhen = new System.Windows.Forms.Button();
             this.panel13 = new System.Windows.Forms.Panel();
             this.btnHopDong = new System.Windows.Forms.Button();
             this.panel12 = new System.Windows.Forms.Panel();
@@ -53,8 +49,6 @@ namespace QUANLYNHANSU.GUI
             this.panelViewQLNhanSu = new System.Windows.Forms.Panel();
             this.header.SuspendLayout();
             this.menuChucNangQLNS.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel16.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -86,8 +80,6 @@ namespace QUANLYNHANSU.GUI
             // menuChucNangQLNS
             // 
             this.menuChucNangQLNS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.menuChucNangQLNS.Controls.Add(this.panel17);
-            this.menuChucNangQLNS.Controls.Add(this.panel16);
             this.menuChucNangQLNS.Controls.Add(this.panel13);
             this.menuChucNangQLNS.Controls.Add(this.panel12);
             this.menuChucNangQLNS.Controls.Add(this.panel11);
@@ -96,50 +88,6 @@ namespace QUANLYNHANSU.GUI
             this.menuChucNangQLNS.Name = "menuChucNangQLNS";
             this.menuChucNangQLNS.Size = new System.Drawing.Size(1479, 60);
             this.menuChucNangQLNS.TabIndex = 2;
-            // 
-            // panel17
-            // 
-            this.panel17.Controls.Add(this.btnKiLuat);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel17.Location = new System.Drawing.Point(592, 0);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(148, 60);
-            this.panel17.TabIndex = 6;
-            // 
-            // btnKiLuat
-            // 
-            this.btnKiLuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(190)))), ((int)(((byte)(216)))));
-            this.btnKiLuat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnKiLuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(136)))), ((int)(((byte)(229)))));
-            this.btnKiLuat.Location = new System.Drawing.Point(0, 0);
-            this.btnKiLuat.Name = "btnKiLuat";
-            this.btnKiLuat.Size = new System.Drawing.Size(148, 60);
-            this.btnKiLuat.TabIndex = 1;
-            this.btnKiLuat.Text = "Kỉ luật";
-            this.btnKiLuat.UseVisualStyleBackColor = false;
-            this.btnKiLuat.Click += new System.EventHandler(this.btnKiLuat_Click);
-            // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.btnKhen);
-            this.panel16.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel16.Location = new System.Drawing.Point(444, 0);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(148, 60);
-            this.panel16.TabIndex = 5;
-            // 
-            // btnKhen
-            // 
-            this.btnKhen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(190)))), ((int)(((byte)(216)))));
-            this.btnKhen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnKhen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(136)))), ((int)(((byte)(229)))));
-            this.btnKhen.Location = new System.Drawing.Point(0, 0);
-            this.btnKhen.Name = "btnKhen";
-            this.btnKhen.Size = new System.Drawing.Size(148, 60);
-            this.btnKhen.TabIndex = 1;
-            this.btnKhen.Text = "Khen thưởng";
-            this.btnKhen.UseVisualStyleBackColor = false;
-            this.btnKhen.Click += new System.EventHandler(this.btnKhen_Click);
             // 
             // panel13
             // 
@@ -240,8 +188,6 @@ namespace QUANLYNHANSU.GUI
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
             this.menuChucNangQLNS.ResumeLayout(false);
-            this.panel17.ResumeLayout(false);
-            this.panel16.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
@@ -254,16 +200,12 @@ namespace QUANLYNHANSU.GUI
         private System.Windows.Forms.Panel header;
         private System.Windows.Forms.Label label1;
         private Panel menuChucNangQLNS;
-        private Panel panel17;
-        private Panel panel16;
         private Panel panel13;
         private Panel panel12;
         private Button btnPhongBan;
         private Panel panel11;
         private Button btnNhanVien;
         private Panel panel10;
-        private Button btnKiLuat;
-        private Button btnKhen;
         private Button btnHopDong;
         private Panel panelViewQLNhanSu;
     }

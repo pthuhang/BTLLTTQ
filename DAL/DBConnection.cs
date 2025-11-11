@@ -14,9 +14,9 @@ namespace QUANLYNHANSU.DAL
 
         public DBConnection()
         {
-            string connStr = ConfigurationManager.ConnectionStrings["QLNhanSuDBConnectionString"].ConnectionString;
+            string connStr = ConfigurationManager.ConnectionStrings["DBConnectString"].ConnectionString;
             conn = new SqlConnection(connStr);
         }
-      
+
     }
 }

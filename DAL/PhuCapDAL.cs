@@ -18,31 +18,40 @@ namespace QUANLYNHANSU.DAL
             da.Fill(dt);
             return dt;
         }
-        public void Them(string ma, string ten, decimal soTien)
+        public void Them(string maPC, string tenPC, decimal tienPC)
         {
-            string sql = "INSERT INTO PhuCap VALUES(@Ma, @Ten, @SoTien)";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@Ma", ma);
-            cmd.Parameters.AddWithValue("@Ten", ten);
-            cmd.Parameters.AddWithValue("@SoTien", soTien);
-            conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            string sql = "INSERT INTO PhuCap (MaPhuCap, TenPhuCap, TienPhuCap) VALUES (@MaPC, @TenPC, @TienPC)";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MaPC", maPC);
+                cmd.Parameters.AddWithValue("@TenPC", tenPC);
+                cmd.Parameters.AddWithValue("@TienPC", tienPC);
+                conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            }
         }
 
-        public void Sua(string ma, string ten, decimal soTien)
+        public void Sua(string maPC, string tenPC, decimal tienPC)
         {
-            string sql = "UPDATE PhuCap SET TenPhuCap=@Ten, SoTien=@SoTien WHERE MaPhuCap=@Ma";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@Ma", ma);
-            cmd.Parameters.AddWithValue("@Ten", ten);
-            cmd.Parameters.AddWithValue("@SoTien", soTien);
-            conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            string sql = "UPDATE PhuCap SET TenPhuCap=@TenPC, TienPhuCap=@TienPC WHERE MaPhuCap=@Ma";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MaPC", maPC);
+                cmd.Parameters.AddWithValue("@TenPC", tenPC);
+                cmd.Parameters.AddWithValue("@TienPC", tienPC);
+                conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            }
         }
 
-        public void Xoa(string ma)
+        public void Xoa(string maPC)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM PhuCap WHERE MaPhuCap=@Ma", conn);
-            cmd.Parameters.AddWithValue("@Ma", ma);
-            conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            string sql = "DELETE FROM PhuCap WHERE MaPhuCap=@Ma";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MaPC", maPC);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
         }
     }
 }

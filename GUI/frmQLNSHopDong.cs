@@ -278,5 +278,10 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi tải danh sách: " + ex.Message);
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

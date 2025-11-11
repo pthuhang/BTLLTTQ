@@ -22,7 +22,7 @@ namespace QUANLYNHANSU.BLL
             dal.Them(maPC, tenPC, tienPC);
         }
 
-        public void CapNhat(string maPC, string tenPC, decimal tienPC)
+        public void Sua(string maPC, string tenPC, decimal tienPC)
         {
             dal.Sua(maPC, tenPC, tienPC);
         }
