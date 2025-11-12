@@ -296,7 +296,7 @@
             this.panel21.TabIndex = 31;
             // 
             // txtSTK
-            // 
+            //
             this.txtSTK.Location = new System.Drawing.Point(150, 9);
             this.txtSTK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSTK.Name = "txtSTK";

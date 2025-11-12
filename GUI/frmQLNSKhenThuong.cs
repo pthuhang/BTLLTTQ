@@ -174,14 +174,14 @@ namespace QUANLYNHANSU.GUI
                     }
 
                     ktBLL.Them(maKT, noiDung, tienKT);
-                    ktnvBLL.Them(maKT, maNV, ngayKT, tienKT);
+                    ktnvBLL.Them(maKT, maNV, ngayKT);
 
                     MessageBox.Show("Thêm khen thưởng mới thành công!");
                 }
                 else if (currentAction == "Sua")
                 {
                     ktBLL.CapNhat(maKT, noiDung, tienKT);
-                    ktnvBLL.CapNhat(maKT, maNV, ngayKT, tienKT);
+                    ktnvBLL.CapNhat(maKT, maNV, ngayKT);
 
                     MessageBox.Show("Cập nhật khen thưởng thành công!");
                 }

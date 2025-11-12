@@ -13,7 +13,9 @@ namespace QUANLYNHANSU.GUI
     public partial class frmMainNhanVien : Form
     {
         private string tenDangNhap; // biến lưu tên người đăng nhập
-        public frmMainNhanVien(string tenDangNhap)
+        private string maNV;
+
+        public frmMainNhanVien(string maNV, string tenDangNhap)
         {
             InitializeComponent();
             this.tenDangNhap = tenDangNhap;
@@ -22,10 +24,10 @@ namespace QUANLYNHANSU.GUI
             label1.Left = (panel3.ClientSize.Width - label1.Width) / 2;
 
         }
-        public frmMainNhanVien()
-        {
-            InitializeComponent();
-        }
+        //public frmMainNhanVien()
+        //{
+        //    InitializeComponent();
+        //}
         //---
         private void HighlightTab(Button selectedButton)
         {
@@ -58,7 +60,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnThongTinCaNhan_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmThongTinCaNhan());
+            MoFormCon(new frmThongTinCaNhan(tenDangNhap));
                 HighlightTab(btnThongTinCaNhan);
         }
 
@@ -70,7 +72,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnBoSungKhauTru_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmBoSungKhauTru());
+            MoFormCon(new frmBoSungKhauTru(maNV));
             HighlightTab(btnBoSungKhauTru);
         }
 
@@ -82,7 +84,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnHopDong_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmHopDong());
+            MoFormCon(new frmHopDong(tenDangNhap));
             HighlightTab(btnHopDong);
         }
 

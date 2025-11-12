@@ -20,7 +20,7 @@ namespace QUANLYNHANSU.GUI
         private PhongBanBLL bllPB = new PhongBanBLL();
         private TrinhDoBLL bllTD = new TrinhDoBLL();
 
-        private string currentAction = ""; 
+        private string currentAction = "";
         public frmQLNSNhanVien()
         {
             InitializeComponent();
@@ -223,7 +223,8 @@ namespace QUANLYNHANSU.GUI
                         return;
                     }
                     bll.Them(maNV, hoTen, gioiTinh, ngaySinh, sdt, cccd, diaChi, email,
-                    trangThai, maPhongBan, maTrinhDo, chucVu,
+                    trangThai, maPhongBan, maTrinhDo, chucVu, 
+
                     soBH, mucDong, stk);
                     MessageBox.Show("Thêm nhân viên mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     HienThiDanhSach();
@@ -401,7 +402,7 @@ namespace QUANLYNHANSU.GUI
                 ClearForm();
                 EnableForm(false);
                 SetDefaultButtonState();
-                MessageBox.Show("Đã tải lại danh sách tất cả nhân viên!","Thông báo",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đã tải lại danh sách tất cả nhân viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

@@ -175,6 +175,7 @@
             this.btnXem.TabIndex = 34;
             this.btnXem.Text = "Xem";
             this.btnXem.UseVisualStyleBackColor = true;
+            this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
             // 
             // panel18
             // 
@@ -196,6 +197,11 @@
             // cbNam
             // 
             this.cbNam.FormattingEnabled = true;
+            this.cbNam.Items.AddRange(new object[] {
+            "2022",
+            "2023",
+            "2024",
+            "2025"});
             this.cbNam.Location = new System.Drawing.Point(354, 43);
             this.cbNam.Name = "cbNam";
             this.cbNam.Size = new System.Drawing.Size(121, 24);

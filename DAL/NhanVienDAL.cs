@@ -32,8 +32,28 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataTable LayNhanVienTheoTenDangNhap(string tenDangNhap)
+        {
+            string sql = @"
+                SELECT nv.*, td.TenTrinhDo, pb.TenPhongBan
+                FROM NhanVien nv
+                INNER JOIN TaiKhoan tk ON nv.MaNV = tk.MaNV
+                LEFT JOIN TrinhDo td on td.MaTrinhDo = nv.MaTrinhDo
+                LEFT JOIN PhongBan pb on pb.MaPhongBan = Nv.MaPhongBan
+                WHERE tk.TenDangNhap = @TenDangNhap";
 
-        public void  Them(
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
+        public void Them(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
             string chucVu, string soBH, decimal mucDong, string stk)
@@ -81,14 +101,17 @@ namespace QUANLYNHANSU.DAL
         public void Sua(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
-            string chucVu,string soBH, decimal mucDong, string stk)
+
+            string chucVu, string soBH, decimal mucDong, string stk)
+
         {
             const string sql = @"
                 UPDATE NhanVien SET 
                     HoTen=@Ten, GioiTinh=@GT, NgaySinh=@NgaySinh, SDT=@SDT, CCCD=@CCCD, 
                     DiaChi=@DiaChi, Email=@Email, TrangThai=@TrangThai, 
-                    MaPhongBan=@Phong, MaTrinhDo=@TrinhDo, ChucVu=@ChucVu,
-                    SoBaoHiemXaHoi=@SoBH, MucDong=@MucDong, SoTaiKhoan=@STK
+                    MaPhongBan=@Phong, MaTrinhDo=@TrinhDo, ChucVu=@ChucVu, 
+                     SoBaoHiemXaHoi=@SoBH, MucDong=@MucDong, SoTaiKhoan=@STK
+
                 WHERE MaNV=@Ma";
             try
             {
@@ -236,7 +259,7 @@ namespace QUANLYNHANSU.DAL
                 }
             }
         }
-       
+
 
     }
 }

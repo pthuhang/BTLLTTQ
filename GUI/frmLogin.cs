@@ -14,7 +14,7 @@ namespace QUANLYNHANSU.GUI
     public partial class frmLogin : Form
     {
         TaiKhoanBLL taiKhoanBLL = new TaiKhoanBLL();
-
+        
         public frmLogin()
         {
             InitializeComponent();
@@ -57,14 +57,14 @@ namespace QUANLYNHANSU.GUI
             if (userRow != null)
             {
                 string vaiTro = userRow["VaiTro"].ToString();
-
+                string maNV = userRow["MaNV"].ToString();
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 if (vaiTro.Equals("Quản trị viên", StringComparison.OrdinalIgnoreCase))
                     new frmMain(user).Show();
                 else
-                    new frmMainNhanVien(user).Show();
+                    new frmMainNhanVien(maNV,user).Show();
             }
             else
             {

@@ -13,17 +13,21 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSach();
         }
+        public DataTable GetKhenThuongByMaNV_ThangNam(string maNV, int thang, int nam)
+        {
+            return dal.GetKhenThuongByMaNV_ThangNam(maNV, thang, nam);
+        }
 
         // Thêm kỷ luật cho nhân viên
-        public void Them(string maKhenThuong, string maNV, DateTime ngayKhenThuong, decimal tienKhenThuong)
+        public void Them(string maKhenThuong, string maNV, DateTime ngayKhenThuong)
         {
-            dal.ThemKLNV(maKhenThuong, maNV, ngayKhenThuong, tienKhenThuong);
+            dal.ThemKLNV(maKhenThuong, maNV, ngayKhenThuong);
         }
 
         // Sửa chi tiết kỷ luật của nhân viên
-        public void CapNhat(string maKhenThuong, string maNV, DateTime ngayMoi, decimal tienMoi)
+        public void CapNhat(string maKhenThuong, string maNV, DateTime ngayMoi)
         {
-            dal.SuaChiTiet(maKhenThuong, maNV, ngayMoi, tienMoi);
+            dal.SuaChiTiet(maKhenThuong, maNV, ngayMoi);
         }
 
         // Xóa kỷ luật của nhân viên

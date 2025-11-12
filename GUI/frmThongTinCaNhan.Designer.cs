@@ -35,7 +35,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel22 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.cbTrangThai = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.panel21 = new System.Windows.Forms.Panel();
             this.txtSTK = new System.Windows.Forms.TextBox();
@@ -54,12 +53,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.cbPhongBan = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.cbTrinhDo = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
             this.txtChucVu = new System.Windows.Forms.TextBox();
@@ -109,6 +106,9 @@
             this.panel29 = new System.Windows.Forms.Panel();
             this.label23 = new System.Windows.Forms.Label();
             this.panel26 = new System.Windows.Forms.Panel();
+            this.txtTrinhDo = new System.Windows.Forms.TextBox();
+            this.txtPhongBan = new System.Windows.Forms.TextBox();
+            this.txtTrangThai = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -205,8 +205,8 @@
             // 
             // panel22
             // 
+            this.panel22.Controls.Add(this.txtTrangThai);
             this.panel22.Controls.Add(this.textBox2);
-            this.panel22.Controls.Add(this.cbTrangThai);
             this.panel22.Controls.Add(this.label17);
             this.panel22.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel22.Location = new System.Drawing.Point(0, 735);
@@ -220,17 +220,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(178, 22);
             this.textBox2.TabIndex = 2;
-            // 
-            // cbTrangThai
-            // 
-            this.cbTrangThai.FormattingEnabled = true;
-            this.cbTrangThai.Items.AddRange(new object[] {
-            "Đang làm việc",
-            "Đã thôi việc"});
-            this.cbTrangThai.Location = new System.Drawing.Point(205, 12);
-            this.cbTrangThai.Name = "cbTrangThai";
-            this.cbTrangThai.Size = new System.Drawing.Size(178, 24);
-            this.cbTrangThai.TabIndex = 3;
             // 
             // label17
             // 
@@ -373,8 +362,8 @@
             // 
             // panel16
             // 
+            this.panel16.Controls.Add(this.txtPhongBan);
             this.panel16.Controls.Add(this.textBox1);
-            this.panel16.Controls.Add(this.cbPhongBan);
             this.panel16.Controls.Add(this.label11);
             this.panel16.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel16.Location = new System.Drawing.Point(0, 465);
@@ -389,20 +378,6 @@
             this.textBox1.Size = new System.Drawing.Size(394, 22);
             this.textBox1.TabIndex = 2;
             // 
-            // cbPhongBan
-            // 
-            this.cbPhongBan.FormattingEnabled = true;
-            this.cbPhongBan.Items.AddRange(new object[] {
-            "Phòng Nhân Sự",
-            "Phòng Kế Toán",
-            "Phòng Kinh Doanh",
-            "Phòng Tiếp Thị",
-            "Phòng Marketing "});
-            this.cbPhongBan.Location = new System.Drawing.Point(205, 12);
-            this.cbPhongBan.Name = "cbPhongBan";
-            this.cbPhongBan.Size = new System.Drawing.Size(178, 24);
-            this.cbPhongBan.TabIndex = 3;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -414,9 +389,9 @@
             // 
             // panel15
             // 
+            this.panel15.Controls.Add(this.txtTrinhDo);
             this.panel15.Controls.Add(this.textBox3);
             this.panel15.Controls.Add(this.comboBox1);
-            this.panel15.Controls.Add(this.cbTrinhDo);
             this.panel15.Controls.Add(this.label10);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel15.Location = new System.Drawing.Point(0, 420);
@@ -441,21 +416,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(178, 24);
             this.comboBox1.TabIndex = 3;
-            // 
-            // cbTrinhDo
-            // 
-            this.cbTrinhDo.FormattingEnabled = true;
-            this.cbTrinhDo.Items.AddRange(new object[] {
-            "Cao đẳng",
-            "Cử nhân",
-            "Kĩ sư",
-            "Tiến sĩ",
-            "Thạc sĩ",
-            "Giáo sư"});
-            this.cbTrinhDo.Location = new System.Drawing.Point(205, 12);
-            this.cbTrinhDo.Name = "cbTrinhDo";
-            this.cbTrinhDo.Size = new System.Drawing.Size(178, 24);
-            this.cbTrinhDo.TabIndex = 3;
             // 
             // label10
             // 
@@ -901,6 +861,29 @@
             this.panel26.Size = new System.Drawing.Size(90, 883);
             this.panel26.TabIndex = 0;
             // 
+
+            // txtTrinhDo
+            // 
+            this.txtTrinhDo.Location = new System.Drawing.Point(205, 9);
+            this.txtTrinhDo.Name = "txtTrinhDo";
+            this.txtTrinhDo.Size = new System.Drawing.Size(178, 22);
+            this.txtTrinhDo.TabIndex = 4;
+            // 
+            // txtPhongBan
+            // 
+            this.txtPhongBan.Location = new System.Drawing.Point(205, 9);
+            this.txtPhongBan.Name = "txtPhongBan";
+            this.txtPhongBan.Size = new System.Drawing.Size(178, 22);
+            this.txtPhongBan.TabIndex = 4;
+            // 
+            // txtTrangThai
+            // 
+            this.txtTrangThai.Location = new System.Drawing.Point(205, 9);
+            this.txtTrangThai.Name = "txtTrangThai";
+            this.txtTrangThai.Size = new System.Drawing.Size(178, 22);
+            this.txtTrangThai.TabIndex = 4;
+            // 
+
             // frmThongTinCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -988,7 +971,6 @@
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox cbTrangThai;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.TextBox txtSTK;
@@ -1007,12 +989,10 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox cbPhongBan;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox cbTrinhDo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.TextBox txtChucVu;
@@ -1053,5 +1033,8 @@
         private System.Windows.Forms.TextBox txtMaNgDung;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtTrangThai;
+        private System.Windows.Forms.TextBox txtPhongBan;
+        private System.Windows.Forms.TextBox txtTrinhDo;
     }
 }

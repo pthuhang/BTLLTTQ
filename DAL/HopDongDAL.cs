@@ -27,7 +27,26 @@ namespace QUANLYNHANSU.DAL
 
             return dt;
         }
+        public DataTable LayHopDongTheoTenDangNhap(string tenDangNhap)
+        {
+            string sql = @"
+                SELECT hd.*, tk.TenDangNhap
+                FROM TaiKhoan tk
+                INNER JOIN NhanVien nv ON nv.MaNV = tk.MaNV
+                INNER JOIN HopDong hd on hd.MaNV= nv.MaNV
+                WHERE tk.TenDangNhap = @TenDangNhap";
 
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
         // ✅ Kiểm tra mã nhân viên tồn tại trong bảng NhanVien
         public bool KiemTraMaNVTonTai(string maNV)
         {
@@ -44,10 +63,11 @@ namespace QUANLYNHANSU.DAL
         }
 
         // ✅ Thêm hợp đồng mới
-        public void Them(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, decimal luongcb, float heSoLuong, string maNV)
+
+        public void Them(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
-            string sql = @"INSERT INTO HopDong (MaHopDong, ThoiHan, NgayBatDau, NgayKetThuc, LuongCoBan, HeSoLuong, MaNV)
-                           VALUES (@Ma, @ThoiHan, @BatDau, @KetThuc, @LuongCB, @HeSoLuong, @MaNV)";
+            string sql = @"INSERT INTO HopDong 
+                           VALUES (@Ma, @ThoiHan, @BatDau, @KetThuc, @NoiDung, @LanKi,  @HeSoLuong, @MaNV, @LuongCB )";
 
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(sql, con))
@@ -56,9 +76,13 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@ThoiHan", thoiHan ?? "");
                 cmd.Parameters.AddWithValue("@BatDau", batDau);
                 cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
-                cmd.Parameters.AddWithValue("@LuongCB", luongcb);
+
+                cmd.Parameters.AddWithValue("@NoiDung", noiDung);
+                cmd.Parameters.AddWithValue("@LanKi", lanKi);
+
                 cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
                 cmd.Parameters.AddWithValue("@MaNV", maNV);
+                cmd.Parameters.AddWithValue("@LuongCB", luongCB);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -67,12 +91,12 @@ namespace QUANLYNHANSU.DAL
         }
 
         // ✅ Sửa hợp đồng
-        public void Sua(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, decimal luongcb, float heSoLuong, string maNV)
+
+        public void Sua(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
             string sql = @"UPDATE HopDong 
-                           SET ThoiHan=@ThoiHan, NgayBatDau=@BatDau, NgayKetThuc=@KetThuc,
-                               LuongCoBan = @LuongCB,
-                               HeSoLuong=@HeSoLuong, MaNV=@MaNV 
+                           SET ThoiHan=@ThoiHan, NgayBatDau=@BatDau, NgayKetThuc=@KetThuc, NoiDung=@NoiDung, LanKi=@LanKi,
+                               HeSoLuong=@HeSoLuong, LuongCoBan = @LuongCB, MaNV=@MaNV 
                            WHERE MaHopDong=@Ma";
 
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
@@ -82,9 +106,12 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@ThoiHan", thoiHan);
                 cmd.Parameters.AddWithValue("@BatDau", batDau);
                 cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
-                cmd.Parameters.AddWithValue("@LuongCB", luongcb);
+                cmd.Parameters.AddWithValue("@NoiDung", noiDung);
+                cmd.Parameters.AddWithValue("@LanKi", lanKi);
+
                 cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
                 cmd.Parameters.AddWithValue("@MaNV", maNV);
+                cmd.Parameters.AddWithValue("@LuongCB", luongCB);
 
                 con.Open();
                 cmd.ExecuteNonQuery();

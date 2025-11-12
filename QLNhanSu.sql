@@ -62,6 +62,13 @@ DROP CONSTRAINT CK__NhanVien__LuongC__4E88ABD4;
 alter table NhanVien
 drop column LuongCoBan
 GO
+ALTER TABLE NhanVien
+DROP CONSTRAINT CK__NhanVien__LuongC__4E88ABD4;
+
+alter table NhanVien
+drop column LuongCoBan
+
+
 INSERT INTO NhanVien VALUES 
 ('NV01', N'Nguyễn Văn A', 1, '1999-01-01', '0901234567', '123456789012', 
  N'Hà Nội', 'vana@gmail.com', N'Đang làm việc', 'PB01', 'TD01', 
@@ -91,7 +98,8 @@ CREATE TABLE HopDong (
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
 GO
-
+alter table HopDong
+add LuongCoBan DECIMAL(18,2) CHECK (LuongCoBan >= 0)
 
 alter table HopDong
 add LuongCoBan DECIMAL(18,2) CHECK (LuongCoBan >= 0)
@@ -107,8 +115,6 @@ CREATE TABLE LoaiCong (
     HeSo FLOAT DEFAULT 1 CHECK (HeSo >= 0)
 );
 GO
-
-
 -- =========================
 -- BẢNG TĂNG CA
 -- =========================

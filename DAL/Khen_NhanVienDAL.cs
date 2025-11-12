@@ -15,7 +15,7 @@ namespace QUANLYNHANSU.DAL
         public DataTable LayDanhSach()
         {
             using (SqlDataAdapter da = new SqlDataAdapter(
-                "SELECT nv.MaNV, kt.MaKhenThuong, kt.NoiDung, nv.NgayKhenThuong, nv.TienKhenThuong " +
+                "SELECT nv.MaNV, kt.MaKhenThuong, kt.NoiDung, nv.NgayKhenThuong, kt.TienKhenThuong " +
                 "FROM Khen_NhanVien nv " +
                 "JOIN KhenThuong kt ON nv.MaKhenThuong = kt.MaKhenThuong", conn))
             {
@@ -24,18 +24,55 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
-        public bool ThemKLNV(string maKT, string maNV, DateTime ngayKT, decimal tienKhenThuong)
+        public DataTable GetKhenThuongByMaNV_ThangNam(string maNV, int thang, int nam)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = @"
+            SELECT kt.MaKhenThuong, kt.NoiDung, kt.TienKhenThuong, knv.NgayKhenThuong
+            FROM KhenThuong kt
+            INNER JOIN Khen_NhanVien knv ON kt.MaKhenThuong = knv.MaKhenThuong
+            WHERE knv.MaNV = @MaNV 
+              AND MONTH(knv.NgayKhenThuong) = @Thang
+              AND YEAR(knv.NgayKhenThuong) = @Nam";
+
+                // Mở kết nối trước khi dùng SqlCommand
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
+                    cmd.Parameters.Add("@Thang", SqlDbType.Int).Value = thang;
+                    cmd.Parameters.Add("@Nam", SqlDbType.Int).Value = nam;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                if (conn.State == ConnectionState.Open) conn.Close();
+                MessageBox.Show("Lỗi lấy khen thưởng theo tháng/năm: " + ex.Message);
+            }
+            return dt;
+        }
+
+
+
+        public bool ThemKLNV(string maKT, string maNV, DateTime ngayKT)
         {
             try
             {
                 using (SqlCommand cmd = new SqlCommand(
-                    "INSERT INTO Khen_NhanVien(MaKhenThuong, MaNV, NgayKhenThuong, TienKhenThuong) VALUES(@MaKhenThuong, @MaNV, @NgayKhenThuong, @TienKhenThuong)", conn))
+                    "INSERT INTO Khen_NhanVien(MaKhenThuong, MaNV, NgayKhenThuong) VALUES(@MaKhenThuong, @MaNV, @NgayKhenThuong)", conn))
                 {
                     cmd.Parameters.AddWithValue("@MaKhenThuong", maKT);
                     cmd.Parameters.AddWithValue("@MaNV", maNV);
                     cmd.Parameters.AddWithValue("@NgayKhenThuong", ngayKT);
-                    cmd.Parameters.AddWithValue("@TienKhenThuong", tienKhenThuong);
-
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -62,16 +99,15 @@ namespace QUANLYNHANSU.DAL
             conn.Close();
         }
 
-        public bool SuaChiTiet(string maKT, string maNV, DateTime ngayMoi, decimal tienMoi)
+        public bool SuaChiTiet(string maKT, string maNV, DateTime ngayMoi)
         {
             try
             {
                 using (SqlCommand cmd = new SqlCommand(
-                    "UPDATE Khen_NhanVien SET NgayKhenThuong=@NgayMoi, TienKhenThuong=@TienMoi " +
+                    "UPDATE Khen_NhanVien SET NgayKhenThuong=@NgayMoi " +
                     "WHERE MaKhenThuong=@MaKhenThuong AND MaNV=@MaNV", conn))
                 {
                     cmd.Parameters.AddWithValue("@NgayMoi", ngayMoi);
-                    cmd.Parameters.AddWithValue("@TienMoi", tienMoi);
                     cmd.Parameters.AddWithValue("@MaKhenThuong", maKT);
                     cmd.Parameters.AddWithValue("@MaNV", maNV);
 

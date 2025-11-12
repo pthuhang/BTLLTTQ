@@ -177,14 +177,14 @@ namespace QUANLYNHANSU.GUI
 
                     // Thêm mới
                     kiluatBLL.Them(maKL, noiDung, tienPhat);
-                    klNV_BLL.Them(maKL, maNV, ngayKL, tienPhat);
+                    klNV_BLL.Them(maKL, maNV, ngayKL);
 
                     MessageBox.Show("Thêm kỷ luật mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (currentAction == "Sua")
                 {
                     kiluatBLL.CapNhat(maKL, noiDung, tienPhat);
-                    klNV_BLL.CapNhat(maKL, maNV, ngayKL, tienPhat);
+                    klNV_BLL.CapNhat(maKL, maNV, ngayKL);
 
                     MessageBox.Show("Cập nhật kỷ luật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
