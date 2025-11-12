@@ -10,6 +10,5 @@ namespace QUANLYNHANSU.Models
     {
         public string MaPhuCap { get; set; }
         public string MaNV { get; set; }
-        public decimal TienPhuCap { get; set; }
     }
 }

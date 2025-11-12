@@ -11,6 +11,5 @@ namespace QUANLYNHANSU.Models
         public string MaKiLuat { get; set; }
         public string MaNV { get; set; }
         public DateTime NgayKiLuat { get; set; }
-        public decimal TienPhat { get; set; }
     }
 }

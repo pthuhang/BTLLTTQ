@@ -145,9 +145,10 @@ namespace QUANLYNHANSU.GUI
                 string maNV = txtMaNV.Text.Trim();
                 string noiDung = txtNoiDung.Text.Trim();
                 string lanKi = txtLanKi.Text.Trim();
-                decimal luongCB = Convert.ToDecimal(txtLuongCoBan.Text.Trim());
                 DateTime ngayBD = dtpNgayBD.Value;
                 DateTime ngayKT = dtpNgayKT.Value;
+                decimal luongCB = Convert.ToDecimal(txtLuongCoBan.Text.Trim());
+
 
                 if (string.IsNullOrEmpty(maHD) || string.IsNullOrEmpty(maNV))
                 {
@@ -182,12 +183,16 @@ namespace QUANLYNHANSU.GUI
                         return;
                     }
 
+
                     bll.Them(maHD, thoiHan, ngayBD, ngayKT,noiDung, lanKi, heSoLuong, luongCB, maNV);
+
                     MessageBox.Show("Thêm hợp đồng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (currentAction == "Sua")
                 {
+
                     bll.CapNhat(maHD, thoiHan, ngayBD, ngayKT,noiDung, lanKi, heSoLuong,luongCB, maNV);
+
                     MessageBox.Show("Cập nhật hợp đồng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else

@@ -852,6 +852,29 @@
             this.panel26.Size = new System.Drawing.Size(90, 883);
             this.panel26.TabIndex = 0;
             // 
+
+            // txtTrinhDo
+            // 
+            this.txtTrinhDo.Location = new System.Drawing.Point(205, 9);
+            this.txtTrinhDo.Name = "txtTrinhDo";
+            this.txtTrinhDo.Size = new System.Drawing.Size(178, 22);
+            this.txtTrinhDo.TabIndex = 4;
+            // 
+            // txtPhongBan
+            // 
+            this.txtPhongBan.Location = new System.Drawing.Point(205, 9);
+            this.txtPhongBan.Name = "txtPhongBan";
+            this.txtPhongBan.Size = new System.Drawing.Size(178, 22);
+            this.txtPhongBan.TabIndex = 4;
+            // 
+            // txtTrangThai
+            // 
+            this.txtTrangThai.Location = new System.Drawing.Point(205, 9);
+            this.txtTrangThai.Name = "txtTrangThai";
+            this.txtTrangThai.Size = new System.Drawing.Size(178, 22);
+            this.txtTrangThai.TabIndex = 4;
+            // 
+
             // frmThongTinCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);

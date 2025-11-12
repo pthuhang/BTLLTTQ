@@ -15,7 +15,6 @@ namespace QUANLYNHANSU.DAL
         {
             DataTable dt = new DataTable();
             string sql = @"SELECT * FROM HopDong";
-
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             {
                 con.Open();
@@ -64,6 +63,7 @@ namespace QUANLYNHANSU.DAL
         }
 
         // ✅ Thêm hợp đồng mới
+
         public void Them(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
             string sql = @"INSERT INTO HopDong 
@@ -76,8 +76,10 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@ThoiHan", thoiHan ?? "");
                 cmd.Parameters.AddWithValue("@BatDau", batDau);
                 cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
+
                 cmd.Parameters.AddWithValue("@NoiDung", noiDung);
                 cmd.Parameters.AddWithValue("@LanKi", lanKi);
+
                 cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
                 cmd.Parameters.AddWithValue("@MaNV", maNV);
                 cmd.Parameters.AddWithValue("@LuongCB", luongCB);
@@ -89,6 +91,7 @@ namespace QUANLYNHANSU.DAL
         }
 
         // ✅ Sửa hợp đồng
+
         public void Sua(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
             string sql = @"UPDATE HopDong 
@@ -105,6 +108,7 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
                 cmd.Parameters.AddWithValue("@NoiDung", noiDung);
                 cmd.Parameters.AddWithValue("@LanKi", lanKi);
+
                 cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
                 cmd.Parameters.AddWithValue("@MaNV", maNV);
                 cmd.Parameters.AddWithValue("@LuongCB", luongCB);

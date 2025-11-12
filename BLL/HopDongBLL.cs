@@ -14,6 +14,7 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.KiemTraMaNVTonTai(maNV);
         }
+
         public DataTable LayHopDong(string tenDangNhap)
         {
             return dal.LayHopDongTheoTenDangNhap(tenDangNhap);
@@ -26,6 +27,7 @@ namespace QUANLYNHANSU.BLL
         public void CapNhat(string maHD, string thoiHan, DateTime ngayBD, DateTime ngayKT, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
             dal.Sua(maHD, thoiHan, ngayBD, ngayKT, noiDung, lanKi, heSoLuong, luongCB, maNV);
+
         }
 
         public void Xoa(string maHD) => dal.Xoa(maHD);

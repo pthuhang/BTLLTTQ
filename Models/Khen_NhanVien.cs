@@ -11,6 +11,5 @@ namespace QUANLYNHANSU.Models
         public string MaKhenThuong { get; set; }
         public string MaNV { get; set; }
         public DateTime NgayKhenThuong { get; set; }
-        public decimal TienKhenThuong { get; set; }
     }
 }

@@ -224,6 +224,7 @@ namespace QUANLYNHANSU.GUI
                     }
                     bll.Them(maNV, hoTen, gioiTinh, ngaySinh, sdt, cccd, diaChi, email,
                     trangThai, maPhongBan, maTrinhDo, chucVu, 
+
                     soBH, mucDong, stk);
                     MessageBox.Show("Thêm nhân viên mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     HienThiDanhSach();

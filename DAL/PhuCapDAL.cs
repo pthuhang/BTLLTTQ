@@ -26,31 +26,56 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@MaPC", maPC);
                 cmd.Parameters.AddWithValue("@TenPC", tenPC);
                 cmd.Parameters.AddWithValue("@TienPC", tienPC);
-                conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
             }
         }
 
         public void Sua(string maPC, string tenPC, decimal tienPC)
         {
-            string sql = "UPDATE PhuCap SET TenPhuCap=@TenPC, TienPhuCap=@TienPC WHERE MaPhuCap=@Ma";
+            string sql = "UPDATE PhuCap SET TenPhuCap=@TenPC, TienPhuCap=@TienPC WHERE MaPhuCap=@MaPC";
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@MaPC", maPC);
                 cmd.Parameters.AddWithValue("@TenPC", tenPC);
                 cmd.Parameters.AddWithValue("@TienPC", tienPC);
-                conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
             }
         }
 
         public void Xoa(string maPC)
         {
-            string sql = "DELETE FROM PhuCap WHERE MaPhuCap=@Ma";
+            string sql = "DELETE FROM PhuCap WHERE MaPhuCap=@MaPC";
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@MaPC", maPC);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
             }
         }
     }

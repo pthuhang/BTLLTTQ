@@ -101,7 +101,9 @@ namespace QUANLYNHANSU.DAL
         public void Sua(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
+
             string chucVu, string soBH, decimal mucDong, string stk)
+
         {
             const string sql = @"
                 UPDATE NhanVien SET 
@@ -109,6 +111,7 @@ namespace QUANLYNHANSU.DAL
                     DiaChi=@DiaChi, Email=@Email, TrangThai=@TrangThai, 
                     MaPhongBan=@Phong, MaTrinhDo=@TrinhDo, ChucVu=@ChucVu, 
                      SoBaoHiemXaHoi=@SoBH, MucDong=@MucDong, SoTaiKhoan=@STK
+
                 WHERE MaNV=@Ma";
             try
             {
