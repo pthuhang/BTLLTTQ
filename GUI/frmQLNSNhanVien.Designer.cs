@@ -49,9 +49,6 @@
             this.panel18 = new System.Windows.Forms.Panel();
             this.txtCCCD = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.txtLuongCB = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.cbPhongBan = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -112,7 +109,6 @@
             this.panel20.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel18.SuspendLayout();
-            this.panel17.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -239,7 +235,6 @@
             this.panel2.Controls.Add(this.panel20);
             this.panel2.Controls.Add(this.panel19);
             this.panel2.Controls.Add(this.panel18);
-            this.panel2.Controls.Add(this.panel17);
             this.panel2.Controls.Add(this.panel16);
             this.panel2.Controls.Add(this.panel15);
             this.panel2.Controls.Add(this.panel14);
@@ -265,7 +260,7 @@
             this.panel22.Controls.Add(this.cbTrangThai);
             this.panel22.Controls.Add(this.label17);
             this.panel22.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel22.Location = new System.Drawing.Point(90, 675);
+            this.panel22.Location = new System.Drawing.Point(90, 635);
             this.panel22.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(560, 40);
@@ -294,7 +289,7 @@
             this.panel21.Controls.Add(this.txtSTK);
             this.panel21.Controls.Add(this.label16);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel21.Location = new System.Drawing.Point(90, 635);
+            this.panel21.Location = new System.Drawing.Point(90, 595);
             this.panel21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(560, 40);
@@ -322,7 +317,7 @@
             this.panel20.Controls.Add(this.txtMucDongBH);
             this.panel20.Controls.Add(this.label15);
             this.panel20.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel20.Location = new System.Drawing.Point(90, 595);
+            this.panel20.Location = new System.Drawing.Point(90, 555);
             this.panel20.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(560, 40);
@@ -350,7 +345,7 @@
             this.panel19.Controls.Add(this.txtSoBH);
             this.panel19.Controls.Add(this.label14);
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel19.Location = new System.Drawing.Point(90, 555);
+            this.panel19.Location = new System.Drawing.Point(90, 515);
             this.panel19.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(560, 40);
@@ -378,7 +373,7 @@
             this.panel18.Controls.Add(this.txtCCCD);
             this.panel18.Controls.Add(this.label13);
             this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel18.Location = new System.Drawing.Point(90, 515);
+            this.panel18.Location = new System.Drawing.Point(90, 475);
             this.panel18.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(560, 40);
@@ -400,34 +395,6 @@
             this.label13.Size = new System.Drawing.Size(64, 16);
             this.label13.TabIndex = 1;
             this.label13.Text = "Số CCCD";
-            // 
-            // panel17
-            // 
-            this.panel17.Controls.Add(this.txtLuongCB);
-            this.panel17.Controls.Add(this.label12);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel17.Location = new System.Drawing.Point(90, 475);
-            this.panel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(560, 40);
-            this.panel17.TabIndex = 27;
-            // 
-            // txtLuongCB
-            // 
-            this.txtLuongCB.Location = new System.Drawing.Point(150, 9);
-            this.txtLuongCB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtLuongCB.Name = "txtLuongCB";
-            this.txtLuongCB.Size = new System.Drawing.Size(177, 22);
-            this.txtLuongCB.TabIndex = 2;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 12);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(88, 16);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Lương cơ bản";
             // 
             // panel16
             // 
@@ -983,8 +950,6 @@
             this.panel19.PerformLayout();
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel17.PerformLayout();
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
             this.panel15.ResumeLayout(false);
@@ -1063,9 +1028,6 @@
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.TextBox txtCCCD;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.TextBox txtLuongCB;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.ComboBox cbPhongBan;
         private System.Windows.Forms.Label label11;

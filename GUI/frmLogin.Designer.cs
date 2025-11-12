@@ -77,6 +77,7 @@ namespace QUANLYNHANSU.GUI
             this.chbHienMK.TabIndex = 17;
             this.chbHienMK.Text = "Hiện mật khẩu";
             this.chbHienMK.UseVisualStyleBackColor = true;
+            this.chbHienMK.CheckedChanged += new System.EventHandler(this.chbHienMK_CheckedChanged);
             // 
             // txtMatKhau
             // 

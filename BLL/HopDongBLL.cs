@@ -15,14 +15,14 @@ namespace QUANLYNHANSU.BLL
             return dal.KiemTraMaNVTonTai(maNV);
         }
 
-        public void Them(string maHD, string thoiHan, DateTime ngayBD, DateTime ngayKT, float heSoLuong, string maNV)
+        public void Them(string maHD, string thoiHan, DateTime ngayBD, DateTime ngayKT, decimal luongcb, float heSoLuong, string maNV)
         {
-            dal.Them(maHD, thoiHan, ngayBD, ngayKT, heSoLuong, maNV);
+            dal.Them(maHD, thoiHan, ngayBD, ngayKT, luongcb, heSoLuong, maNV);
         }
 
-        public void CapNhat(string maHD, string thoiHan, DateTime ngayBD, DateTime ngayKT, float heSoLuong, string maNV)
+        public void CapNhat(string maHD, string thoiHan, DateTime ngayBD, DateTime ngayKT, decimal luongcb, float heSoLuong, string maNV)
         {
-            dal.Sua(maHD, thoiHan, ngayBD, ngayKT, heSoLuong, maNV);
+            dal.Sua(maHD, thoiHan, ngayBD, ngayKT, luongcb, heSoLuong, maNV);
         }
 
         public void Xoa(string maHD) => dal.Xoa(maHD);

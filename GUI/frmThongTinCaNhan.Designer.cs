@@ -92,6 +92,7 @@
             this.btnThoat = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel30 = new System.Windows.Forms.Panel();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.panel31 = new System.Windows.Forms.Panel();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
@@ -108,7 +109,6 @@
             this.panel29 = new System.Windows.Forms.Panel();
             this.label23 = new System.Windows.Forms.Label();
             this.panel26 = new System.Windows.Forms.Panel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -751,6 +751,13 @@
             this.panel30.Size = new System.Drawing.Size(413, 45);
             this.panel30.TabIndex = 50;
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(194, 14);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(217, 22);
+            this.textBox4.TabIndex = 15;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -893,13 +900,6 @@
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(90, 883);
             this.panel26.TabIndex = 0;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(194, 14);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(217, 22);
-            this.textBox4.TabIndex = 15;
             // 
             // frmThongTinCaNhan
             // 

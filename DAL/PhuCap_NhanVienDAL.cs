@@ -1,8 +1,11 @@
-﻿using System;
+﻿using QUANLYNHANSU.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,42 +13,101 @@ namespace QUANLYNHANSU.DAL
 {
     public class PhuCap_NhanVienDAL : DBConnection
     {
-        public DataTable LayDanhSach()
+        public DataTable LayDanhSachPhuCapNhanVien()
         {
-            string sql = "SELECT * FROM PhuCap_NhanVien";
+            string sql = @"
+                        SELECT 
+                            nv.MaNV, 
+                            nv.HoTen, 
+                            pc.MaPhuCap, 
+                            pc.TenPhuCap
+                        FROM PhuCap_NhanVien pcnv
+                        INNER JOIN NhanVien nv ON pcnv.MaNV = nv.MaNV
+                        INNER JOIN PhuCap pc ON pcnv.MaPhuCap = pc.MaPhuCap";
+            
             SqlDataAdapter da = new SqlDataAdapter(sql, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
             return dt;
         }
-        public void Them(string maPhuCap, string maNV, decimal tienPhuCap)
+        public DataTable LayNhanVienTheoMa(string mnv)
         {
-            string sql = "INSERT INTO PhuCap_NhanVien VALUES(@MaPhuCap, @MaNV, @TienPhuCap)";
+            string sql = @"
+                        SELECT
+                            pcnv.MaNV, 
+                            nv.HoTen, 
+                            pcnv.MaPhuCap, 
+                            pc.TenPhuCap
+                        FROM PhuCap_NhanVien pcnv
+                        INNER JOIN NhanVien nv ON pcnv.MaNV = nv.MaNV
+                        INNER JOIN PhuCap pc ON pcnv.MaPhuCap = pc.MaPhuCap
+                        WHERE pcnv.MaNV = @mnv";
+            //SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            //da.SelectCommand.Parameters.AddWithValue("@MaNV", mnv);
+            //DataTable dt = new DataTable();
+            //da.Fill(dt);
+            //return dt;
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@MaPhuCap", maPhuCap);
-            cmd.Parameters.AddWithValue("@MaNV", maNV);
-            cmd.Parameters.AddWithValue("@TienPhuCap", tienPhuCap);
-            conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            cmd.Parameters.AddWithValue("@mnv", mnv);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
         }
-        public void Sua(string maPhuCap, string maNV, decimal tienMoi)
+
+        public string LayTenNV(string mnv)
         {
-            string sql = "UPDATE PhuCap_NhanVien SET TienPhuCap = @TienMoi WHERE MaPhuCap = @MaPhuCap AND MaNV = @MaNV";
+            string sql = "SELECT HoTen FROM NhanVien WHERE MaNV = @mnv";
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@TienMoi", tienMoi);
-            cmd.Parameters.AddWithValue("@MaPhuCap", maPhuCap);
-            cmd.Parameters.AddWithValue("@MaNV", maNV);
-            conn.Open();
-            cmd.ExecuteNonQuery();
+            cmd.Parameters.AddWithValue("@mnv", mnv);
+
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            object result = cmd.ExecuteScalar();
             conn.Close();
+
+            return result != null ? result.ToString() : string.Empty;
+        }
+        public void Them(string maPhuCap, string maNV)
+        {
+            string sql = "INSERT INTO PhuCap_NhanVien (MaPhuCap, MaNV) VALUES(@MaPhuCap, @MaNV)";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MaPhuCap", maPhuCap);
+                cmd.Parameters.AddWithValue("@MaNV", maNV);
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
         }
 
         public void Xoa(string maPhuCap, string maNV)
         {
             string sql = "DELETE FROM PhuCap_NhanVien WHERE MaPhuCap=@MaPhuCap AND MaNV=@MaNV";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@MaPhuCap", maPhuCap);
-            cmd.Parameters.AddWithValue("@MaNV", maNV);
-            conn.Open(); cmd.ExecuteNonQuery(); conn.Close();
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MaPhuCap", maPhuCap);
+                cmd.Parameters.AddWithValue("@MaNV", maNV);
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
         }
     }
 }

@@ -74,6 +74,9 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.btnXemHD = new System.Windows.Forms.Button();
             this.dgvHopDong = new System.Windows.Forms.DataGridView();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.txtLuongCoBan = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel17.SuspendLayout();
@@ -90,6 +93,7 @@
             this.panel4.SuspendLayout();
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHopDong)).BeginInit();
+            this.panel19.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -100,7 +104,7 @@
             this.panel1.Controls.Add(this.btnSua);
             this.panel1.Controls.Add(this.btnThem);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 702);
+            this.panel1.Location = new System.Drawing.Point(0, 775);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1719, 90);
@@ -163,6 +167,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.panel19);
             this.panel2.Controls.Add(this.panel17);
             this.panel2.Controls.Add(this.panel18);
             this.panel2.Controls.Add(this.panel13);
@@ -178,13 +183,13 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(700, 702);
+            this.panel2.Size = new System.Drawing.Size(700, 775);
             this.panel2.TabIndex = 3;
             // 
             // panel17
             // 
-            this.panel17.Controls.Add(this.txtMaNV);
-            this.panel17.Controls.Add(this.label6);
+            this.panel17.Controls.Add(this.txtHSLuong);
+            this.panel17.Controls.Add(this.label5);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel17.Location = new System.Drawing.Point(90, 617);
             this.panel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -194,7 +199,7 @@
             // 
             // txtMaNV
             // 
-            this.txtMaNV.Location = new System.Drawing.Point(140, 22);
+            this.txtMaNV.Location = new System.Drawing.Point(140, 23);
             this.txtMaNV.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(132, 22);
@@ -203,7 +208,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 25);
+            this.label6.Location = new System.Drawing.Point(30, 26);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 16);
@@ -212,8 +217,8 @@
             // 
             // panel18
             // 
-            this.panel18.Controls.Add(this.txtHSLuong);
-            this.panel18.Controls.Add(this.label5);
+            this.panel18.Controls.Add(this.txtLuongCoBan);
+            this.panel18.Controls.Add(this.label14);
             this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel18.Location = new System.Drawing.Point(90, 552);
             this.panel18.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -223,7 +228,7 @@
             // 
             // txtHSLuong
             // 
-            this.txtHSLuong.Location = new System.Drawing.Point(140, 22);
+            this.txtHSLuong.Location = new System.Drawing.Point(140, 23);
             this.txtHSLuong.Margin = new System.Windows.Forms.Padding(4);
             this.txtHSLuong.Name = "txtHSLuong";
             this.txtHSLuong.Size = new System.Drawing.Size(132, 22);
@@ -232,7 +237,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 25);
+            this.label5.Location = new System.Drawing.Point(30, 26);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 16);
@@ -435,7 +440,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 122);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(90, 580);
+            this.panel8.Size = new System.Drawing.Size(90, 653);
             this.panel8.TabIndex = 3;
             // 
             // panel7
@@ -443,7 +448,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel7.Location = new System.Drawing.Point(640, 122);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(60, 580);
+            this.panel7.Size = new System.Drawing.Size(60, 653);
             this.panel7.TabIndex = 2;
             // 
             // panel6
@@ -518,7 +523,7 @@
             this.panel5.Location = new System.Drawing.Point(1629, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(90, 702);
+            this.panel5.Size = new System.Drawing.Size(90, 775);
             this.panel5.TabIndex = 7;
             // 
             // panel3
@@ -598,15 +603,45 @@
             this.dgvHopDong.Name = "dgvHopDong";
             this.dgvHopDong.RowHeadersWidth = 51;
             this.dgvHopDong.RowTemplate.Height = 24;
-            this.dgvHopDong.Size = new System.Drawing.Size(929, 580);
+            this.dgvHopDong.Size = new System.Drawing.Size(929, 653);
             this.dgvHopDong.TabIndex = 15;
             this.dgvHopDong.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHopDong_CellClick);
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.txtMaNV);
+            this.panel19.Controls.Add(this.label6);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel19.Location = new System.Drawing.Point(90, 682);
+            this.panel19.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(550, 65);
+            this.panel19.TabIndex = 16;
+            // 
+            // txtLuongCoBan
+            // 
+            this.txtLuongCoBan.Location = new System.Drawing.Point(140, 20);
+            this.txtLuongCoBan.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLuongCoBan.Name = "txtLuongCoBan";
+            this.txtLuongCoBan.Size = new System.Drawing.Size(132, 22);
+            this.txtLuongCoBan.TabIndex = 4;
+            this.txtLuongCoBan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(30, 23);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(88, 16);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Lương cơ bản";
             // 
             // frmQLNSHopDong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1719, 792);
+            this.ClientSize = new System.Drawing.Size(1719, 865);
             this.Controls.Add(this.dgvHopDong);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -643,6 +678,8 @@
             this.panel4.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHopDong)).EndInit();
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -698,5 +735,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtLanKi;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.TextBox txtLuongCoBan;
+        private System.Windows.Forms.Label label14;
     }
 }

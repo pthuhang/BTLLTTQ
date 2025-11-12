@@ -75,14 +75,14 @@ namespace QUANLYNHANSU.GUI
             }
         }
 
-        private void chbHienMK_CheckedChanged(object sender, EventArgs e)
-        {
-            txtMatKhau.UseSystemPasswordChar = !chbHienMK.Checked;
-        }
-
         private void frmLogin_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void chbHienMK_CheckedChanged(object sender, EventArgs e)
+        {
+            txtMatKhau.UseSystemPasswordChar = !chbHienMK.Checked;
         }
     }
 }

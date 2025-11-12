@@ -12,7 +12,7 @@ namespace QUANLYNHANSU.BLL
     {
         private PhuCapDAL dal = new PhuCapDAL();
 
-        public DataTable LayDanhSach()
+        public DataTable LayDanhSachPC()
         {
             return dal.LayDanhSachPhuCap();
         }

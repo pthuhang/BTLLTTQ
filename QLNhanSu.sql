@@ -1,4 +1,6 @@
-﻿--create database QLNhanSu
+﻿
+
+--create database QLNhanSu
 --use QLNhanSu
 -- =========================
 -- BẢNG PHÒNG BAN
@@ -53,6 +55,12 @@ CREATE TABLE NhanVien (
     FOREIGN KEY (MaPhongBan) REFERENCES PhongBan(MaPhongBan),
     FOREIGN KEY (MaTrinhDo) REFERENCES TrinhDo(MaTrinhDo)
 );
+
+ALTER TABLE NhanVien
+DROP CONSTRAINT CK__NhanVien__LuongC__4E88ABD4;
+
+alter table NhanVien
+drop column LuongCoBan
 GO
 INSERT INTO NhanVien VALUES 
 ('NV01', N'Nguyễn Văn A', 1, '1999-01-01', '0901234567', '123456789012', 
@@ -85,6 +93,11 @@ CREATE TABLE HopDong (
 GO
 
 
+alter table HopDong
+add LuongCoBan DECIMAL(18,2) CHECK (LuongCoBan >= 0)
+
+select * from HopDong
+delete from HopDong where MaHopDong = 'HD02'
 -- =========================
 -- BẢNG LOẠI CÔNG
 -- =========================
@@ -193,6 +206,7 @@ CREATE TABLE LoaiCong_NhanVien (
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
 GO
+
 
 
 -- =========================

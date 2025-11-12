@@ -14,8 +14,7 @@ namespace QUANLYNHANSU.DAL
         public DataTable LayDanhSachHopDong()
         {
             DataTable dt = new DataTable();
-            string sql = @"SELECT MaHopDong, ThoiHan, NgayBatDau, NgayKetThuc,HeSoLuong, MaNV FROM HopDong";
-
+            string sql = @"SELECT * FROM HopDong";
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             {
                 con.Open();
@@ -45,10 +44,10 @@ namespace QUANLYNHANSU.DAL
         }
 
         // ✅ Thêm hợp đồng mới
-        public void Them(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, float heSoLuong, string maNV)
+        public void Them(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, decimal luongcb, float heSoLuong, string maNV)
         {
-            string sql = @"INSERT INTO HopDong (MaHopDong, ThoiHan, NgayBatDau, NgayKetThuc, HeSoLuong, MaNV)
-                           VALUES (@Ma, @ThoiHan, @BatDau, @KetThuc, @HeSoLuong, @MaNV)";
+            string sql = @"INSERT INTO HopDong (MaHopDong, ThoiHan, NgayBatDau, NgayKetThuc, LuongCoBan, HeSoLuong, MaNV)
+                           VALUES (@Ma, @ThoiHan, @BatDau, @KetThuc, @LuongCB, @HeSoLuong, @MaNV)";
 
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(sql, con))
@@ -57,6 +56,7 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@ThoiHan", thoiHan ?? "");
                 cmd.Parameters.AddWithValue("@BatDau", batDau);
                 cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
+                cmd.Parameters.AddWithValue("@LuongCB", luongcb);
                 cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
                 cmd.Parameters.AddWithValue("@MaNV", maNV);
 
@@ -67,10 +67,11 @@ namespace QUANLYNHANSU.DAL
         }
 
         // ✅ Sửa hợp đồng
-        public void Sua(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, float heSoLuong, string maNV)
+        public void Sua(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, decimal luongcb, float heSoLuong, string maNV)
         {
             string sql = @"UPDATE HopDong 
-                           SET ThoiHan=@ThoiHan, NgayBatDau=@BatDau, NgayKetThuc=@KetThuc, 
+                           SET ThoiHan=@ThoiHan, NgayBatDau=@BatDau, NgayKetThuc=@KetThuc,
+                               LuongCoBan = @LuongCB,
                                HeSoLuong=@HeSoLuong, MaNV=@MaNV 
                            WHERE MaHopDong=@Ma";
 
@@ -81,6 +82,7 @@ namespace QUANLYNHANSU.DAL
                 cmd.Parameters.AddWithValue("@ThoiHan", thoiHan);
                 cmd.Parameters.AddWithValue("@BatDau", batDau);
                 cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
+                cmd.Parameters.AddWithValue("@LuongCB", luongcb);
                 cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
                 cmd.Parameters.AddWithValue("@MaNV", maNV);
 
@@ -106,7 +108,7 @@ namespace QUANLYNHANSU.DAL
         //Tìm kiếm hợp đồng
         public DataTable TimKiemHopDong(string maHopDong, string maNV)
         {
-            string sql = @"SELECT MaHopDong, ThoiHan, NgayBatDau, NgayKetThuc, HeSoLuong, MaNV
+            string sql = @"SELECT *
                    FROM HopDong
                    WHERE (@MaHopDong = '' OR MaHopDong = @MaHopDong)
                    AND (@MaNV = '' OR MaNV = @MaNV)";
@@ -124,7 +126,7 @@ namespace QUANLYNHANSU.DAL
         public DataTable LayHopDongSapHetHan(int soNgay)
         {
             string sql = @"
-        SELECT MaHopDong, ThoiHan, NgayBatDau, NgayKetThuc, HeSoLuong, MaNV
+        SELECT *
         FROM HopDong
         WHERE DATEDIFF(day, GETDATE(), NgayKetThuc) <= @SoNgay
               AND DATEDIFF(day, GETDATE(), NgayKetThuc) >= 0";

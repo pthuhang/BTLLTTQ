@@ -56,7 +56,6 @@ namespace QUANLYNHANSU.GUI
             cbPhongBan.Enabled = enable;
             cbTrinhDo.Enabled = enable;
             txtChucVu.Enabled = enable;
-            txtLuongCB.Enabled = enable;
             txtSoBH.Enabled = enable;
             txtMucDongBH.Enabled = enable;
             txtSTK.Enabled = enable;
@@ -143,7 +142,6 @@ namespace QUANLYNHANSU.GUI
             cbPhongBan.SelectedIndex = -1;
             cbTrinhDo.SelectedIndex = -1;
             txtChucVu.Clear();
-            txtLuongCB.Clear();
             txtSoBH.Clear();
             txtMucDongBH.Clear();
             txtSTK.Clear();
@@ -169,7 +167,6 @@ namespace QUANLYNHANSU.GUI
                 cbTrangThai.Text = row.Cells["TrangThai"].Value.ToString();
                 cbTrinhDo.SelectedValue = row.Cells["MaTrinhDo"].Value.ToString();
                 txtChucVu.Text = row.Cells["ChucVu"].Value.ToString();
-                txtLuongCB.Text = row.Cells["LuongCoBan"].Value.ToString();
                 txtSoBH.Text = row.Cells["SoBaoHiemXaHoi"].Value.ToString();
                 txtMucDongBH.Text = row.Cells["MucDong"].Value.ToString();
                 txtSTK.Text = row.Cells["SoTaiKhoan"].Value.ToString();
@@ -197,7 +194,6 @@ namespace QUANLYNHANSU.GUI
                 string maTrinhDo = cbTrinhDo.SelectedValue?.ToString();
                 string chucVu = txtChucVu.Text.Trim();
                 decimal luongCB = 0, mucDong = 0;
-                decimal.TryParse(txtLuongCB.Text, out luongCB);
                 decimal.TryParse(txtMucDongBH.Text, out mucDong);
                 string soBH = txtSoBH.Text.Trim();
                 string stk = txtSTK.Text.Trim();
@@ -227,7 +223,7 @@ namespace QUANLYNHANSU.GUI
                         return;
                     }
                     bll.Them(maNV, hoTen, gioiTinh, ngaySinh, sdt, cccd, diaChi, email,
-                    trangThai, maPhongBan, maTrinhDo, chucVu, luongCB,
+                    trangThai, maPhongBan, maTrinhDo, chucVu,
                     soBH, mucDong, stk);
                     MessageBox.Show("Thêm nhân viên mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     HienThiDanhSach();
@@ -235,7 +231,7 @@ namespace QUANLYNHANSU.GUI
                 else if (currentAction == "Sua")
                 {
                     bll.CapNhat(maNV, hoTen, gioiTinh, ngaySinh, sdt, cccd, diaChi, email,
-                           trangThai, maPhongBan, maTrinhDo, chucVu, luongCB,
+                           trangThai, maPhongBan, maTrinhDo, chucVu,
                            soBH, mucDong, stk);
 
                     MessageBox.Show("Cập nhật thông tin nhân viên thành công!");
