@@ -74,8 +74,7 @@ namespace QUANLYNHANSU.GUI
             dtpNgayChamCong.Value = Convert.ToDateTime(row.Cells["NgayLam"].Value);
             dtpGioVao.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioVao"].Value);
             dtpGioRa.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioRa"].Value);
-
-            txtHeSo.Text = row.Cells["HeSoCong"].Value.ToString();
+            txtHeSo.Text = row.Cells["HeSoC"].Value.ToString();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -98,12 +97,12 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Vui lòng chọn dòng để sửa.");
                 return;
             }
-
             currentAction = "Sua";
             EnableForm(true);
 
             txtMaNV.Enabled = false;
             txtMaLoaiCong.Enabled = false;
+            txtHeSo.Enabled = false;
 
             btnThem.Enabled = false;
             btnXoa.Enabled = false;
@@ -160,13 +159,13 @@ namespace QUANLYNHANSU.GUI
                     return;
                 }
 
-                lcnvBll.Them(maLoai, maNV, ngay, gioVao, gioRa, heSo);
+                lcnvBll.Them(maLoai, maNV, ngay, gioVao, gioRa);
 
                 MessageBox.Show("Thêm thành công.");
             }
             else if (currentAction == "Sua")
             {
-                lcnvBll.Sua(maLoai, maNV, ngay, gioVao, gioRa, heSo);
+                lcnvBll.Sua(maLoai, maNV, ngay, gioVao, gioRa);
                 MessageBox.Show("Cập nhật thành công.");
             }
             else

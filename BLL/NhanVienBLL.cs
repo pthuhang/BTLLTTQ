@@ -21,23 +21,26 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayNhanVienTheoMa(maNV);
         }
-
+        public DataTable LayNhanVienTheoTenDangNhap(string tenDangNhap)
+        {
+            return dal.LayNhanVienTheoTenDangNhap(tenDangNhap);
+        }
         public void Them(string maNV, string hoTen, bool gioiTinh, DateTime ngaySinh,
                          string sdt, string cccd, string diaChi, string email, string trangThai,
                          string maPhongBan, string maTrinhDo, string chucVu,
-                         decimal luongCoBan, string soBHXH, decimal mucDong, string soTaiKhoan)
+                         string soBHXH, decimal mucDong, string soTaiKhoan)
         {
             dal.Them(maNV, hoTen, gioiTinh, ngaySinh, sdt, cccd, diaChi, email, trangThai,
-                     maPhongBan, maTrinhDo, chucVu, luongCoBan, soBHXH, mucDong, soTaiKhoan);
+                     maPhongBan, maTrinhDo, chucVu, soBHXH, mucDong, soTaiKhoan);
         }
 
         public void CapNhat(string maNV, string hoTen, bool gioiTinh, DateTime ngaySinh,
                             string sdt, string cccd, string diaChi, string email, string trangThai,
                             string maPhongBan, string maTrinhDo, string chucVu,
-                            decimal luongCoBan, string soBHXH, decimal mucDong, string soTaiKhoan)
+                            string soBHXH, decimal mucDong, string soTaiKhoan)
         {
             dal.Sua(maNV, hoTen, gioiTinh, ngaySinh, sdt, cccd, diaChi, email, trangThai,
-                    maPhongBan, maTrinhDo, chucVu, luongCoBan, soBHXH, mucDong, soTaiKhoan);
+                    maPhongBan, maTrinhDo, chucVu, soBHXH, mucDong, soTaiKhoan);
         }
         public void Xoa(string maNV)
         {

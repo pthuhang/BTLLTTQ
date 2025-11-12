@@ -15,23 +15,34 @@ namespace QUANLYNHANSU.DAL
         private LoaiCongDAL lc = new LoaiCongDAL();
         public DataTable LayDanhSach()
         {
-            string sql = "SELECT lcnv.MaloaiCong, lcnv.MaNV, lc.TenLoaiCong, lcnv.NgayLam, lcnv.GioVao, lcnv.GioRa, lcnv.HeSoCong  FROM LoaiCong_NhanVien lcnv JOIN LoaiCong lc ON lcnv.MaLoaiCong = lc.MaLoaiCong";
+            string sql = "SELECT lcnv.MaloaiCong, lcnv.MaNV, lc.TenLoaiCong, lcnv.NgayLam, lcnv.GioVao, lcnv.GioRa, lc.HeSo  " +
+                "FROM LoaiCong_NhanVien lcnv " +
+                "JOIN LoaiCong lc ON lcnv.MaLoaiCong = lc.MaLoaiCong";
             SqlDataAdapter da = new SqlDataAdapter(sql, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
             return dt;
         }
-
-        public void Them(string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa, decimal heSoCong)
+        private decimal LayHeSoCongTheoMa(string maLoaiCong)
         {
-            string sql = "INSERT INTO LoaiCong_NhanVien VALUES (@MaLoaiCong, @MaNV, @NgayLam, @GioVao, @GioRa, @HeSoCong)";
+            string sql = "SELECT HeSo FROM LoaiCong WHERE MaLoaiCong = @MaLoaiCong";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@MaLoaiCong", maLoaiCong);
+            conn.Open();
+            object result = cmd.ExecuteScalar();
+            conn.Close();
+            return result != DBNull.Value && result != null ? Convert.ToDecimal(result) : 1;
+        }
+        public void Them(string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa)
+        {
+            decimal heSo = LayHeSoCongTheoMa(maLoaiCong);
+            string sql = "INSERT INTO LoaiCong_NhanVien VALUES (@MaLoaiCong, @MaNV, @NgayLam, @GioVao, @GioRa)";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@MaLoaiCong", maLoaiCong);
             cmd.Parameters.AddWithValue("@MaNV", maNV);
             cmd.Parameters.AddWithValue("@NgayLam", ngayLam);
             cmd.Parameters.AddWithValue("@GioVao", gioVao);
             cmd.Parameters.AddWithValue("@GioRa", gioRa);
-            cmd.Parameters.AddWithValue("@HeSoCong", heSoCong);
             conn.Open();
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -87,16 +98,15 @@ namespace QUANLYNHANSU.DAL
         }
 
         // 🟢 Sửa thông tin công (chỉ sửa dữ liệu phụ, không sửa khóa chính)
-        public void Sua(string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa, decimal heSoCong)
+        public void Sua(string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa)
         {
             string sql = "UPDATE LoaiCong_NhanVien " +
-                         "SET NgayLam = @NgayLam, GioVao = @GioVao, GioRa = @GioRa, HeSoCong = @HeSoCong " +
+                         "SET NgayLam = @NgayLam, GioVao = @GioVao, GioRa = @GioRa " +
                          "WHERE MaLoaiCong = @MaLoaiCong AND MaNV = @MaNV";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@NgayLam", ngayLam);
             cmd.Parameters.AddWithValue("@GioVao", gioVao);
             cmd.Parameters.AddWithValue("@GioRa", gioRa);
-            cmd.Parameters.AddWithValue("@HeSoCong", heSoCong);
             cmd.Parameters.AddWithValue("@MaLoaiCong", maLoaiCong);
             cmd.Parameters.AddWithValue("@MaNV", maNV);
             conn.Open();

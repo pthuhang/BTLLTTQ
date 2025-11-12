@@ -20,9 +20,9 @@ namespace QUANLYNHANSU.BLL
             return lcnv.LayDanhSach();
         }
 
-        public void Them (string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa, decimal heSoCong)
+        public void Them (string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa)
         {
-            lcnv.Them(maLoaiCong, maNV, ngayLam, gioVao, gioRa, heSoCong);
+            lcnv.Them(maLoaiCong, maNV, ngayLam, gioVao, gioRa);
         }
 
         public bool KiemTraTonTai(string maLoaiCong, string maNV)
@@ -30,9 +30,9 @@ namespace QUANLYNHANSU.BLL
             return lcnv.KiemTraTonTai(maLoaiCong, maNV);
         }
 
-        public void Sua (string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa, decimal heSoCong)
+        public void Sua (string maLoaiCong, string maNV, DateTime ngayLam, TimeSpan gioVao, TimeSpan gioRa)
         {
-            lcnv.Sua(maLoaiCong, maNV, ngayLam, gioVao, gioRa, heSoCong);
+            lcnv.Sua(maLoaiCong, maNV, ngayLam, gioVao, gioRa);
         }
 
         public void Xoa (string maLoaiCong, string maNV)

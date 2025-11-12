@@ -23,6 +23,6 @@ namespace QUANLYNHANSU.Models
         public decimal LuongCoBan { get; set; }
         public string SoBaoHiemXaHoi { get; set; }
         public decimal MucDong { get; set; }
-        public int SoTaiKhoan { get; set; }
+        public string SoTaiKhoan { get; set; }
     }
 }

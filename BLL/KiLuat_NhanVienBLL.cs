@@ -15,15 +15,15 @@ namespace QUANLYNHANSU.BLL
         }
 
         // Thêm kỷ luật cho nhân viên
-        public void Them(string maKL, string maNV, DateTime ngayKL, decimal tienPhat)
+        public void Them(string maKL, string maNV, DateTime ngayKL)
         {
-            dal.ThemKLNV(maKL, maNV, ngayKL, tienPhat);
+            dal.ThemKLNV(maKL, maNV, ngayKL);
         }
 
         // Sửa chi tiết kỷ luật của nhân viên
-        public void CapNhat(string maKL, string maNV, DateTime ngayMoi, decimal tienMoi)
+        public void CapNhat(string maKL, string maNV, DateTime ngayMoi)
         {
-            dal.SuaChiTiet(maKL, maNV, ngayMoi, tienMoi);
+            dal.SuaChiTiet(maKL, maNV, ngayMoi);
         }
 
         // Xóa kỷ luật của nhân viên

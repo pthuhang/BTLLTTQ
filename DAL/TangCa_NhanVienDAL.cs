@@ -23,7 +23,30 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataTable LayTangCaTheoThangNam(int thang, int nam, string maNV)
+        {
+            string sql = " select tcnv.MaTangCa, tcnv.MaNV, tcnv.SoGioTangCa, tc.NgayTangCa " +
+                        " from TangCa_NhanVien tcnv" +
+                        " join TangCa tc on tc.MaTangCa=tcnv.MaTangCa" +
+                        " where month(tc.NgayTangCa)=@Thang and year(tc.NgayTangCa)=@Nam";
+            if (!string.IsNullOrEmpty(maNV))
+                sql += " AND tcnv.MaNV = @MaNV";
+            using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Thang", thang);
+                    cmd.Parameters.AddWithValue("@Nam", nam);
+                    if (!string.IsNullOrEmpty(maNV))
+                        cmd.Parameters.AddWithValue("@MaNV", maNV);
 
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
         public void Them(string maTangCa, string maNV, int soGioTangCa)
         {
             string sql = "INSERT INTO TangCa_NhanVien (MaTangCa, MaNV, SoGioTangCa) VALUES (@MaTangCa, @MaNV, @SoGioTangCa)";
@@ -78,7 +101,6 @@ namespace QUANLYNHANSU.DAL
             {
                 connection.Open();
 
-                // Delete from TangCa_NhanVien
                 string sqlDelete = "DELETE FROM TangCa_NhanVien WHERE MaTangCa = @MaTangCa AND MaNV = @MaNV";
                 using (SqlCommand cmd = new SqlCommand(sqlDelete, connection))
                 {
@@ -87,7 +109,6 @@ namespace QUANLYNHANSU.DAL
                     cmd.ExecuteNonQuery();
                 }
 
-                // Check if MaTangCa is still referenced
                 string sqlCheck = "SELECT COUNT(*) FROM TangCa_NhanVien WHERE MaTangCa = @MaTangCa";
                 using (SqlCommand cmd = new SqlCommand(sqlCheck, connection))
                 {

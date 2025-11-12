@@ -32,17 +32,37 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataTable LayNhanVienTheoTenDangNhap(string tenDangNhap)
+        {
+            string sql = @"
+                SELECT nv.*, td.TenTrinhDo, pb.TenPhongBan
+                FROM NhanVien nv
+                INNER JOIN TaiKhoan tk ON nv.MaNV = tk.MaNV
+                LEFT JOIN TrinhDo td on td.MaTrinhDo = nv.MaTrinhDo
+                LEFT JOIN PhongBan pb on pb.MaPhongBan = Nv.MaPhongBan
+                WHERE tk.TenDangNhap = @TenDangNhap";
 
-        public void  Them(
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
+        public void Them(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
-            string chucVu, decimal luongCB, string soBH, decimal mucDong, string stk)
+            string chucVu, string soBH, decimal mucDong, string stk)
         {
             const string sql = @"
                 INSERT INTO NhanVien (MaNV, HoTen, GioiTinh, NgaySinh, SDT, CCCD, DiaChi, Email, TrangThai,
-                                      MaPhongBan, MaTrinhDo, ChucVu, LuongCoBan, SoBaoHiemXaHoi, MucDong, SoTaiKhoan)
+                                      MaPhongBan, MaTrinhDo, ChucVu, SoBaoHiemXaHoi, MucDong, SoTaiKhoan)
                 VALUES (@Ma, @Ten, @GT, @NgaySinh, @SDT, @CCCD, @DiaChi, @Email, @TrangThai, 
-                        @Phong, @TrinhDo, @ChucVu, @LuongCB, @SoBH, @MucDong, @STK)";
+                        @Phong, @TrinhDo, @ChucVu, @SoBH, @MucDong, @STK)";
             try
             {
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -59,7 +79,6 @@ namespace QUANLYNHANSU.DAL
                     cmd.Parameters.AddWithValue("@Phong", maPhong);
                     cmd.Parameters.AddWithValue("@TrinhDo", maTrinhDo);
                     cmd.Parameters.AddWithValue("@ChucVu", chucVu);
-                    cmd.Parameters.AddWithValue("@LuongCB", luongCB);
                     cmd.Parameters.AddWithValue("@SoBH", soBH);
                     cmd.Parameters.AddWithValue("@MucDong", mucDong);
                     cmd.Parameters.AddWithValue("@STK", stk);
@@ -82,14 +101,14 @@ namespace QUANLYNHANSU.DAL
         public void Sua(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
-            string chucVu, decimal luongCB, string soBH, decimal mucDong, string stk)
+            string chucVu, string soBH, decimal mucDong, string stk)
         {
             const string sql = @"
                 UPDATE NhanVien SET 
                     HoTen=@Ten, GioiTinh=@GT, NgaySinh=@NgaySinh, SDT=@SDT, CCCD=@CCCD, 
                     DiaChi=@DiaChi, Email=@Email, TrangThai=@TrangThai, 
                     MaPhongBan=@Phong, MaTrinhDo=@TrinhDo, ChucVu=@ChucVu, 
-                    LuongCoBan=@LuongCB, SoBaoHiemXaHoi=@SoBH, MucDong=@MucDong, SoTaiKhoan=@STK
+                     SoBaoHiemXaHoi=@SoBH, MucDong=@MucDong, SoTaiKhoan=@STK
                 WHERE MaNV=@Ma";
             try
             {
@@ -107,7 +126,6 @@ namespace QUANLYNHANSU.DAL
                     cmd.Parameters.AddWithValue("@Phong", maPhong);
                     cmd.Parameters.AddWithValue("@TrinhDo", maTrinhDo);
                     cmd.Parameters.AddWithValue("@ChucVu", chucVu);
-                    cmd.Parameters.AddWithValue("@LuongCB", luongCB);
                     cmd.Parameters.AddWithValue("@SoBH", soBH);
                     cmd.Parameters.AddWithValue("@MucDong", mucDong);
                     cmd.Parameters.AddWithValue("@STK", stk);
@@ -238,7 +256,7 @@ namespace QUANLYNHANSU.DAL
                 }
             }
         }
-       
+
 
     }
 }

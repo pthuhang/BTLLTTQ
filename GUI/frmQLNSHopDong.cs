@@ -38,9 +38,12 @@ namespace QUANLYNHANSU.GUI
             txtMaHD.Enabled=enable;
             txtMaNV.Enabled=enable;
             txtThoiHan.Enabled=enable;
+            txtNoiDung.Enabled=enable;
+            txtLanKi.Enabled= enable;
             txtHSLuong.Enabled=enable;
             dtpNgayBD.Enabled=enable;
             dtpNgayKT.Enabled=enable;
+            txtLuongCoBan.Enabled=enable;
         }
         private void SetDefaultButtonState()
         {
@@ -58,7 +61,10 @@ namespace QUANLYNHANSU.GUI
             dgvHopDong.Columns["ThoiHan"].HeaderText = "Thời Hạn";
             dgvHopDong.Columns["NgayBatDau"].HeaderText = "Ngày Bắt Đầu";
             dgvHopDong.Columns["NgayKetThuc"].HeaderText = "Ngày Kết Thúc";
+            dgvHopDong.Columns["NoiDung"].HeaderText = "Nội dung";
+            dgvHopDong.Columns["LanKi"].HeaderText = "Lần kí";
             dgvHopDong.Columns["HeSoLuong"].HeaderText = "Hệ Số Lương";
+            dgvHopDong.Columns["LuongCoBan"].HeaderText = "Lương cơ bản";
             dgvHopDong.Columns["MaNV"].HeaderText = "Mã Nhân Viên";
 
             dgvHopDong.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -123,6 +129,9 @@ namespace QUANLYNHANSU.GUI
             txtThoiHan.Clear();
             txtHSLuong.Clear();
             txtMaNV.Clear();
+            txtLanKi.Clear();
+            txtNoiDung.Clear();
+            txtLuongCoBan.Clear();
             dtpNgayBD.Value = DateTime.Now;
             dtpNgayKT.Value = DateTime.Now;
             txtMaHD.Focus();
@@ -134,6 +143,9 @@ namespace QUANLYNHANSU.GUI
                 string maHD = txtMaHD.Text.Trim();
                 string thoiHan = txtThoiHan.Text.Trim();
                 string maNV = txtMaNV.Text.Trim();
+                string noiDung = txtNoiDung.Text.Trim();
+                string lanKi = txtLanKi.Text.Trim();
+                decimal luongCB = Convert.ToDecimal(txtLuongCoBan.Text.Trim());
                 DateTime ngayBD = dtpNgayBD.Value;
                 DateTime ngayKT = dtpNgayKT.Value;
 
@@ -170,12 +182,12 @@ namespace QUANLYNHANSU.GUI
                         return;
                     }
 
-                    bll.Them(maHD, thoiHan, ngayBD, ngayKT, heSoLuong, maNV);
+                    bll.Them(maHD, thoiHan, ngayBD, ngayKT,noiDung, lanKi, heSoLuong, luongCB, maNV);
                     MessageBox.Show("Thêm hợp đồng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (currentAction == "Sua")
                 {
-                    bll.CapNhat(maHD, thoiHan, ngayBD, ngayKT, heSoLuong, maNV);
+                    bll.CapNhat(maHD, thoiHan, ngayBD, ngayKT,noiDung, lanKi, heSoLuong,luongCB, maNV);
                     MessageBox.Show("Cập nhật hợp đồng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -213,7 +225,10 @@ namespace QUANLYNHANSU.GUI
                 dtpNgayBD.Value = Convert.ToDateTime(row.Cells["NgayBatDau"].Value);
                 dtpNgayKT.Value = Convert.ToDateTime(row.Cells["NgayKetThuc"].Value);
                 txtThoiHan.Text = row.Cells["ThoiHan"].Value?.ToString();
+                txtNoiDung.Text = row.Cells["NoiDung"].Value?.ToString();
+                txtLanKi.Text = row.Cells["LanKi"].Value?.ToString();
                 txtHSLuong.Text = row.Cells["HeSoLuong"].Value?.ToString();
+                txtLuongCoBan.Text = row.Cells["LuongCoBan"].Value?.ToString();
                 txtMaNV.Text = row.Cells["MaNV"].Value?.ToString();
 
             }

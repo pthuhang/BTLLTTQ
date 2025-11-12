@@ -99,6 +99,7 @@
             this.btnThoat.TabIndex = 12;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnLuu
             // 
@@ -109,6 +110,7 @@
             this.btnLuu.TabIndex = 11;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnXoa
             // 
@@ -119,6 +121,7 @@
             this.btnXoa.TabIndex = 10;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -129,6 +132,7 @@
             this.btnSua.TabIndex = 9;
             this.btnSua.Text = "Sửa thông tin";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -139,6 +143,7 @@
             this.btnThem.TabIndex = 8;
             this.btnThem.Text = "Thêm mới";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // panel2
             // 
@@ -346,6 +351,7 @@
             this.btnTimKiem.TabIndex = 12;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // panel5
             // 
@@ -387,6 +393,7 @@
             this.btnXemDSKT.TabIndex = 13;
             this.btnXemDSKT.Text = "Xem danh sách khen thưởng";
             this.btnXemDSKT.UseVisualStyleBackColor = true;
+            this.btnXemDSKT.Click += new System.EventHandler(this.btnXemDSKT_Click);
             // 
             // panel4
             // 
@@ -413,6 +420,7 @@
             this.btnLoc.TabIndex = 13;
             this.btnLoc.Text = "Lọc";
             this.btnLoc.UseVisualStyleBackColor = true;
+            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
             // txtNamLoc
             // 

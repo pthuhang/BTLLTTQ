@@ -14,7 +14,7 @@ namespace QUANLYNHANSU.DAL
         public DataTable LayDanhSach()
         {
             using (SqlDataAdapter da = new SqlDataAdapter(
-                "SELECT nv.MaNV, kl.MaKiLuat, kl.NoiDung, nv.NgayKiLuat, nv.TienPhat " +
+                "SELECT nv.MaNV, kl.MaKiLuat, kl.NoiDung, nv.NgayKiLuat, kl.TienPhat " +
                 "FROM KiLuat_NhanVien nv " +
                 "JOIN KiLuat kl ON nv.MaKiLuat = kl.MaKiLuat", conn))
             {
@@ -23,18 +23,16 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
-        public bool ThemKLNV(string maKL, string maNV, DateTime ngayKL, decimal tienPhat)
+        public bool ThemKLNV(string maKL, string maNV, DateTime ngayKL)
         {
             try
             {
                 using (SqlCommand cmd = new SqlCommand(
-                    "INSERT INTO KiLuat_NhanVien(MaKiLuat, MaNV, NgayKiLuat, TienPhat) VALUES(@MaKiLuat, @MaNV, @NgayKiLuat, @TienPhat)", conn))
+                    "INSERT INTO KiLuat_NhanVien(MaKiLuat, MaNV, NgayKiLuat) VALUES(@MaKiLuat, @MaNV, @NgayKiLuat)", conn))
                 {
                     cmd.Parameters.AddWithValue("@MaKiLuat", maKL);
                     cmd.Parameters.AddWithValue("@MaNV", maNV);
                     cmd.Parameters.AddWithValue("@NgayKiLuat", ngayKL);
-                    cmd.Parameters.AddWithValue("@TienPhat", tienPhat);
-
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -61,16 +59,15 @@ namespace QUANLYNHANSU.DAL
             conn.Close();
         }
 
-        public bool SuaChiTiet(string maKL, string maNV, DateTime ngayMoi, decimal tienMoi)
+        public bool SuaChiTiet(string maKL, string maNV, DateTime ngayMoi)
         {
             try
             {
                 using (SqlCommand cmd = new SqlCommand(
-                    "UPDATE KiLuat_NhanVien SET NgayKiLuat=@NgayMoi, TienPhat=@TienMoi " +
+                    "UPDATE KiLuat_NhanVien SET NgayKiLuat=@NgayMoi " +
                     "WHERE MaKiLuat=@MaKiLuat AND MaNV=@MaNV", conn))
                 {
                     cmd.Parameters.AddWithValue("@NgayMoi", ngayMoi);
-                    cmd.Parameters.AddWithValue("@TienMoi", tienMoi);
                     cmd.Parameters.AddWithValue("@MaKiLuat", maKL);
                     cmd.Parameters.AddWithValue("@MaNV", maNV);
 

@@ -16,7 +16,10 @@ namespace QUANLYNHANSU.BLL
         {
             return tcnv.LayDanhSach();
         }
-
+        public DataTable LayTangCa(int thang, int nam, string maNV )
+        {
+            return tcnv.LayTangCaTheoThangNam(thang, nam, maNV);
+        }
         public void Them(string maTangCa, string maNV, int soGioTangCa)
         {
             tcnv.Them(maTangCa, maNV, soGioTangCa);
