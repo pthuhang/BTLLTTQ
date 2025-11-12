@@ -44,6 +44,7 @@ namespace QUANLYNHANSU.GUI
                     dtpNgayBD.Value = nbd;
                 if (DateTime.TryParse(row["NgayKetThuc"].ToString(), out DateTime nkt))
                     dtpNgayKT.Value = nkt;
+                txtLuongCB.Text = row["LuongCoBan"].ToString();
             }
             else
             {
@@ -61,10 +62,16 @@ namespace QUANLYNHANSU.GUI
             txtLanKi.ReadOnly = !enable;
             txtThoiHan.ReadOnly = !enable;
             txtHSLuong.ReadOnly = !enable;
+            txtLuongCB.ReadOnly = !enable;
         }
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

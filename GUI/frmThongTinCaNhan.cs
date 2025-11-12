@@ -54,7 +54,6 @@ namespace QUANLYNHANSU.GUI
                 txtChucVu.Text = row["ChucVu"].ToString();
                 txtTrinhDo.Text = row["TenTrinhDo"].ToString();
                 txtPhongBan.Text = row["TenPhongBan"].ToString();
-                txtLuongCB.Text = row["LuongCoBan"].ToString();
                 txtCCCD.Text = row["CCCD"].ToString();
                 txtSoBH.Text = row["SoBaoHiemXaHoi"].ToString();
                 txtMucDongBH.Text = row["MucDong"].ToString();
@@ -81,7 +80,6 @@ namespace QUANLYNHANSU.GUI
             txtPhongBan.ReadOnly = !enable;
             txtTrinhDo.ReadOnly = !enable;
             txtChucVu.ReadOnly = !enable;
-            txtLuongCB.ReadOnly = !enable;
             txtSoBH.ReadOnly = !enable;
             txtMucDongBH.ReadOnly = !enable;
             txtSTK.ReadOnly = !enable;
@@ -90,6 +88,11 @@ namespace QUANLYNHANSU.GUI
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
