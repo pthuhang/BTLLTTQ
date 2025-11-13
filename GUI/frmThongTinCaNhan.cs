@@ -15,6 +15,7 @@ namespace QUANLYNHANSU.GUI
     public partial class frmThongTinCaNhan : Form
     {
         private NhanVienBLL bll = new NhanVienBLL();
+        private TaiKhoanBLL tkBLL = new TaiKhoanBLL();
         private string tenDangNhap;
         public frmThongTinCaNhan(string tenDangNhap)
         {
@@ -34,6 +35,7 @@ namespace QUANLYNHANSU.GUI
             label23.Top = (panel29.ClientSize.Height - label23.Height) / 2;
 
             HienThiThongTinCaNhan();
+
 
             EnableForm(false);
         }
@@ -64,35 +66,92 @@ namespace QUANLYNHANSU.GUI
             {
                 MessageBox.Show("Không tìm thấy thông tin nhân viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            DataTable dtb = tkBLL.LayTaiKhoanTheoTenDangNhap(tenDangNhap);
+            if (dtb.Rows.Count > 0)
+            {
+                DataRow row = dtb.Rows[0];
+                txtMaNgDung.Text = row["MaNguoiDung"].ToString();
+                txtTenDangNhap.Text = row["TenDangNhap"].ToString();
+                txtMatKhau.Text = row["MatKhau"].ToString();
+                txtVaiTro.Text = row["VaiTro"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy thông tin tài khoản của nhân viên ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
-        private void EnableForm(bool enable)
-        {
-            // Khóa/Mở toàn bộ control nhập liệu
-            txtMaNV.ReadOnly = !enable;
-            txtHoTen.ReadOnly = !enable;
-            cbGioiTinh.Enabled = enable;
-            dtpNgaySinh.Enabled = enable;
-            txtSDT.ReadOnly = !enable;
-            txtCCCD.ReadOnly = !enable;
-            txtDiaChi.ReadOnly = !enable;
-            txtEmail.ReadOnly = !enable;
-            txtTrangThai.ReadOnly = !enable;
-            txtPhongBan.ReadOnly = !enable;
-            txtTrinhDo.ReadOnly = !enable;
-            txtChucVu.ReadOnly = !enable;
-            txtSoBH.ReadOnly = !enable;
-            txtMucDongBH.ReadOnly = !enable;
-            txtSTK.ReadOnly = !enable;
-            txtTrangThai.ReadOnly = !enable;
-        }
+                private void EnableForm(bool enable)
+                {
+                    // Khóa/Mở toàn bộ control nhập liệu
+                    txtMaNV.ReadOnly = !enable;
+                    txtHoTen.ReadOnly = !enable;
+                    cbGioiTinh.Enabled = enable;
+                    dtpNgaySinh.Enabled = enable;
+                    txtSDT.ReadOnly = !enable;
+                    txtCCCD.ReadOnly = !enable;
+                    txtDiaChi.ReadOnly = !enable;
+                    txtEmail.ReadOnly = !enable;
+                    txtTrangThai.ReadOnly = !enable;
+                    txtPhongBan.ReadOnly = !enable;
+                    txtTrinhDo.ReadOnly = !enable;
+                    txtChucVu.ReadOnly = !enable;
+                    txtSoBH.ReadOnly = !enable;
+                    txtMucDongBH.ReadOnly = !enable;
+                    txtSTK.ReadOnly = !enable;
+                    txtTrangThai.ReadOnly = !enable;
+                    txtMaNgDung.ReadOnly = !enable;
+                    txtTenDangNhap.ReadOnly = !enable;
+                    txtMatKhau.ReadOnly = !enable;
+                    txtVaiTro.ReadOnly = !enable;
+                }
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void panel6_Paint(object sender, PaintEventArgs e)
+        private void btnSua_Click(object sender, EventArgs e)
         {
+            txtTenDangNhap.ReadOnly = false;
+            txtMatKhau.ReadOnly = false;
+            txtVaiTro.ReadOnly = true;  
+            btnLuu.Enabled = true;
+        }
 
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tenDangNhap = txtTenDangNhap.Text.Trim();
+                string matKhau = txtMatKhau.Text.Trim();
+                string vaiTro = txtVaiTro.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(tenDangNhap))
+                {
+                    MessageBox.Show("Vui lòng nhập tên đăng nhập mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(matKhau))
+                {
+                    MessageBox.Show("Vui lòng nhập mật khẩu mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                bool result = tkBLL.CapNhatTaiKhoan(tenDangNhap, matKhau, vaiTro);
+                if (result)
+                {
+                    MessageBox.Show("Cập nhật tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtMatKhau.ReadOnly = true;
+                    btnLuu.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Không thể cập nhật tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

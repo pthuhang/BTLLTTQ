@@ -24,6 +24,10 @@ namespace QUANLYNHANSU.BLL
         {
             lcnv.Them(maLoaiCong, maNV, ngayLam, gioVao, gioRa);
         }
+        public DataTable LayBangCongTheoThangNam(string maNV, int thang, int nam)
+        {
+            return lcnv.LayBangCongTheoThangNam(maNV, thang, nam);
+        }
 
         public bool KiemTraTonTai(string maLoaiCong, string maNV)
         {

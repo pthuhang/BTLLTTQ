@@ -23,6 +23,42 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataTable GetKiLuatByMaNV_ThangNam(string maNV, int thang, int nam)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = @"
+            SELECT kl.MaKiLuat, kl.NoiDung, kl.TienPhat, klnv.NgayKiLuat
+            FROM KiLuat kl
+            INNER JOIN KiLuat_NhanVien klnv ON kl.MaKiLuat = klnv.MaKiLuat
+            WHERE klnv.MaNV = @MaNV 
+              AND MONTH(klnv.NgayKiLuat) = @Thang
+              AND YEAR(klnv.NgayKiLuat) = @Nam";
+
+                // Mở kết nối trước khi dùng SqlCommand
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
+                    cmd.Parameters.Add("@Thang", SqlDbType.Int).Value = thang;
+                    cmd.Parameters.Add("@Nam", SqlDbType.Int).Value = nam;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                if (conn.State == ConnectionState.Open) conn.Close();
+                MessageBox.Show("Lỗi lấy Li luat theo tháng/năm: " + ex.Message);
+            }
+            return dt;
+        }
         public bool ThemKLNV(string maKL, string maNV, DateTime ngayKL)
         {
             try

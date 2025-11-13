@@ -31,7 +31,6 @@ namespace QUANLYNHANSU.GUI
 
         private void frmQLCDuLieuChamCong_Load(object sender, EventArgs e)
         {
-            cmbTrangThai.Items.AddRange(new string[] { "Nửa ngày", "Cả ngày" });
             LoadDanhSach();
             EnableForm(false);
             dgvChamCong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -49,7 +48,6 @@ namespace QUANLYNHANSU.GUI
             dtpGioVao.Enabled = enable;
             dtpGioRa.Enabled = enable;
             txtHeSo.Enabled = enable;
-            cmbTrangThai.Enabled = enable;
         }
         private void ClearForm()
         {
@@ -57,7 +55,6 @@ namespace QUANLYNHANSU.GUI
             txtHoTenNV.Clear();
             txtMaLoaiCong.Clear();
             txtHeSo.Clear();
-            cmbTrangThai.SelectedIndex = -1;
             dtpNgayChamCong.Value = DateTime.Now;
             dtpGioVao.Value = DateTime.Now;
             dtpGioRa.Value = DateTime.Now;
@@ -74,7 +71,7 @@ namespace QUANLYNHANSU.GUI
             dtpNgayChamCong.Value = Convert.ToDateTime(row.Cells["NgayLam"].Value);
             dtpGioVao.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioVao"].Value);
             dtpGioRa.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioRa"].Value);
-            txtHeSo.Text = row.Cells["HeSoC"].Value.ToString();
+            txtHeSo.Text = row.Cells["HeSo"].Value.ToString();
         }
 
         private void btnThem_Click(object sender, EventArgs e)

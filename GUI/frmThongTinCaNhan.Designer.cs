@@ -89,7 +89,7 @@
             this.btnThoat = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel30 = new System.Windows.Forms.Panel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtVaiTro = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.panel31 = new System.Windows.Forms.Panel();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
@@ -656,7 +656,6 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 883);
             this.panel6.TabIndex = 23;
-            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
             // 
             // panel24
             // 
@@ -694,7 +693,7 @@
             // 
             // panel30
             // 
-            this.panel30.Controls.Add(this.textBox4);
+            this.panel30.Controls.Add(this.txtVaiTro);
             this.panel30.Controls.Add(this.label21);
             this.panel30.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel30.Location = new System.Drawing.Point(90, 195);
@@ -702,12 +701,12 @@
             this.panel30.Size = new System.Drawing.Size(413, 45);
             this.panel30.TabIndex = 50;
             // 
-            // textBox4
+            // txtVaiTro
             // 
-            this.textBox4.Location = new System.Drawing.Point(194, 14);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(217, 22);
-            this.textBox4.TabIndex = 15;
+            this.txtVaiTro.Location = new System.Drawing.Point(194, 14);
+            this.txtVaiTro.Name = "txtVaiTro";
+            this.txtVaiTro.Size = new System.Drawing.Size(217, 22);
+            this.txtVaiTro.TabIndex = 15;
             // 
             // label21
             // 
@@ -814,6 +813,7 @@
             this.btnSua.TabIndex = 17;
             this.btnSua.Text = "Sửa thông tin";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLuu
             // 
@@ -823,6 +823,7 @@
             this.btnLuu.TabIndex = 18;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // panel29
             // 
@@ -852,29 +853,6 @@
             this.panel26.Size = new System.Drawing.Size(90, 883);
             this.panel26.TabIndex = 0;
             // 
-
-            // txtTrinhDo
-            // 
-            this.txtTrinhDo.Location = new System.Drawing.Point(205, 9);
-            this.txtTrinhDo.Name = "txtTrinhDo";
-            this.txtTrinhDo.Size = new System.Drawing.Size(178, 22);
-            this.txtTrinhDo.TabIndex = 4;
-            // 
-            // txtPhongBan
-            // 
-            this.txtPhongBan.Location = new System.Drawing.Point(205, 9);
-            this.txtPhongBan.Name = "txtPhongBan";
-            this.txtPhongBan.Size = new System.Drawing.Size(178, 22);
-            this.txtPhongBan.TabIndex = 4;
-            // 
-            // txtTrangThai
-            // 
-            this.txtTrangThai.Location = new System.Drawing.Point(205, 9);
-            this.txtTrangThai.Name = "txtTrangThai";
-            this.txtTrangThai.Size = new System.Drawing.Size(178, 22);
-            this.txtTrangThai.TabIndex = 4;
-            // 
-
             // frmThongTinCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1018,7 +996,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtMaNgDung;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtVaiTro;
         private System.Windows.Forms.TextBox txtTrangThai;
         private System.Windows.Forms.TextBox txtPhongBan;
         private System.Windows.Forms.TextBox txtTrinhDo;

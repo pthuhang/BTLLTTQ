@@ -25,6 +25,10 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayNhanVienTheoTenDangNhap(tenDangNhap);
         }
+        public DataRow KiemTraDangNhap(string tenDangNhap, string matKhau)
+        {
+            return dal.KiemTraDangNhap(tenDangNhap, matKhau);
+        }
         public void Them(string maNV, string hoTen, bool gioiTinh, DateTime ngaySinh,
                          string sdt, string cccd, string diaChi, string email, string trangThai,
                          string maPhongBan, string maTrinhDo, string chucVu,

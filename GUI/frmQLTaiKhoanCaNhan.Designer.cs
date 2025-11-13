@@ -33,6 +33,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnThoat = new System.Windows.Forms.Button();
             this.btnLuu = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtMaNgDung = new System.Windows.Forms.TextBox();
@@ -45,7 +46,6 @@
             this.txtTenDangNhap = new System.Windows.Forms.TextBox();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
             this.cbVaiTro = new System.Windows.Forms.ComboBox();
-            this.btnThoat = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -97,6 +97,16 @@
             this.panel4.Size = new System.Drawing.Size(972, 100);
             this.panel4.TabIndex = 2;
             // 
+            // btnThoat
+            // 
+            this.btnThoat.Location = new System.Drawing.Point(563, 30);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(113, 40);
+            this.btnThoat.TabIndex = 1;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            // 
             // btnLuu
             // 
             this.btnLuu.Location = new System.Drawing.Point(407, 30);
@@ -105,6 +115,7 @@
             this.btnLuu.TabIndex = 0;
             this.btnLuu.Text = "Lưu thay đổi";
             this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // panel5
             // 
@@ -195,15 +206,6 @@
             this.cbVaiTro.Size = new System.Drawing.Size(217, 24);
             this.cbVaiTro.TabIndex = 13;
             // 
-            // btnThoat
-            // 
-            this.btnThoat.Location = new System.Drawing.Point(563, 30);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(113, 40);
-            this.btnThoat.TabIndex = 1;
-            this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = true;
-            // 
             // frmQLTaiKhoanCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -225,6 +227,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "frmQLTaiKhoanCaNhan";
             this.Text = "frmQLTKTaiKhoanCaNhan";
+            this.Load += new System.EventHandler(this.frmQLTaiKhoanCaNhan_Load);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

@@ -26,7 +26,10 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSachTaiKhoan();
         }
-
+        public DataTable LayTaiKhoanTheoTenDangNhap(string tenDangNhap)
+        {
+            return dal.LayTaiKhoanTheoTenDangNhap(tenDangNhap);
+        }
         public void Them(string maND, string tenDN, string matKhau, string maNV, string vaiTro)
         {
             dal.Them(maND, tenDN, matKhau, maNV, vaiTro);
@@ -41,5 +44,14 @@ namespace QUANLYNHANSU.BLL
         {
             dal.Xoa(maND);
         }
+        public bool UpdateOne(string maNguoiDung, string maNhanVien, string tenDangNhap, string matKhau, string vaiTro)
+        {
+            return dal.UpdateOne(maNguoiDung, maNhanVien, tenDangNhap, matKhau, vaiTro);
+        }
+        public bool CapNhatTaiKhoan(string tenDangNhap, string matKhau, string vaiTro)
+        {
+            return dal.CapNhatTaiKhoan(tenDangNhap, matKhau, vaiTro);
+        }
+    
     }
 }

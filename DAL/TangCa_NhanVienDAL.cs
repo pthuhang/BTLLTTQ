@@ -25,10 +25,9 @@ namespace QUANLYNHANSU.DAL
         }
         public DataTable LayTangCaTheoThangNam(int thang, int nam, string maNV)
         {
-            string sql = " select tcnv.MaTangCa, tcnv.MaNV, tcnv.SoGioTangCa, tc.NgayTangCa " +
+            string sql = " select  tcnv.MaNV, tcnv.SoGioTangCa, tcnv.NgayTangCa " +
                         " from TangCa_NhanVien tcnv" +
-                        " join TangCa tc on tc.MaTangCa=tcnv.MaTangCa" +
-                        " where month(tc.NgayTangCa)=@Thang and year(tc.NgayTangCa)=@Nam";
+                        " where month(tcnv.NgayTangCa)=@Thang and year(tcnv.NgayTangCa)=@Nam";
             if (!string.IsNullOrEmpty(maNV))
                 sql += " AND tcnv.MaNV = @MaNV";
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))

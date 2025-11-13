@@ -32,6 +32,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnThoat = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -42,14 +43,13 @@
             this.cbNam = new System.Windows.Forms.ComboBox();
             this.lblThang = new System.Windows.Forms.Label();
             this.cbThang = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dgvBangCong = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBangCong)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -88,6 +88,17 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1048, 120);
             this.panel8.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(414, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(221, 46);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Bảng công";
             // 
             // panel3
             // 
@@ -136,6 +147,7 @@
             this.btnXem.TabIndex = 20;
             this.btnXem.Text = "Xem";
             this.btnXem.UseVisualStyleBackColor = true;
+            this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
             // 
             // panel6
             // 
@@ -157,6 +169,11 @@
             // cbNam
             // 
             this.cbNam.FormattingEnabled = true;
+            this.cbNam.Items.AddRange(new object[] {
+            "2022",
+            "2023",
+            "2024",
+            "2025"});
             this.cbNam.Location = new System.Drawing.Point(336, 33);
             this.cbNam.Name = "cbNam";
             this.cbNam.Size = new System.Drawing.Size(121, 24);
@@ -192,35 +209,24 @@
             this.cbThang.Size = new System.Drawing.Size(121, 24);
             this.cbThang.TabIndex = 21;
             // 
-            // dataGridView1
+            // dgvBangCong
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(120, 210);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(728, 346);
-            this.dataGridView1.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(414, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 46);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Bảng công";
+            this.dgvBangCong.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvBangCong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBangCong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBangCong.Location = new System.Drawing.Point(120, 210);
+            this.dgvBangCong.Name = "dgvBangCong";
+            this.dgvBangCong.RowHeadersWidth = 51;
+            this.dgvBangCong.RowTemplate.Height = 24;
+            this.dgvBangCong.Size = new System.Drawing.Size(728, 346);
+            this.dgvBangCong.TabIndex = 9;
             // 
             // frmBangCong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 656);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvBangCong);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
@@ -236,7 +242,7 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBangCong)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -255,7 +261,7 @@
         private System.Windows.Forms.ComboBox cbNam;
         private System.Windows.Forms.Label lblThang;
         private System.Windows.Forms.ComboBox cbThang;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvBangCong;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label1;
     }
