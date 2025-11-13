@@ -20,24 +20,24 @@ namespace QUANLYNHANSU.BLL
         {
             return tcnv.LayTangCaTheoThangNam(thang, nam, maNV);
         }
-        public void Them(string maTangCa, string maNV, int soGioTangCa)
+        public void Them(string maNV, int soGioTangCa, DateTime ngayTangCa)
         {
-            tcnv.Them(maTangCa, maNV, soGioTangCa);
+            tcnv.Them(maNV, soGioTangCa, ngayTangCa);
         }
 
-        public bool KiemTraTonTai(string maTangCa, string maNV)
+        public bool KiemTraTonTai(DateTime ngayTangCa, string maNV)
         {
-            return tcnv.KiemTraTonTai(maTangCa, maNV);
+            return tcnv.KiemTraTonTai(ngayTangCa, maNV);
         }
 
-        public void Sua(string maTangCa, string maNV, int soGioMoi)
+        public void Sua(string maNV, DateTime ngayTC, int soGioMoi)
         {
-            tcnv.Sua(maTangCa, maNV, soGioMoi);
+            tcnv.Sua(maNV, ngayTC, soGioMoi);
         }
 
-        public void Xoa(string maTangCa, string maNV)
+        public void Xoa(DateTime ngayTangCa, string maNV)
         {
-            tcnv.XoaVaCapNhatTangCa(maTangCa, maNV);
+            tcnv.XoaVaCapNhatTangCa(ngayTangCa, maNV);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using QUANLYNHANSU.DAL;
+using QUANLYNHANSU.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,8 +17,15 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSach();
         }
-
-        public decimal TinhLuongThucLinh(string maNV)
+        public DataTable LayBangLuongNhanVien(string mnv)
+        {
+            return dal.LayDanhSachTheoMa(mnv);
+        }
+        public DataTable LayBangLuong(int thang, int nam, string maNV)
+        {
+            return dal.LayBangLuonggTheoThangNam(thang, nam, maNV);
+        }
+        public decimal TinhLuongThucLinh(string maNV, int thang, int nam)
         {
             DataRow hd = dal.LayThongTinHD(maNV);
             if (hd == null)
@@ -27,27 +35,32 @@ namespace QUANLYNHANSU.BLL
             decimal luongCoBan = hd["LuongCoBan"] == DBNull.Value ? 0 : Convert.ToDecimal(hd["LuongCoBan"]);
             decimal heSoLuong = hd["HeSoLuong"] == DBNull.Value ? 1 : Convert.ToDecimal(hd["HeSoLuong"]);
 
+            decimal tongTangCa = dal.TinhSoGioTangCa(maNV, thang, nam);
+            decimal tongCong = dal.TinhSoNgayCong(maNV, thang, nam);
+
             decimal tongPhuCap = dal.TinhTongPhuCap(maNV);
-            decimal tongThuong = dal.TinhTongThuong(maNV);
-            decimal tongPhat = dal.TinhTongPhat(maNV);
             decimal mucBaoHiem = dal.LayMucDongBH(maNV);
 
-            decimal luongThucLinh = (luongCoBan * heSoLuong + tongPhuCap + tongThuong - tongPhat) - mucBaoHiem;
+            decimal tongThuong = dal.TinhTongThuong(maNV, thang, nam);
+            decimal tongPhat = dal.TinhTongPhat(maNV, thang, nam);
+
+            decimal tienTangCa = (tongTangCa / 8) * 250000;
+
+            decimal luongThucLinh = (luongCoBan * heSoLuong + tongPhuCap + tongThuong - tongPhat + tienTangCa) - mucBaoHiem;
             return luongThucLinh;
         }
 
         public bool TaoBangLuong(string maNV, int thang, int nam)
         {
-            // Nếu bảng lương đã tồn tại thì không tạo lại
             if (dal.KiemTraBangLuong(maNV, thang, nam))
                 return false;
 
-            // 1️⃣ Lấy dữ liệu cần thiết
             decimal tongPhuCap = dal.TinhTongPhuCap(maNV);
-            decimal tongThuong = dal.TinhTongThuong(maNV);
-            decimal tongPhat = dal.TinhTongPhat(maNV);
+            decimal tongThuong = dal.TinhTongThuong(maNV, thang, nam);
+            decimal tongPhat = dal.TinhTongPhat(maNV, thang, nam);
+            decimal soGioTangCa = dal.TinhSoGioTangCa(maNV, thang, nam);
+            decimal soNgayCong = dal.TinhSoNgayCong(maNV, thang, nam);
 
-            // 2️⃣ Lấy thông tin hợp đồng
             DataRow hd = dal.LayThongTinHD(maNV);
             if (hd == null)
                 throw new Exception("Không tìm thấy hợp đồng cho nhân viên này.");
@@ -55,38 +68,26 @@ namespace QUANLYNHANSU.BLL
             decimal luongCoBan = Convert.ToDecimal(hd["LuongCoBan"]);
             float heSoLuong = Convert.ToSingle(hd["HeSoLuong"]);
 
-            // 3️⃣ Lấy mức đóng bảo hiểm
             decimal mucBaoHiem = dal.LayMucDongBH(maNV);
 
-            // 4️⃣ Tính lương thực lĩnh
-            decimal luongThucLinh = (luongCoBan * (decimal)heSoLuong + tongPhuCap + tongThuong - tongPhat) - mucBaoHiem;
+            decimal luongThucLinh = TinhLuongThucLinh(maNV, thang, nam);
 
-            // 5️⃣ Sinh mã bảng lương tự động
-            string maBangLuong = dal.TaoMaBangLuongMoi();
+            string maBangLuong = TaoMaBangLuongMoi(maNV, thang, nam);
 
-            // 6️⃣ Lưu xuống CSDL
             dal.Them(maBangLuong, maNV, thang, nam,
-                     0, 0, // SoNgayCong, SoGioTangCa — có thể cập nhật sau
+                     soNgayCong, soGioTangCa,
                      tongPhuCap, tongThuong, tongPhat,
                      luongCoBan, heSoLuong, luongThucLinh);
 
             return true;
         }
+        private string TaoMaBangLuongMoi(string maNV, int thang, int nam)
+        {
+            string maNVSuffix = maNV.Length >= 2 ? maNV.Substring(maNV.Length - 2) : maNV.PadLeft(2, '0');
+            string maBangLuong = $"BL{maNVSuffix}{thang:D2}{nam % 100:D2}";
+            return maBangLuong;
+        }
 
 
-        //public void Them(string maBL, string maNV, decimal luongCB, decimal tongPC, decimal tongKT, decimal tongKL, decimal thucLinh, DateTime thang)
-        //{
-        //    dal.Them(maBL, maNV, luongCB, tongPC, tongKL, tongKT, thucLinh, thang);
-        //}
-
-        //public void CapNhat(string maBL, string maNV, decimal luongCB, decimal tongPC, decimal tongKT, decimal tongKL, decimal thucLinh, DateTime thang)
-        //{
-        //    dal.Sua(maBL, maNV, luongCB, tongPC, tongKL, tongKT, thucLinh, thang);
-        //}
-
-        //public void Xoa(string maBL)
-        //{
-        //    dal.Xoa(maBL);
-        //}
     }
 }

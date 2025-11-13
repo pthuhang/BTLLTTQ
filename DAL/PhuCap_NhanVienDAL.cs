@@ -32,12 +32,15 @@ namespace QUANLYNHANSU.DAL
         }
         public DataTable LayNhanVienTheoMa(string mnv)
         {
+            DataTable dt = new DataTable();
+            if (string.IsNullOrEmpty(mnv))
+                return dt;
             string sql = @"
                         SELECT
                             pcnv.MaNV, 
                             nv.HoTen, 
                             pcnv.MaPhuCap, 
-                            pc.TenPhuCap
+                            pc.TenPhuCap, pc.TienPhuCap
                         FROM PhuCap_NhanVien pcnv
                         INNER JOIN NhanVien nv ON pcnv.MaNV = nv.MaNV
                         INNER JOIN PhuCap pc ON pcnv.MaPhuCap = pc.MaPhuCap
@@ -50,9 +53,10 @@ namespace QUANLYNHANSU.DAL
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@mnv", mnv);
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                da.Fill(dt);
+            }
             return dt;
         }
 

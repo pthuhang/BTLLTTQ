@@ -47,7 +47,7 @@ namespace QUANLYNHANSU.GUI
                 DataRow row = dt.Rows[0];
                 txtMaNV.Text = row["MaNV"].ToString();
                 txtHoTen.Text = row["HoTen"].ToString();
-                cbGioiTinh.Text = row["GioiTinh"].ToString();
+                cbGioiTinh.SelectedItem = (row["GioiTinh"].ToString() == "0") ? "Nam" : "Nữ";
                 if (DateTime.TryParse(row["NgaySinh"].ToString(), out DateTime ns))
                     dtpNgaySinh.Value = ns;
                 txtDiaChi.Text = row["DiaChi"].ToString();

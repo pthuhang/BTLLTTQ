@@ -79,7 +79,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnBangLuong_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmBangLuong());
+            MoFormCon(new frmBangLuong(maNV));
             HighlightTab(btnBangLuong);
         }
 
