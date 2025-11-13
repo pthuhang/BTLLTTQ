@@ -21,6 +21,10 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSachTheoMa(mnv);
         }
+        public DataTable LayBangLuong(int thang, int nam, string maNV)
+        {
+            return dal.LayBangLuonggTheoThangNam(thang, nam, maNV);
+        }
         public decimal TinhLuongThucLinh(string maNV, int thang, int nam)
         {
             DataRow hd = dal.LayThongTinHD(maNV);

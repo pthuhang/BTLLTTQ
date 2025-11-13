@@ -62,12 +62,15 @@ namespace QUANLYNHANSU.GUI
             dtpNgayChamCong.Enabled = enable;
             dtpGioVao.Enabled = enable;
             dtpGioRa.Enabled = enable;
+
         }
         private void ClearForm()
         {
             txtMaNV.Clear();
+
             txtTenNV.Clear();
             cbLoaiCong.SelectedIndex = -1;
+
             dtpNgayChamCong.Value = DateTime.Now;
             dtpGioVao.Value = DateTime.Now;
             dtpGioRa.Value = DateTime.Now;
@@ -84,6 +87,7 @@ namespace QUANLYNHANSU.GUI
             dtpNgayChamCong.Value = Convert.ToDateTime(row.Cells["NgayLam"].Value);
             dtpGioVao.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioVao"].Value);
             dtpGioRa.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioRa"].Value);
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace QUANLYNHANSU.GUI
 {
@@ -30,10 +31,10 @@ namespace QUANLYNHANSU.GUI
         //
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            string user = txtTenDangNhap.Text.Trim();
-            string pass = txtMatKhau.Text.Trim();
+            string tenDangNhap = txtTenDangNhap.Text.Trim();
+            string matKhau = txtMatKhau.Text.Trim();
 
-            if (string.IsNullOrEmpty(user))
+            if (string.IsNullOrEmpty(tenDangNhap))
             {
                 lblThongBao.Text = "Vui lòng nhập tên đăng nhập!";
                 lblThongBao.ForeColor = Color.Red;
@@ -43,7 +44,7 @@ namespace QUANLYNHANSU.GUI
                 return;
             }
 
-            if (string.IsNullOrEmpty(pass))
+            if (string.IsNullOrEmpty(matKhau))
             {
                 lblThongBao.Text = "Vui lòng nhập  mật khẩu!";
                 lblThongBao.ForeColor = Color.Red;
@@ -53,7 +54,9 @@ namespace QUANLYNHANSU.GUI
                 return;
             }
 
-            DataRow userRow = taiKhoanBLL.DangNhap(user, pass);
+            NhanVienBLL nvBll = new NhanVienBLL();
+            DataRow userRow = nvBll.KiemTraDangNhap(tenDangNhap, matKhau);
+            //DataRow userRow = taiKhoanBLL.DangNhap(user, pass);
             if (userRow != null)
             {
                 string vaiTro = userRow["VaiTro"].ToString();
@@ -62,9 +65,9 @@ namespace QUANLYNHANSU.GUI
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 if (vaiTro.Equals("Quản trị viên", StringComparison.OrdinalIgnoreCase))
-                    new frmMain(user).Show();
+                    new frmMain(tenDangNhap).Show();
                 else
-                    new frmMainNhanVien(maNV,user).Show();
+                    new frmMainNhanVien(maNV,tenDangNhap).Show();
             }
             else
             {

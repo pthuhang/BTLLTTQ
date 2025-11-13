@@ -18,6 +18,20 @@ namespace QUANLYNHANSU.DAL
             da.Fill(dt);
             return dt;
         }
+        public DataTable LayTaiKhoanTheoTenDangNhap(string tenDangNhap)
+        {
+            string sql = @"select * from TaiKhoan Where TenDangNhap=@tenDangNhap";
+            using(SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
         //Thêm, sửa, xóa
         public void Them(string maNguoiDung, string tenDangNhap, string matKhau, string maNV, string vaiTro)
         {
@@ -77,5 +91,40 @@ namespace QUANLYNHANSU.DAL
                 return null;
             }
         }
+        public bool UpdateOne(string maNguoiDung, string maNhanVien, string tenDangNhap, string matKhau, string vaiTro)
+        {
+            
+                string query = @"UPDATE TaiKhoan 
+                             SET MaNV=@MaNV, TenDangNhap=@TenDangNhap, MatKhau=@MatKhau, VaiTro=@VaiTro
+                             WHERE MaNguoiDung=@MaNguoiDung";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDung);
+                cmd.Parameters.AddWithValue("@MaNV", maNhanVien);
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
+                cmd.Parameters.AddWithValue("@VaiTro", vaiTro);
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            
+        }
+        public bool CapNhatTaiKhoan(string tenDangNhap, string matKhau, string vaiTro)
+        {
+            string sql = @"UPDATE TaiKhoan 
+                   SET MatKhau = @MatKhau, VaiTro = @VaiTro
+                   WHERE TenDangNhap = @TenDangNhap";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
+                cmd.Parameters.AddWithValue("@VaiTro", vaiTro);
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+
+                conn.Open();
+                int rows = cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return rows > 0;
+            }
+        }
+
     }
 }

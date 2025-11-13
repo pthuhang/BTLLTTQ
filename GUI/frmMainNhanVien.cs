@@ -19,16 +19,17 @@ namespace QUANLYNHANSU.GUI
         {
             InitializeComponent();
             this.tenDangNhap = tenDangNhap;
+            this.maNV = maNV;
 
             label1.Text = "Xin chào, " + tenDangNhap + "!";
             label1.Left = (panel3.ClientSize.Width - label1.Width) / 2;
 
         }
-        //public frmMainNhanVien()
-        //{
-        //    InitializeComponent();
-        //}
-        //---
+        public frmMainNhanVien()
+        {
+            InitializeComponent();
+        }
+        
         private void HighlightTab(Button selectedButton)
         {
             Button[] tabs = { btnThongTinCaNhan, btnBangCong, btnBangLuong, btnHopDong, btnBoSungKhauTru };
@@ -66,7 +67,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnBangCong_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmBangCong());
+            MoFormCon(new frmBangCong(maNV));
             HighlightTab(btnBangCong);
         }
 
@@ -78,7 +79,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnBangLuong_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmBangLuong());
+            MoFormCon(new frmBangLuong(maNV));
             HighlightTab(btnBangLuong);
         }
 

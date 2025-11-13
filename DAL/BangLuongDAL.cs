@@ -27,6 +27,31 @@ namespace QUANLYNHANSU.DAL
             da.Fill(dt);
             return dt;
         }
+        public DataTable LayBangLuonggTheoThangNam(int thang, int nam, string maNV)
+        {
+            string sql = "SELECT *  " +
+                         " FROM BangLuong " +
+                         " WHERE Thang=@thang and Nam=@nam";
+
+            if (!string.IsNullOrEmpty(maNV))
+                sql += " AND MaNV = @MaNV";
+
+            using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Thang", thang);
+                    cmd.Parameters.AddWithValue("@Nam", nam);
+                    if (!string.IsNullOrEmpty(maNV))
+                        cmd.Parameters.AddWithValue("@MaNV", maNV);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
         public DataRow LayThongTinHD(string maNV)
         {
             string sql = "SELECT HeSoLuong, LuongCoBan FROM HopDong WHERE MaNV = @MaNV";

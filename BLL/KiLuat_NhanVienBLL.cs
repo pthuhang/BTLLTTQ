@@ -19,7 +19,10 @@ namespace QUANLYNHANSU.BLL
         {
             dal.ThemKLNV(maKL, maNV, ngayKL);
         }
-
+        public DataTable GetKiLuatByMaNV_ThangNam(string maNV, int thang, int nam)
+        {
+            return dal.GetKiLuatByMaNV_ThangNam(maNV, thang, nam);
+        }
         // Sửa chi tiết kỷ luật của nhân viên
         public void CapNhat(string maKL, string maNV, DateTime ngayMoi)
         {

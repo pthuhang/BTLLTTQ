@@ -14,7 +14,10 @@ namespace QUANLYNHANSU.GUI
     public partial class frmHopDong : Form
     {
         private HopDongBLL hopDongBLL = new HopDongBLL();
+        private PhuCap_NhanVienBLL pcnvBLL = new PhuCap_NhanVienBLL();
         private string tenDangNhap;
+        private string maNhanVien;
+
         public frmHopDong(string tenDangNhap)
         {
             InitializeComponent();
@@ -25,7 +28,7 @@ namespace QUANLYNHANSU.GUI
         {
             label1.Left = (panel8.ClientSize.Width - label1.Width) / 2;
             HienThiThongTinCaNhan();
-
+            HienThiPhuCap();
             EnableForm(false);
         }
         private void HienThiThongTinCaNhan()
@@ -44,6 +47,8 @@ namespace QUANLYNHANSU.GUI
                     dtpNgayBD.Value = nbd;
                 if (DateTime.TryParse(row["NgayKetThuc"].ToString(), out DateTime nkt))
                     dtpNgayKT.Value = nkt;
+                txtLuongCB.Text = row["LuongCoBan"].ToString();
+                maNhanVien = row["MaNV"].ToString();
             }
             else
             {
@@ -61,7 +66,24 @@ namespace QUANLYNHANSU.GUI
             txtLanKi.ReadOnly = !enable;
             txtThoiHan.ReadOnly = !enable;
             txtHSLuong.ReadOnly = !enable;
+            txtLuongCB.ReadOnly = !enable;
         }
+        private void HienThiPhuCap()
+        {
+            if (string.IsNullOrEmpty(maNhanVien))
+                return;
+            DataTable dtPhuCap = pcnvBLL.LayNhanVien(maNhanVien);
+            dgvPhuCap_NhanVien.DataSource = dtPhuCap;
+
+            // Tùy chỉnh hiển thị nếu cần
+            dgvPhuCap_NhanVien.Columns["MaNV"].HeaderText = "Mã nhân viên";
+            dgvPhuCap_NhanVien.Columns["HoTen"].HeaderText = "Họ tên";
+            dgvPhuCap_NhanVien.Columns["MaPhuCap"].HeaderText = "Mã phụ cấp";
+            dgvPhuCap_NhanVien.Columns["TenPhuCap"].HeaderText = "Tên phụ cấp";
+            dgvPhuCap_NhanVien.Columns["TienPhuCap"].HeaderText = "Tiền phụ cấp";
+            dgvPhuCap_NhanVien.Columns["TienPhuCap"].DefaultCellStyle.Format = "N0"; // định dạng số
+        }
+
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();

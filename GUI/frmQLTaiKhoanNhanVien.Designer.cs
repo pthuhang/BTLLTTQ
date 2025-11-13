@@ -82,6 +82,7 @@
             this.btnLuu.TabIndex = 3;
             this.btnLuu.Text = "Lưu thay đổi";
             this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnThoat
             // 
@@ -91,6 +92,7 @@
             this.btnThoat.TabIndex = 2;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // panel3
             // 
@@ -239,6 +241,7 @@
             this.btnXoa.TabIndex = 17;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -248,6 +251,7 @@
             this.btnSua.TabIndex = 16;
             this.btnSua.Text = "Sửa thông tin";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -257,6 +261,7 @@
             this.btnThem.TabIndex = 14;
             this.btnThem.Text = "Thêm mới";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // frmQLTaiKhoanNhanVien
             // 
@@ -271,6 +276,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "frmQLTaiKhoanNhanVien";
             this.Text = "frmQLLTaiKhoanNhanVien";
+            this.Load += new System.EventHandler(this.frmQLTaiKhoanNhanVien_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoanNhanVien)).EndInit();
             this.panel4.ResumeLayout(false);

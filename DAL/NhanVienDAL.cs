@@ -53,6 +53,31 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataRow KiemTraDangNhap(string tenDangNhap, string matKhau)
+        {
+            string sql = "SELECT *" +
+                " FROM NhanVien nv" +
+                " INNER JOIN TaiKhoan tk on tk.MaNV = nv.MaNV" +
+                " WHERE tk.TenDangNhap = @tenDangNhap AND tk.MatKhau = @matKhau";
+
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                        return dt.Rows[0];
+                    else
+                        return null;
+                }
+            }
+        }
+
         public void Them(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,

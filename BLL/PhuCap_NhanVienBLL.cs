@@ -12,7 +12,7 @@ namespace QUANLYNHANSU.BLL
     public class PhuCap_NhanVienBLL
     {
         private PhuCap_NhanVienDAL dal = new PhuCap_NhanVienDAL();
-
+        
         public DataTable LayDanhSach()
         {
             return dal.LayDanhSachPhuCapNhanVien();

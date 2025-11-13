@@ -24,6 +24,34 @@ namespace QUANLYNHANSU.DAL
             da.Fill(dt);
             return dt;
         }
+        public DataTable LayBangCongTheoThangNam(string maNV, int thang, int nam)
+        {
+            string sql = @"
+                    SELECT nv.MaNV, nv.HoTen, lcnv.NgayLam, lcnv.GioVao, lcnv.GioRa, 
+                           lc.TenLoaiCong, lc.HeSo
+                    FROM LoaiCong_NhanVien lcnv
+                    INNER JOIN LoaiCong lc ON lc.MaLoaiCong = lcnv.MaLoaiCong
+                    INNER JOIN NhanVien nv ON nv.MaNV = lcnv.MaNV
+                    WHERE nv.MaNV = @maNV
+                      AND MONTH(lcnv.NgayLam) = @thang
+                      AND YEAR(lcnv.NgayLam) = @nam
+                    ORDER BY lcnv.NgayLam ASC";
+
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@maNV", maNV?.Trim() ?? string.Empty);
+                cmd.Parameters.AddWithValue("@thang", thang);
+                cmd.Parameters.AddWithValue("@nam", nam);
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
         private decimal LayHeSoCongTheoMa(string maLoaiCong)
         {
             string sql = "SELECT HeSo FROM LoaiCong WHERE MaLoaiCong = @MaLoaiCong";
