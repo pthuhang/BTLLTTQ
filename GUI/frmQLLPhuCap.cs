@@ -34,16 +34,10 @@ namespace QUANLYNHANSU.GUI
             txtMaPC.Clear();
             txtTenPC.Clear();
             txtTienPC.Clear();
+            txtMaNV.Clear();
+            txtTenNV.Clear();
 
-            btnThemPC.Enabled = true;
-            btnSuaPC.Enabled = true;
-            btnXoaPC.Enabled = true;
-            btnLuuPC.Enabled = true;
-
-            btnLoc.Enabled = true;
-            btnThemPCNV.Enabled = true;
-            btnXoaPCNV.Enabled = true;
-            btnLuuPCNV.Enabled = true;
+            batBtn();
 
             hienThiDSPC();
             hienThiDSPCNV();
@@ -68,9 +62,10 @@ namespace QUANLYNHANSU.GUI
             txtMaPC.Enabled = false;
             txtTenPC.Enabled = false;
             txtTienPC.Enabled = false;
-            txtMaNV.Enabled = false;
             txtTenNV.Enabled = false;
             cbPhuCap.Enabled = false;
+
+            batBtn(); 
 
             hienThiDSPC();
             hienThiDSPCNV();
@@ -110,6 +105,7 @@ namespace QUANLYNHANSU.GUI
             txtTenPC.Clear();
             txtTienPC.Clear();
         }
+        private string currentActionPC = ""; // "Them" hoặc "Sua"
         private void btnThemPC_Click(object sender, EventArgs e)
         {
             txtMaPC.Enabled = true;
@@ -121,12 +117,31 @@ namespace QUANLYNHANSU.GUI
             btnLuuPC.Enabled = true;
 
             txtMaPC.Focus();
+
+            currentActionPC = "Them";
+        }
+        private void btnSuaPC_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaPC.Text))
+            {
+                MessageBox.Show("Vui lòng chọn phụ cấp để sửa!");
+                return;
+            }
+
+            txtTenPC.Enabled = true;
+            txtTienPC.Enabled = true;
+
+            tatBtn();
+            btnSuaPC.Enabled = true;
+            btnLuuPC.Enabled = true;
+
+            txtTenPC.Focus();
+            currentActionPC = "Sua";
         }
         private void btnLuuPC_Click(object sender, EventArgs e)
         {
             try
             {
-                //Kiểm tra rỗng, định dạng, trùng lặp
                 if (string.IsNullOrWhiteSpace(txtMaPC.Text) || string.IsNullOrWhiteSpace(txtTenPC.Text) || string.IsNullOrWhiteSpace(txtTienPC.Text))
                 {
                     MessageBox.Show("Vui lòng nhập đầy đủ thông tin phụ cấp!");
@@ -138,25 +153,38 @@ namespace QUANLYNHANSU.GUI
                     txtTienPC.Focus();
                     return;
                 }
-                DataTable dtPC = pcbll.LayDanhSachPC();
-                foreach (DataRow row in dtPC.Rows)
+                if (currentActionPC == "Them")
                 {
-                    if (row["MaPhuCap"].ToString().Equals(txtMaPC.Text, StringComparison.OrdinalIgnoreCase))
+                    DataTable dtPC = pcbll.LayDanhSachPC();
+                    foreach (DataRow row in dtPC.Rows)
                     {
-                        MessageBox.Show("Mã phụ cấp đã tồn tại!");
-                        txtMaPC.Focus();
-                        return;
+                        if (row["MaPhuCap"].ToString().Equals(txtMaPC.Text, StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show("Mã phụ cấp đã tồn tại!");
+                            txtMaPC.Focus();
+                            return;
+                        }
+                        if (row["TenPhuCap"].ToString().Equals(txtTenPC.Text, StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show("Tên phụ cấp đã tồn tại!");
+                            txtTenPC.Focus();
+                            return;
+                        }
                     }
-                    if (row["TenPhuCap"].ToString().Equals(txtTenPC.Text, StringComparison.OrdinalIgnoreCase))
-                    {
-                        MessageBox.Show("Tên phụ cấp đã tồn tại!");
-                        txtTenPC.Focus();
-                        return;
-                    }
+
+                    pcbll.Them(txtMaPC.Text, txtTenPC.Text, tienPC);
+                    MessageBox.Show("Thêm phụ cấp thành công!");
                 }
-                //
-                pcbll.Them(txtMaPC.Text, txtTenPC.Text, Convert.ToDecimal(txtTienPC.Text));
-                MessageBox.Show("Thêm phụ cấp thành công!");
+                else if (currentActionPC == "Sua")
+                {
+                    pcbll.Sua(txtMaPC.Text, txtTenPC.Text, tienPC);
+                    MessageBox.Show("Cập nhật phụ cấp thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Bạn cần chọn Thêm hoặc Sửa trước!");
+                    return;
+                }
                 hienThiDSPC();
                 hienThiComboBoxPC();
                 ClearFormPC();
@@ -165,7 +193,7 @@ namespace QUANLYNHANSU.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi thêm phụ cấp: " + ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
         private void dgvPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -180,22 +208,6 @@ namespace QUANLYNHANSU.GUI
             btnSuaPC.Enabled = true;
             btnXoaPC.Enabled = true;
         }
-        private void btnSuaPC_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                pcbll.Sua(txtMaPC.Text, txtTenPC.Text, Convert.ToDecimal(txtTienPC.Text));
-                MessageBox.Show("Cập nhật phụ cấp thành công!");
-                hienThiDSPC();
-                hienThiComboBoxPC();
-                ClearFormPC();
-                batBtn();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi sửa: " + ex.Message);
-            }
-        }
         private void btnXoaPC_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Bạn có chắc muốn xóa không?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -208,7 +220,6 @@ namespace QUANLYNHANSU.GUI
                     hienThiComboBoxPC();
                     ClearFormPC();
                     batBtn();
-                    btnLoc.Enabled = false;
                 }
                 catch (Exception ex)
                 {
@@ -237,9 +248,10 @@ namespace QUANLYNHANSU.GUI
             btnThemPCNV.Enabled = true;
             btnLuuPCNV.Enabled = true;
             btnLoc.Enabled = true;
+            cbPhuCap.Enabled = true;
 
             txtMaNV.Enabled = true;
-            txtMaNV.Focus();
+            cbPhuCap.Focus();
         }
         private void locNhanVien(string maNv)
         {
@@ -271,8 +283,6 @@ namespace QUANLYNHANSU.GUI
             if (!string.IsNullOrEmpty(maNV))
             {
                 locNhanVien(maNV);
-                cbPhuCap.Enabled = true;
-                btnLuuPCNV.Enabled = true;
             }
             else
             {

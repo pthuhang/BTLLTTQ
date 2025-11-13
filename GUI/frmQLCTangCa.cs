@@ -15,8 +15,6 @@ namespace QUANLYNHANSU.GUI
 {
     public partial class frmQLCTangCa : Form
     {
-
-        private TangCaBLL TangCaBll = new TangCaBLL();
         private TangCa_NhanVienBLL nvtcbll = new TangCa_NhanVienBLL();
         private string currentAction = "";
         public frmQLCTangCa()
@@ -35,7 +33,6 @@ namespace QUANLYNHANSU.GUI
         }
         private void EnableForm(bool enable)
         {
-            txtMaTC.Enabled = enable;
             txtMaNV.Enabled = enable;
             txtSoGioTC.Enabled = enable;
             dtpNgayTC.Enabled = enable;
@@ -48,7 +45,6 @@ namespace QUANLYNHANSU.GUI
 
         private void ClearForm()
         {
-            txtMaTC.Clear();
             txtMaNV.Clear();
             dtpNgayTC.Value = DateTime.Now;
             txtSoGioTC.Clear();
@@ -61,7 +57,7 @@ namespace QUANLYNHANSU.GUI
                 try
                 {
                     DataGridViewRow row = dgvTangCa.Rows[e.RowIndex];
-                    txtMaTC.Text = row.Cells["MaTangCa"].Value?.ToString() ?? "";
+                    
                     txtMaNV.Text = row.Cells["MaNV"].Value?.ToString() ?? "";
                     dtpNgayTC.Value = row.Cells["NgayTangCa"].Value != null ? Convert.ToDateTime(row.Cells["NgayTangCa"].Value) : DateTime.Now;
                     txtSoGioTC.Text = row.Cells["SoGioTangCa"].Value?.ToString() ?? "";
@@ -79,7 +75,6 @@ namespace QUANLYNHANSU.GUI
             EnableForm(true);
             ClearForm();
 
-            txtMaTC.Enabled = true;
             txtMaNV.Enabled = true;
 
             btnSua.Enabled = false;
@@ -88,7 +83,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnSua_Click_1(object sender, EventArgs e)
         {
-            if (txtMaTC.Text.Trim() == "" || txtMaNV.Text.Trim() == "")
+            if (txtMaNV.Text.Trim() == "")
             {
                 MessageBox.Show("Vui lòng chọn một dòng để sửa.");
                 return;
@@ -98,7 +93,6 @@ namespace QUANLYNHANSU.GUI
             EnableForm(true);
 
             // Không cho sửa khóa chính
-            txtMaTC.Enabled = false;
             txtMaNV.Enabled = false;
 
             btnThem.Enabled = false;
@@ -107,7 +101,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnXoa_Click_1(object sender, EventArgs e)
         {
-            if (txtMaTC.Text.Trim() == "" || txtMaNV.Text.Trim() == "")
+            if (txtMaNV.Text.Trim() == "")
             {
                 MessageBox.Show("Vui lòng chọn dòng cần xóa.");
                 return;
@@ -117,17 +111,16 @@ namespace QUANLYNHANSU.GUI
                 MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
-            nvtcbll.Xoa(txtMaTC.Text.Trim(), txtMaNV.Text.Trim());
+            nvtcbll.Xoa(dtpNgayTC.Value,txtMaNV.Text.Trim());
             HienThiDanhSach();
             ClearForm();
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            string maTC = txtMaTC.Text.Trim();
             string maNV = txtMaNV.Text.Trim();
 
-            if (string.IsNullOrEmpty(maTC) || string.IsNullOrEmpty(maNV))
+            if (string.IsNullOrEmpty(maNV))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
@@ -143,24 +136,18 @@ namespace QUANLYNHANSU.GUI
 
             if (currentAction == "Them")
             {
-                if (!TangCaBll.KiemTraTonTai(maTC))
-                {
-                    TangCaBll.Them(maTC, ngay);
-                }
-
-                if (nvtcbll.KiemTraTonTai(maTC, maNV))
+                if (nvtcbll.KiemTraTonTai(ngay, maNV))
                 {
                     MessageBox.Show("Cặp mã tăng ca và nhân viên đã tồn tại!");
                     return;
                 }
 
-                nvtcbll.Them(maTC, maNV, soGio);
+                nvtcbll.Them(maNV, soGio, ngay);
                 MessageBox.Show("Thêm thành công!");
             }
             else if (currentAction == "Sua")
             {
-                TangCaBll.CapNhat(maTC, ngay);
-                nvtcbll.Sua(maTC, maNV, soGio);
+                nvtcbll.Sua(maNV, ngay, soGio);
                 MessageBox.Show("Cập nhật thành công!");
             }
             else

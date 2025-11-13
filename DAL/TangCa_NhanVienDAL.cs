@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QUANLYNHANSU.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,7 +15,7 @@ namespace QUANLYNHANSU.DAL
 
         public DataTable LayDanhSach()
         {
-            string sql = "SELECT tcnv.MaTangCa, tcnv.MaNV, tc.NgayTangCa, tcnv.SoGioTangCa FROM TangCa_NhanVien tcnv JOIN TangCa tc ON tcnv.MaTangCa = tc.MaTangCa";
+            string sql = "SELECT * FROM TangCa_NhanVien";
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 SqlDataAdapter da = new SqlDataAdapter(sql, connection);
@@ -25,12 +26,13 @@ namespace QUANLYNHANSU.DAL
         }
         public DataTable LayTangCaTheoThangNam(int thang, int nam, string maNV)
         {
-            string sql = " select tcnv.MaTangCa, tcnv.MaNV, tcnv.SoGioTangCa, tc.NgayTangCa " +
-                        " from TangCa_NhanVien tcnv" +
-                        " join TangCa tc on tc.MaTangCa=tcnv.MaTangCa" +
-                        " where month(tc.NgayTangCa)=@Thang and year(tc.NgayTangCa)=@Nam";
+            string sql = "SELECT MaNV, SoGioTangCa, NgayTangCa " +
+                         "FROM TangCa_NhanVien " +
+                         "WHERE MONTH(NgayTangCa) = @Thang AND YEAR(NgayTangCa) = @Nam";
+
             if (!string.IsNullOrEmpty(maNV))
-                sql += " AND tcnv.MaNV = @MaNV";
+                sql += " AND MaNV = @MaNV";
+
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
@@ -47,15 +49,16 @@ namespace QUANLYNHANSU.DAL
                 }
             }
         }
-        public void Them(string maTangCa, string maNV, int soGioTangCa)
+
+        public void Them(string maNV, int soGioTangCa, DateTime ngayTangCa)
         {
-            string sql = "INSERT INTO TangCa_NhanVien (MaTangCa, MaNV, SoGioTangCa) VALUES (@MaTangCa, @MaNV, @SoGioTangCa)";
+            string sql = "INSERT INTO TangCa_NhanVien (MaNV, NgayTangCa, SoGioTangCa) VALUES (@MaNV, @NgayTangCa, @SoGioTangCa)";
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.Add("@MaTangCa", SqlDbType.NVarChar).Value = maTangCa;
                     cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
+                    cmd.Parameters.Add("@NgayTangCa", SqlDbType.DateTime).Value = ngayTangCa;
                     cmd.Parameters.Add("@SoGioTangCa", SqlDbType.Int).Value = soGioTangCa;
                     connection.Open();
                     cmd.ExecuteNonQuery();
@@ -63,14 +66,14 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        public bool KiemTraTonTai(string maTangCa, string maNV)
+        public bool KiemTraTonTai(DateTime ngayTC, string maNV)
         {
-            string sql = "SELECT COUNT(*) FROM TangCa_NhanVien WHERE MaTangCa = @MaTangCa AND MaNV = @MaNV";
+            string sql = "SELECT COUNT(*) FROM TangCa_NhanVien WHERE MaNV = @MaNV and NgayTangCa = @NgayTC";
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.Add("@MaTangCa", SqlDbType.NVarChar).Value = maTangCa;
+                    cmd.Parameters.Add("@NgayTC", SqlDbType.DateTime).Value = ngayTC;
                     cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
                     connection.Open();
                     int count = (int)cmd.ExecuteScalar();
@@ -79,15 +82,15 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        public void Sua(string maTangCa, string maNV, int soGioMoi)
+        public void Sua(string maNV, DateTime ngayTC, int soGioMoi)
         {
-            string sql = "UPDATE TangCa_NhanVien SET SoGioTangCa = @SoGioMoi WHERE MaTangCa = @MaTangCa AND MaNV = @MaNV";
+            string sql = "UPDATE TangCa_NhanVien SET SoGioTangCa = @SoGioMoi WHERE NgayTangCa = @NgayTC AND MaNV = @MaNV";
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.Add("@SoGioMoi", SqlDbType.Int).Value = soGioMoi;
-                    cmd.Parameters.Add("@MaTangCa", SqlDbType.NVarChar).Value = maTangCa;
+                    cmd.Parameters.Add("@NgayTC", SqlDbType.DateTime).Value = ngayTC;
                     cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
                     connection.Open();
                     cmd.ExecuteNonQuery();
@@ -95,30 +98,20 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        public void XoaVaCapNhatTangCa(string maTangCa, string maNV)
+        public void XoaVaCapNhatTangCa(DateTime ngayTC, string maNV)
         {
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 connection.Open();
 
-                string sqlDelete = "DELETE FROM TangCa_NhanVien WHERE MaTangCa = @MaTangCa AND MaNV = @MaNV";
+                string sqlDelete = "DELETE FROM TangCa_NhanVien WHERE NgayTangCa = @NgayTC AND MaNV = @MaNV";
                 using (SqlCommand cmd = new SqlCommand(sqlDelete, connection))
                 {
-                    cmd.Parameters.Add("@MaTangCa", SqlDbType.NVarChar).Value = maTangCa;
+                    cmd.Parameters.Add("@NgayTC", SqlDbType.DateTime).Value = ngayTC;
                     cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
                     cmd.ExecuteNonQuery();
                 }
 
-                string sqlCheck = "SELECT COUNT(*) FROM TangCa_NhanVien WHERE MaTangCa = @MaTangCa";
-                using (SqlCommand cmd = new SqlCommand(sqlCheck, connection))
-                {
-                    cmd.Parameters.Add("@MaTangCa", SqlDbType.NVarChar).Value = maTangCa;
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        tangCaDAL.Xoa(maTangCa);
-                    }
-                }
             }
         }
     }

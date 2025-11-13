@@ -202,7 +202,7 @@
             // 
             // btnXoaPC
             // 
-            this.btnXoaPC.Location = new System.Drawing.Point(530, 25);
+            this.btnXoaPC.Location = new System.Drawing.Point(470, 25);
             this.btnXoaPC.Name = "btnXoaPC";
             this.btnXoaPC.Size = new System.Drawing.Size(150, 40);
             this.btnXoaPC.TabIndex = 15;
@@ -212,7 +212,7 @@
             // 
             // btnLuuPC
             // 
-            this.btnLuuPC.Location = new System.Drawing.Point(360, 25);
+            this.btnLuuPC.Location = new System.Drawing.Point(320, 25);
             this.btnLuuPC.Name = "btnLuuPC";
             this.btnLuuPC.Size = new System.Drawing.Size(150, 40);
             this.btnLuuPC.TabIndex = 16;
@@ -222,7 +222,7 @@
             // 
             // btnSuaPC
             // 
-            this.btnSuaPC.Location = new System.Drawing.Point(190, 25);
+            this.btnSuaPC.Location = new System.Drawing.Point(170, 25);
             this.btnSuaPC.Name = "btnSuaPC";
             this.btnSuaPC.Size = new System.Drawing.Size(150, 40);
             this.btnSuaPC.TabIndex = 14;

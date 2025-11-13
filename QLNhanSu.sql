@@ -1,5 +1,6 @@
 ﻿
 
+
 --create database QLNhanSu
 --use QLNhanSu
 -- =========================
@@ -48,7 +49,6 @@ CREATE TABLE NhanVien (
     MaPhongBan VARCHAR(10),
     MaTrinhDo VARCHAR(10),
     ChucVu NVARCHAR(50),
-    LuongCoBan DECIMAL(18,2) CHECK (LuongCoBan >= 0),
     SoBaoHiemXaHoi VARCHAR(25),
     MucDong DECIMAL(18,2) DEFAULT 0,
     SoTaiKhoan VARCHAR(25),
@@ -56,27 +56,8 @@ CREATE TABLE NhanVien (
     FOREIGN KEY (MaTrinhDo) REFERENCES TrinhDo(MaTrinhDo)
 );
 
-ALTER TABLE NhanVien
-DROP CONSTRAINT CK__NhanVien__LuongC__4E88ABD4;
-
-alter table NhanVien
-drop column LuongCoBan
-GO
-ALTER TABLE NhanVien
-DROP CONSTRAINT CK__NhanVien__LuongC__4E88ABD4;
-
-alter table NhanVien
-drop column LuongCoBan
 
 
-INSERT INTO NhanVien VALUES 
-('NV01', N'Nguyễn Văn A', 1, '1999-01-01', '0901234567', '123456789012', 
- N'Hà Nội', 'vana@gmail.com', N'Đang làm việc', 'PB01', 'TD01', 
- N'Quản lý', 15000000, '231725428192', 1000000, '23018278374');
- INSERT INTO NhanVien VALUES 
-('NV02', N'Trần Văn B', 1, '2001-05-01', '0901292067', '123456019012', 
- N'Hà Nội', 'vanB@gmail.com', N'Đang làm việc', 'PB01', 'TD01', 
- N'NhanVien', 10000000, '231720188192', 800000, '23018123474');
 GO
 ALTER TABLE PhongBan
 ADD CONSTRAINT FK_PhongBan_NhanVien
@@ -100,12 +81,7 @@ CREATE TABLE HopDong (
 GO
 alter table HopDong
 add LuongCoBan DECIMAL(18,2) CHECK (LuongCoBan >= 0)
-
-alter table HopDong
-add LuongCoBan DECIMAL(18,2) CHECK (LuongCoBan >= 0)
-
-select * from HopDong
-delete from HopDong where MaHopDong = 'HD02'
+go
 -- =========================
 -- BẢNG LOẠI CÔNG
 -- =========================
@@ -267,3 +243,24 @@ CREATE TABLE KiLuat_NhanVien (
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
 GO
+
+SELECT name AS TenRangBuoc
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('TangCa_NhanVien');
+
+
+ALTER TABLE TangCa_NhanVien
+DROP CONSTRAINT FK__TangCa_Nh__MaTan__7D439ABD;
+
+DROP TABLE TangCa;
+
+DROP TABLE TangCa_NhanVien;
+
+CREATE TABLE TangCa_NhanVien (
+    MaNV VARCHAR(10),
+    NgayTangCa DATE NOT NULL,
+    SoGioTangCa INT CHECK (SoGioTangCa >= 0),
+    PRIMARY KEY (MaNV, NgayTangCa),
+    FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+);
+
