@@ -189,6 +189,20 @@ CREATE TABLE LoaiCong_NhanVien (
 );
 GO
 
+SELECT name 
+FROM sys.check_constraints 
+WHERE parent_object_id = OBJECT_ID('LoaiCong_NhanVien');
+
+ALTER TABLE LoaiCong_NhanVien
+DROP CONSTRAINT CK__LoaiCong___HeSoC__778AC167;
+
+ALTER TABLE LoaiCong_NhanVien
+DROP CONSTRAINT DF__LoaiCong___HeSoC__76969D2E;
+
+ALTER TABLE LoaiCong_NhanVien
+DROP COLUMN HeSoCong;
+
+
 
 
 -- =========================

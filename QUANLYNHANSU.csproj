@@ -195,18 +195,6 @@
     <Compile Include="GUI\frmQLNSHopDong.Designer.cs">
       <DependentUpon>frmQLNSHopDong.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\frmQLNSKhenThuong.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmQLNSKhenThuong.Designer.cs">
-      <DependentUpon>frmQLNSKhenThuong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\frmQLNSKiLuat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmQLNSKiLuat.Designer.cs">
-      <DependentUpon>frmQLNSKiLuat.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\frmQLNSNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,12 +314,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLNSHopDong.resx">
       <DependentUpon>frmQLNSHopDong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmQLNSKhenThuong.resx">
-      <DependentUpon>frmQLNSKhenThuong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmQLNSKiLuat.resx">
-      <DependentUpon>frmQLNSKiLuat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLNSNhanVien.resx">
       <DependentUpon>frmQLNSNhanVien.cs</DependentUpon>

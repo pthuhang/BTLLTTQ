@@ -137,11 +137,12 @@ namespace QUANLYNHANSU.DAL
         public decimal TinhSoNgayCong(string maNV, int thang, int nam)
         {
             string sql = @"
-                    SELECT ISNULL(SUM(HeSoCong), 0)
-                    FROM LoaiCong_NhanVien
-                    WHERE MaNV = @MaNV
-                      AND MONTH(NgayLam) = @Thang
-                      AND YEAR(NgayLam) = @Nam";
+                    SELECT ISNULL(SUM(lc.HeSo), 0)
+                    FROM LoaiCong_NhanVien lcnv
+                    JOIN LoaiCong lc on lcnv.MaLoaiCong = lc.MaLoaiCong
+                    WHERE lcnv.MaNV = @MaNV
+                      AND MONTH(lcnv.NgayLam) = @Thang
+                      AND YEAR(lcnv.NgayLam) = @Nam";
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@MaNV", maNV);
