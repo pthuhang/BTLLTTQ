@@ -192,5 +192,6 @@ namespace QUANLYNHANSU.GUI
         {
             this.Close();
         }
+
     }
 }

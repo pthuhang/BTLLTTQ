@@ -33,7 +33,7 @@ namespace QUANLYNHANSU.GUI
         }
         private void HighlightTab(Button selectedButton)
         {
-            Button[] tabs = { btnNhanVien, btnPhongBan, btnHopDong};
+            Button[] tabs = { btnNhanVien, btnPhongBan, btnHopDong, btnTaiKhoan};
 
             foreach (Button btn in tabs)
             {
@@ -52,6 +52,7 @@ namespace QUANLYNHANSU.GUI
             StyleButton(btnNhanVien);
             StyleButton(btnPhongBan);
             StyleButton(btnHopDong);
+            StyleButton(btnTaiKhoan);
         }
 
         private void btnNhanVien_Click(object sender, EventArgs e)

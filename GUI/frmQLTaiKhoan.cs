@@ -51,11 +51,6 @@ namespace QUANLYNHANSU.GUI
             StyleButton(btnTaiKhoanNV);
         }
 
-        private void btnTaiKhoanCN_Click(object sender, EventArgs e)
-        {
-            MoFormCon(new frmQLTaiKhoanCaNhan());
-            HighlightTab(btnTaiKhoanCN);
-        }
 
         private void btnTaiKhoanNV_Click(object sender, EventArgs e)
         {

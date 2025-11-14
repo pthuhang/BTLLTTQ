@@ -73,7 +73,6 @@ namespace QUANLYNHANSU.GUI
 
         private void EnableForm(bool enable)
         {
-            // Khóa/Mở toàn bộ control nhập liệu
             txtMaNV.Enabled = enable;
             txtHoTen.Enabled = enable;
             cbGioiTinh.Enabled = enable;

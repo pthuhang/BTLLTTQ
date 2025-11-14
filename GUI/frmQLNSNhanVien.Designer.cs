@@ -94,19 +94,19 @@
             this.txtMaNVTimKiem = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.cbLocGioiTinh = new System.Windows.Forms.ComboBox();
+            this.panel32 = new System.Windows.Forms.Panel();
+            this.cbLocTrangThai = new System.Windows.Forms.ComboBox();
+            this.panel31 = new System.Windows.Forms.Panel();
+            this.cbLocPhongBan = new System.Windows.Forms.ComboBox();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.cbLocChucVu = new System.Windows.Forms.ComboBox();
             this.panel24 = new System.Windows.Forms.Panel();
             this.btnXemDanhSach = new System.Windows.Forms.Button();
             this.panel23 = new System.Windows.Forms.Panel();
             this.cbLocTrinhDo = new System.Windows.Forms.ComboBox();
             this.dgvNhanVien = new System.Windows.Forms.DataGridView();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.cbLocChucVu = new System.Windows.Forms.ComboBox();
-            this.panel31 = new System.Windows.Forms.Panel();
-            this.cbLocPhongBan = new System.Windows.Forms.ComboBox();
-            this.panel32 = new System.Windows.Forms.Panel();
-            this.cbLocTrangThai = new System.Windows.Forms.ComboBox();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.cbLocGioiTinh = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel27.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -129,13 +129,13 @@
             this.panel4.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel30.SuspendLayout();
+            this.panel32.SuspendLayout();
+            this.panel31.SuspendLayout();
+            this.panel17.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel23.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).BeginInit();
-            this.panel17.SuspendLayout();
-            this.panel31.SuspendLayout();
-            this.panel32.SuspendLayout();
-            this.panel30.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -851,6 +851,96 @@
             this.panel5.Size = new System.Drawing.Size(1041, 34);
             this.panel5.TabIndex = 4;
             // 
+            // panel30
+            // 
+            this.panel30.Controls.Add(this.cbLocGioiTinh);
+            this.panel30.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel30.Location = new System.Drawing.Point(400, 0);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(100, 34);
+            this.panel30.TabIndex = 21;
+            // 
+            // cbLocGioiTinh
+            // 
+            this.cbLocGioiTinh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLocGioiTinh.FormattingEnabled = true;
+            this.cbLocGioiTinh.Items.AddRange(new object[] {
+            "Nữ",
+            "Nam"});
+            this.cbLocGioiTinh.Location = new System.Drawing.Point(0, 0);
+            this.cbLocGioiTinh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLocGioiTinh.Name = "cbLocGioiTinh";
+            this.cbLocGioiTinh.Size = new System.Drawing.Size(100, 24);
+            this.cbLocGioiTinh.TabIndex = 3;
+            this.cbLocGioiTinh.Text = "Giới tính";
+            this.cbLocGioiTinh.SelectedIndexChanged += new System.EventHandler(this.cbLocGioiTinh_SelectedIndexChanged);
+            // 
+            // panel32
+            // 
+            this.panel32.Controls.Add(this.cbLocTrangThai);
+            this.panel32.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel32.Location = new System.Drawing.Point(300, 0);
+            this.panel32.Name = "panel32";
+            this.panel32.Size = new System.Drawing.Size(100, 34);
+            this.panel32.TabIndex = 20;
+            // 
+            // cbLocTrangThai
+            // 
+            this.cbLocTrangThai.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLocTrangThai.FormattingEnabled = true;
+            this.cbLocTrangThai.Items.AddRange(new object[] {
+            "Đang làm việc",
+            "Đã thôi việc"});
+            this.cbLocTrangThai.Location = new System.Drawing.Point(0, 0);
+            this.cbLocTrangThai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLocTrangThai.Name = "cbLocTrangThai";
+            this.cbLocTrangThai.Size = new System.Drawing.Size(100, 24);
+            this.cbLocTrangThai.TabIndex = 3;
+            this.cbLocTrangThai.Text = "Trạng thái";
+            this.cbLocTrangThai.SelectedIndexChanged += new System.EventHandler(this.cbLocTrangThai_SelectedIndexChanged);
+            // 
+            // panel31
+            // 
+            this.panel31.Controls.Add(this.cbLocPhongBan);
+            this.panel31.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel31.Location = new System.Drawing.Point(200, 0);
+            this.panel31.Name = "panel31";
+            this.panel31.Size = new System.Drawing.Size(100, 34);
+            this.panel31.TabIndex = 19;
+            // 
+            // cbLocPhongBan
+            // 
+            this.cbLocPhongBan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLocPhongBan.FormattingEnabled = true;
+            this.cbLocPhongBan.Location = new System.Drawing.Point(0, 0);
+            this.cbLocPhongBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLocPhongBan.Name = "cbLocPhongBan";
+            this.cbLocPhongBan.Size = new System.Drawing.Size(100, 24);
+            this.cbLocPhongBan.TabIndex = 3;
+            this.cbLocPhongBan.Text = "Phòng ban";
+            this.cbLocPhongBan.SelectedIndexChanged += new System.EventHandler(this.cbLocPhongBan_SelectedIndexChanged);
+            // 
+            // panel17
+            // 
+            this.panel17.Controls.Add(this.cbLocChucVu);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel17.Location = new System.Drawing.Point(100, 0);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(100, 34);
+            this.panel17.TabIndex = 17;
+            // 
+            // cbLocChucVu
+            // 
+            this.cbLocChucVu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLocChucVu.FormattingEnabled = true;
+            this.cbLocChucVu.Location = new System.Drawing.Point(0, 0);
+            this.cbLocChucVu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLocChucVu.Name = "cbLocChucVu";
+            this.cbLocChucVu.Size = new System.Drawing.Size(100, 24);
+            this.cbLocChucVu.TabIndex = 3;
+            this.cbLocChucVu.Text = "Chức vụ";
+            this.cbLocChucVu.SelectedIndexChanged += new System.EventHandler(this.cbLocChucVu_SelectedIndexChanged);
+            // 
             // panel24
             // 
             this.panel24.Controls.Add(this.btnXemDanhSach);
@@ -907,96 +997,6 @@
             this.dgvNhanVien.TabIndex = 5;
             this.dgvNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellClick);
             // 
-            // panel17
-            // 
-            this.panel17.Controls.Add(this.cbLocChucVu);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel17.Location = new System.Drawing.Point(100, 0);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(100, 34);
-            this.panel17.TabIndex = 17;
-            // 
-            // cbLocChucVu
-            // 
-            this.cbLocChucVu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbLocChucVu.FormattingEnabled = true;
-            this.cbLocChucVu.Location = new System.Drawing.Point(0, 0);
-            this.cbLocChucVu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbLocChucVu.Name = "cbLocChucVu";
-            this.cbLocChucVu.Size = new System.Drawing.Size(100, 24);
-            this.cbLocChucVu.TabIndex = 3;
-            this.cbLocChucVu.Text = "Chức vụ";
-            this.cbLocChucVu.SelectedIndexChanged += new System.EventHandler(this.cbLocChucVu_SelectedIndexChanged);
-            // 
-            // panel31
-            // 
-            this.panel31.Controls.Add(this.cbLocPhongBan);
-            this.panel31.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel31.Location = new System.Drawing.Point(200, 0);
-            this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(100, 34);
-            this.panel31.TabIndex = 19;
-            // 
-            // cbLocPhongBan
-            // 
-            this.cbLocPhongBan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbLocPhongBan.FormattingEnabled = true;
-            this.cbLocPhongBan.Location = new System.Drawing.Point(0, 0);
-            this.cbLocPhongBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbLocPhongBan.Name = "cbLocPhongBan";
-            this.cbLocPhongBan.Size = new System.Drawing.Size(100, 24);
-            this.cbLocPhongBan.TabIndex = 3;
-            this.cbLocPhongBan.Text = "Phòng ban";
-            this.cbLocPhongBan.SelectedIndexChanged += new System.EventHandler(this.cbLocPhongBan_SelectedIndexChanged);
-            // 
-            // panel32
-            // 
-            this.panel32.Controls.Add(this.cbLocTrangThai);
-            this.panel32.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel32.Location = new System.Drawing.Point(300, 0);
-            this.panel32.Name = "panel32";
-            this.panel32.Size = new System.Drawing.Size(100, 34);
-            this.panel32.TabIndex = 20;
-            // 
-            // cbLocTrangThai
-            // 
-            this.cbLocTrangThai.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbLocTrangThai.FormattingEnabled = true;
-            this.cbLocTrangThai.Items.AddRange(new object[] {
-            "Đang làm việc",
-            "Đã thôi việc"});
-            this.cbLocTrangThai.Location = new System.Drawing.Point(0, 0);
-            this.cbLocTrangThai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbLocTrangThai.Name = "cbLocTrangThai";
-            this.cbLocTrangThai.Size = new System.Drawing.Size(100, 24);
-            this.cbLocTrangThai.TabIndex = 3;
-            this.cbLocTrangThai.Text = "Trạng thái";
-            this.cbLocTrangThai.SelectedIndexChanged += new System.EventHandler(this.cbLocTrangThai_SelectedIndexChanged);
-            // 
-            // panel30
-            // 
-            this.panel30.Controls.Add(this.cbLocGioiTinh);
-            this.panel30.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel30.Location = new System.Drawing.Point(400, 0);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(100, 34);
-            this.panel30.TabIndex = 21;
-            // 
-            // cbLocGioiTinh
-            // 
-            this.cbLocGioiTinh.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbLocGioiTinh.FormattingEnabled = true;
-            this.cbLocGioiTinh.Items.AddRange(new object[] {
-            "Nữ",
-            "Nam"});
-            this.cbLocGioiTinh.Location = new System.Drawing.Point(0, 0);
-            this.cbLocGioiTinh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbLocGioiTinh.Name = "cbLocGioiTinh";
-            this.cbLocGioiTinh.Size = new System.Drawing.Size(100, 24);
-            this.cbLocGioiTinh.TabIndex = 3;
-            this.cbLocGioiTinh.Text = "Giới tính";
-            this.cbLocGioiTinh.SelectedIndexChanged += new System.EventHandler(this.cbLocGioiTinh_SelectedIndexChanged);
-            // 
             // frmQLNSNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1051,13 +1051,13 @@
             this.panel4.PerformLayout();
             this.panel25.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel30.ResumeLayout(false);
+            this.panel32.ResumeLayout(false);
+            this.panel31.ResumeLayout(false);
+            this.panel17.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).EndInit();
-            this.panel17.ResumeLayout(false);
-            this.panel31.ResumeLayout(false);
-            this.panel32.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

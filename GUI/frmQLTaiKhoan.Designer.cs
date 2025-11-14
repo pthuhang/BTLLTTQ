@@ -128,7 +128,6 @@ namespace QUANLYNHANSU.GUI
             this.btnTaiKhoanCN.TabIndex = 0;
             this.btnTaiKhoanCN.Text = "Tài khoản cá nhân";
             this.btnTaiKhoanCN.UseVisualStyleBackColor = false;
-            this.btnTaiKhoanCN.Click += new System.EventHandler(this.btnTaiKhoanCN_Click);
             // 
             // panel10
             // 
