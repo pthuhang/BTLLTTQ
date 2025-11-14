@@ -37,6 +37,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.txtLuongCB = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel17 = new System.Windows.Forms.Panel();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -66,15 +69,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.txtLuongCB = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhuCap_NhanVien)).BeginInit();
             this.panel16.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel13.SuspendLayout();
@@ -85,7 +85,6 @@
             this.panel14.SuspendLayout();
             this.panel27.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -104,7 +103,6 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.btnThoat);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(1540, 719);
             this.panel6.Name = "panel6";
@@ -113,7 +111,7 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(180, 10);
+            this.btnThoat.Location = new System.Drawing.Point(579, 599);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(150, 40);
             this.btnThoat.TabIndex = 20;
@@ -122,6 +120,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnThoat);
             this.panel5.Controls.Add(this.dgvPhuCap_NhanVien);
             this.panel5.Controls.Add(this.panel16);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
@@ -187,6 +186,32 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(650, 659);
             this.panel4.TabIndex = 23;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.txtLuongCB);
+            this.panel7.Controls.Add(this.label12);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 559);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(650, 60);
+            this.panel7.TabIndex = 51;
+            // 
+            // txtLuongCB
+            // 
+            this.txtLuongCB.Location = new System.Drawing.Point(200, 19);
+            this.txtLuongCB.Name = "txtLuongCB";
+            this.txtLuongCB.Size = new System.Drawing.Size(323, 22);
+            this.txtLuongCB.TabIndex = 4;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(70, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(88, 16);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Lương cơ bản";
             // 
             // panel17
             // 
@@ -446,32 +471,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Hợp đồng";
             // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.txtLuongCB);
-            this.panel7.Controls.Add(this.label12);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 559);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(650, 60);
-            this.panel7.TabIndex = 51;
-            // 
-            // txtLuongCB
-            // 
-            this.txtLuongCB.Location = new System.Drawing.Point(200, 19);
-            this.txtLuongCB.Name = "txtLuongCB";
-            this.txtLuongCB.Size = new System.Drawing.Size(323, 22);
-            this.txtLuongCB.TabIndex = 4;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(70, 22);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(88, 16);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Lương cơ bản";
-            // 
             // frmHopDong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -482,12 +481,13 @@
             this.Text = "frmHopDong";
             this.Load += new System.EventHandler(this.frmHopDong_Load);
             this.panel3.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhuCap_NhanVien)).EndInit();
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
             this.panel15.ResumeLayout(false);
@@ -508,8 +508,6 @@
             this.panel27.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }

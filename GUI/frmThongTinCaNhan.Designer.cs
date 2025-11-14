@@ -74,7 +74,6 @@
             this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.cbGioiTinh = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel23 = new System.Windows.Forms.Panel();
             this.txtHoTen = new System.Windows.Forms.TextBox();
@@ -91,7 +90,7 @@
             this.panel30 = new System.Windows.Forms.Panel();
             this.txtVaiTro = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.panel31 = new System.Windows.Forms.Panel();
+            this.pnlMatKhau = new System.Windows.Forms.Panel();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.panel32 = new System.Windows.Forms.Panel();
@@ -106,6 +105,8 @@
             this.panel29 = new System.Windows.Forms.Panel();
             this.label23 = new System.Windows.Forms.Label();
             this.panel26 = new System.Windows.Forms.Panel();
+            this.txtGioiTinh = new System.Windows.Forms.TextBox();
+            this.btnShowHide = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -129,7 +130,7 @@
             this.panel24.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel30.SuspendLayout();
-            this.panel31.SuspendLayout();
+            this.pnlMatKhau.SuspendLayout();
             this.panel32.SuspendLayout();
             this.panel33.SuspendLayout();
             this.panel25.SuspendLayout();
@@ -548,24 +549,13 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.cbGioiTinh);
+            this.panel9.Controls.Add(this.txtGioiTinh);
             this.panel9.Controls.Add(this.label4);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 150);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(600, 45);
             this.panel9.TabIndex = 65;
-            // 
-            // cbGioiTinh
-            // 
-            this.cbGioiTinh.FormattingEnabled = true;
-            this.cbGioiTinh.Items.AddRange(new object[] {
-            "Nữ",
-            "Nam"});
-            this.cbGioiTinh.Location = new System.Drawing.Point(205, 12);
-            this.cbGioiTinh.Name = "cbGioiTinh";
-            this.cbGioiTinh.Size = new System.Drawing.Size(178, 24);
-            this.cbGioiTinh.TabIndex = 2;
             // 
             // label4
             // 
@@ -653,6 +643,7 @@
             this.panel6.Controls.Add(this.panel24);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel6.Location = new System.Drawing.Point(1203, 120);
+            this.panel6.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 883);
             this.panel6.TabIndex = 23;
@@ -679,7 +670,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.panel30);
-            this.panel3.Controls.Add(this.panel31);
+            this.panel3.Controls.Add(this.pnlMatKhau);
             this.panel3.Controls.Add(this.panel32);
             this.panel3.Controls.Add(this.panel33);
             this.panel3.Controls.Add(this.panel25);
@@ -717,15 +708,16 @@
             this.label21.TabIndex = 14;
             this.label21.Text = "Vai trò";
             // 
-            // panel31
+            // pnlMatKhau
             // 
-            this.panel31.Controls.Add(this.txtMatKhau);
-            this.panel31.Controls.Add(this.label20);
-            this.panel31.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel31.Location = new System.Drawing.Point(90, 150);
-            this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(413, 45);
-            this.panel31.TabIndex = 49;
+            this.pnlMatKhau.Controls.Add(this.btnShowHide);
+            this.pnlMatKhau.Controls.Add(this.txtMatKhau);
+            this.pnlMatKhau.Controls.Add(this.label20);
+            this.pnlMatKhau.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMatKhau.Location = new System.Drawing.Point(90, 150);
+            this.pnlMatKhau.Name = "pnlMatKhau";
+            this.pnlMatKhau.Size = new System.Drawing.Size(413, 45);
+            this.pnlMatKhau.TabIndex = 49;
             // 
             // txtMatKhau
             // 
@@ -853,6 +845,27 @@
             this.panel26.Size = new System.Drawing.Size(90, 883);
             this.panel26.TabIndex = 0;
             // 
+            // txtGioiTinh
+            // 
+            this.txtGioiTinh.Location = new System.Drawing.Point(205, 9);
+            this.txtGioiTinh.Name = "txtGioiTinh";
+            this.txtGioiTinh.Size = new System.Drawing.Size(178, 22);
+            this.txtGioiTinh.TabIndex = 3;
+            // 
+            // btnShowHide
+            // 
+            this.btnShowHide.BackColor = System.Drawing.SystemColors.Window;
+            this.btnShowHide.FlatAppearance.BorderSize = 0;
+            this.btnShowHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowHide.Location = new System.Drawing.Point(380, 12);
+            this.btnShowHide.Name = "btnShowHide";
+            this.btnShowHide.Size = new System.Drawing.Size(30, 22);
+            this.btnShowHide.TabIndex = 15;
+            this.btnShowHide.TabStop = false;
+            this.btnShowHide.Text = "👁";
+            this.btnShowHide.UseVisualStyleBackColor = false;
+            this.btnShowHide.Click += new System.EventHandler(this.btnShowHide_Click);
+            // 
             // frmThongTinCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -907,8 +920,8 @@
             this.panel3.ResumeLayout(false);
             this.panel30.ResumeLayout(false);
             this.panel30.PerformLayout();
-            this.panel31.ResumeLayout(false);
-            this.panel31.PerformLayout();
+            this.pnlMatKhau.ResumeLayout(false);
+            this.pnlMatKhau.PerformLayout();
             this.panel32.ResumeLayout(false);
             this.panel32.PerformLayout();
             this.panel33.ResumeLayout(false);
@@ -974,7 +987,6 @@
         private System.Windows.Forms.DateTimePicker dtpNgaySinh;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.ComboBox cbGioiTinh;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.TextBox txtHoTen;
@@ -986,7 +998,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Panel panel30;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Panel panel31;
+        private System.Windows.Forms.Panel pnlMatKhau;
         private System.Windows.Forms.TextBox txtMatKhau;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel32;
@@ -1000,5 +1012,7 @@
         private System.Windows.Forms.TextBox txtTrangThai;
         private System.Windows.Forms.TextBox txtPhongBan;
         private System.Windows.Forms.TextBox txtTrinhDo;
+        private System.Windows.Forms.TextBox txtGioiTinh;
+        private System.Windows.Forms.Button btnShowHide;
     }
 }

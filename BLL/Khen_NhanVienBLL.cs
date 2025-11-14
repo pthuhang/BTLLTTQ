@@ -13,6 +13,10 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSach();
         }
+        public DataTable LayKTTheoMaNhanVien(string maNV)
+        {
+            return dal.LayKhenThuonhTheoNV(maNV);
+        }
         public DataTable GetKhenThuongByMaNV_ThangNam(string maNV, int thang, int nam)
         {
             return dal.GetKhenThuongByMaNV_ThangNam(maNV, thang, nam);

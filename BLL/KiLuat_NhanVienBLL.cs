@@ -13,7 +13,10 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSach();
         }
-
+        public DataTable LayKLTheoMaNhanVien(string maNV)
+        {
+            return dal.LayKiLuatTheoNV(maNV);
+        }
         // Thêm kỷ luật cho nhân viên
         public void Them(string maKL, string maNV, DateTime ngayKL)
         {
