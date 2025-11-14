@@ -24,6 +24,16 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataTable LayKhenThuonhTheoNV(string maNV)
+        {
+            string sql = "SELECT * FROM Khen_NhanVien WHERE MaNV = @MaNV";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@MaNV", maNV);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
         public DataTable GetKhenThuongByMaNV_ThangNam(string maNV, int thang, int nam)
         {
             DataTable dt = new DataTable();

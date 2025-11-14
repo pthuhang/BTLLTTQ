@@ -23,6 +23,16 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
+        public DataTable LayTangCaTheoNV(string maNV)
+        {
+            string sql = "SELECT * FROM TangCa_NhanVien WHERE MaNV = @MaNV";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@MaNV", maNV);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
         public DataTable LayTangCaTheoThangNam(int thang, int nam, string maNV)
         {
             string sql = "SELECT MaNV, SoGioTangCa, NgayTangCa " +

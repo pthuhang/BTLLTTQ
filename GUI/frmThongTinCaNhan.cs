@@ -33,6 +33,12 @@ namespace QUANLYNHANSU.GUI
 
             label23.Left = (panel29.ClientSize.Width - label23.Width) / 2;
             label23.Top = (panel29.ClientSize.Height - label23.Height) / 2;
+            txtMatKhau.UseSystemPasswordChar = true;
+            btnShowHide.FlatStyle = FlatStyle.Flat;
+            btnShowHide.FlatAppearance.BorderSize = 0;
+            btnShowHide.BackColor = Color.White;
+            btnShowHide.TabStop = false; // không hiện viền khi focus
+            btnShowHide.Cursor = Cursors.Hand;
 
             HienThiThongTinCaNhan();
 
@@ -47,7 +53,8 @@ namespace QUANLYNHANSU.GUI
                 DataRow row = dt.Rows[0];
                 txtMaNV.Text = row["MaNV"].ToString();
                 txtHoTen.Text = row["HoTen"].ToString();
-                cbGioiTinh.SelectedItem = (row["GioiTinh"].ToString() == "0") ? "Nam" : "Nữ";
+                bool gioiTinh = Convert.ToBoolean(row["GioiTinh"]);
+                txtGioiTinh.Text = gioiTinh ? "Nam" : "Nữ";
                 if (DateTime.TryParse(row["NgaySinh"].ToString(), out DateTime ns))
                     dtpNgaySinh.Value = ns;
                 txtDiaChi.Text = row["DiaChi"].ToString();
@@ -85,7 +92,7 @@ namespace QUANLYNHANSU.GUI
                     // Khóa/Mở toàn bộ control nhập liệu
                     txtMaNV.ReadOnly = !enable;
                     txtHoTen.ReadOnly = !enable;
-                    cbGioiTinh.Enabled = enable;
+                    txtGioiTinh.ReadOnly = !enable;
                     dtpNgaySinh.Enabled = enable;
                     txtSDT.ReadOnly = !enable;
                     txtCCCD.ReadOnly = !enable;
@@ -145,6 +152,9 @@ namespace QUANLYNHANSU.GUI
                 }
                 else
                 {
+
+                }
+                {
                     MessageBox.Show("Không thể cập nhật tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -153,5 +163,24 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi lưu tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        bool isPasswordVisible = false;
+        private void btnShowHide_Click(object sender, EventArgs e)
+        {
+            if (isPasswordVisible)
+            {
+                // Đang hiện → ẩn lại
+                txtMatKhau.UseSystemPasswordChar = true;
+                btnShowHide.Text = "👁"; // biểu tượng mắt mở
+                isPasswordVisible = false;
+            }
+            else
+            {
+                // Đang ẩn → hiện lên
+                txtMatKhau.UseSystemPasswordChar = false;
+                btnShowHide.Text = "🙈"; // biểu tượng mắt nhắm
+                isPasswordVisible = true;
+            }
+        }
+
     }
 }

@@ -27,7 +27,7 @@ namespace QUANLYNHANSU.GUI
             label1.Left = (panel8.ClientSize.Width - label1.Width) / 2;
             label1.Top = (panel8.ClientSize.Height - label1.Height) / 2;
             SetupDataGridView(dgvBangLuong);
-
+            LoadTatCaBangLuong();
         }
         private void SetupDataGridView(DataGridView dgv)
         {
@@ -39,6 +39,19 @@ namespace QUANLYNHANSU.GUI
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void LoadTatCaBangLuong()
+        {
+            try
+            {
+                DataTable dtBangLuong = blBLL.LayBangLuongNhanVien(maNV);
+                dgvBangLuong.DataSource = dtBangLuong;
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnXem_Click(object sender, EventArgs e)

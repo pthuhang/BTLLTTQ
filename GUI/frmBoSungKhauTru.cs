@@ -30,6 +30,7 @@ namespace QUANLYNHANSU.GUI
             SetupDataGridView(dgvTangCa);
             SetupDataGridView(dgvKhenThuong);
             SetupDataGridView(dgvKiLuat);
+            LoadTatCaKhauTru();
         }
         private void SetupDataGridView(DataGridView dgv)
         {
@@ -40,6 +41,22 @@ namespace QUANLYNHANSU.GUI
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void LoadTatCaKhauTru()
+        {
+            try
+            {
+                DataTable dtTangCa = tangCaBll.LayTCNhanVienTheoMa(maNV);
+                dgvTangCa.DataSource = dtTangCa;
+                DataTable dtKhenThuong = khenBll.LayKTTheoMaNhanVien(maNV);
+                dgvKhenThuong.DataSource = dtKhenThuong;
+                DataTable dtKiLuat = kiLuatBll.LayKLTheoMaNhanVien(maNV);
+                dgvKiLuat.DataSource = dtKiLuat;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnXem_Click(object sender, EventArgs e)
