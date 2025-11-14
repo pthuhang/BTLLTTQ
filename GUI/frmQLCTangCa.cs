@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -119,14 +120,15 @@ namespace QUANLYNHANSU.GUI
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string maNV = txtMaNV.Text.Trim();
+            string soGio = txtSoGioTC.Text.Trim();
 
-            if (string.IsNullOrEmpty(maNV))
+            if (string.IsNullOrEmpty(maNV) || string.IsNullOrEmpty(soGio))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
 
-            if (!int.TryParse(txtSoGioTC.Text.Trim(), out int soGio) || soGio <= 0)
+            if (!int.TryParse(soGio, out int soGioTC) || soGioTC <= 0)
             {
                 MessageBox.Show("Số giờ tăng ca phải là số nguyên dương!");
                 return;
@@ -138,16 +140,22 @@ namespace QUANLYNHANSU.GUI
             {
                 if (nvtcbll.KiemTraTonTai(ngay, maNV))
                 {
-                    MessageBox.Show("Cặp mã tăng ca và nhân viên đã tồn tại!");
+                    MessageBox.Show("Đã có dữ liệu tăng ca này!");
+                    ClearForm();
+                    EnableForm(false);
+                    currentAction = "";
+                    btnThem.Enabled = true;
+                    btnSua.Enabled = true;
+                    btnXoa.Enabled = true;
                     return;
                 }
 
-                nvtcbll.Them(maNV, soGio, ngay);
+                nvtcbll.Them(maNV, soGioTC, ngay);
                 MessageBox.Show("Thêm thành công!");
             }
             else if (currentAction == "Sua")
             {
-                nvtcbll.Sua(maNV, ngay, soGio);
+                nvtcbll.Sua(maNV, ngay, soGioTC);
                 MessageBox.Show("Cập nhật thành công!");
             }
             else

@@ -44,7 +44,7 @@ namespace QUANLYNHANSU.GUI
         {
             this.panelMenu = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnQLTaiKhoan = new System.Windows.Forms.Button();
+            this.btnThongTinCaNhan = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnThuongPhat = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -91,26 +91,26 @@ namespace QUANLYNHANSU.GUI
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.btnQLTaiKhoan);
+            this.panel2.Controls.Add(this.btnThongTinCaNhan);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 370);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(290, 50);
             this.panel2.TabIndex = 12;
             // 
-            // btnQLTaiKhoan
+            // btnThongTinCaNhan
             // 
-            this.btnQLTaiKhoan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(60)))), ((int)(((byte)(140)))));
-            this.btnQLTaiKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnQLTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQLTaiKhoan.ForeColor = System.Drawing.Color.White;
-            this.btnQLTaiKhoan.Location = new System.Drawing.Point(0, 0);
-            this.btnQLTaiKhoan.Name = "btnQLTaiKhoan";
-            this.btnQLTaiKhoan.Size = new System.Drawing.Size(290, 50);
-            this.btnQLTaiKhoan.TabIndex = 3;
-            this.btnQLTaiKhoan.Text = "Quản lý tài khoản";
-            this.btnQLTaiKhoan.UseVisualStyleBackColor = false;
-            this.btnQLTaiKhoan.Click += new System.EventHandler(this.btnQLTaiKhoan_Click_1);
+            this.btnThongTinCaNhan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(60)))), ((int)(((byte)(140)))));
+            this.btnThongTinCaNhan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnThongTinCaNhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongTinCaNhan.ForeColor = System.Drawing.Color.White;
+            this.btnThongTinCaNhan.Location = new System.Drawing.Point(0, 0);
+            this.btnThongTinCaNhan.Name = "btnThongTinCaNhan";
+            this.btnThongTinCaNhan.Size = new System.Drawing.Size(290, 50);
+            this.btnThongTinCaNhan.TabIndex = 3;
+            this.btnThongTinCaNhan.Text = "Thông tin cá nhân";
+            this.btnThongTinCaNhan.UseVisualStyleBackColor = false;
+            this.btnThongTinCaNhan.Click += new System.EventHandler(this.btnThongTinCaNhan_Click);
             // 
             // panel10
             // 
@@ -337,7 +337,7 @@ namespace QUANLYNHANSU.GUI
         private Panel panel8;
         private Panel panel10;
         private Panel panel2;
-        private Button btnQLTaiKhoan;
+        private Button btnThongTinCaNhan;
         private Button btnThuongPhat;
     }
 }

@@ -75,20 +75,6 @@ namespace QUANLYNHANSU.GUI
             dtpGioVao.Value = DateTime.Now;
             dtpGioRa.Value = DateTime.Now;
         }
-        private void dgvChamCong_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            DataGridViewRow row = dgvChamCong.Rows[e.RowIndex];
-
-            cbLoaiCong.SelectedValue = row.Cells["MaLoaiCong"].Value.ToString();
-            txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
-            txtTenNV.Text = nvBll.LayNhanVienTheoMa(txtMaNV.Text)?.Rows[0]["HoTen"].ToString();
-            dtpNgayChamCong.Value = Convert.ToDateTime(row.Cells["NgayLam"].Value);
-            dtpGioVao.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioVao"].Value);
-            dtpGioRa.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioRa"].Value);
-
-        }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -102,7 +88,19 @@ namespace QUANLYNHANSU.GUI
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
         }
+        private void dgvChamCong_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
 
+            DataGridViewRow row = dgvChamCong.Rows[e.RowIndex];
+
+            cbLoaiCong.SelectedValue = row.Cells["MaLoaiCong"].Value.ToString();
+            txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
+            txtTenNV.Text = nvBll.LayNhanVienTheoMa(txtMaNV.Text)?.Rows[0]["HoTen"].ToString();
+            dtpNgayChamCong.Value = Convert.ToDateTime(row.Cells["NgayLam"].Value);
+            dtpGioVao.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioVao"].Value);
+            dtpGioRa.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioRa"].Value);
+        }
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (txtMaNV.Text.Trim() == "" || cbLoaiCong.SelectedIndex == -1)
@@ -272,7 +270,6 @@ namespace QUANLYNHANSU.GUI
                     txtTenNV.Text = "";
                 }
 
-                // ✅ Khóa ô nhập tên nhân viên
                 txtTenNV.ReadOnly = true;
 
                 DataTable dt = lcnvBll.LocCongNV(maNV);
@@ -302,7 +299,6 @@ namespace QUANLYNHANSU.GUI
             string thang = txtThang.Text.Trim();
             string nam = txtNam.Text.Trim();
 
-            // Kiểm tra nếu người dùng không nhập gì
             if ( string.IsNullOrEmpty(ngay) &&
                 string.IsNullOrEmpty(thang) && string.IsNullOrEmpty(nam))
             {
@@ -313,7 +309,6 @@ namespace QUANLYNHANSU.GUI
 
             try
             {
-                // Gọi hàm lọc từ BLL
                 DataTable dt = lcnvBll.LocLoaiCongNV(ngay, thang, nam);
 
                 if (dt == null || dt.Rows.Count == 0)
@@ -333,6 +328,11 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi lọc dữ liệu: " + ex.Message,
                                 "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnXemBC_Click(object sender, EventArgs e)
+        {
+            LoadDanhSach();
         }
 
         

@@ -54,21 +54,34 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.TimKiem(maNVTimKiem, hoTenTimKiem);
         }
-        public DataTable LayNhanVienNam()
+        
+        //lấy item cho combobox
+        
+        public DataTable LayDanhSachChucVu()
         {
-            return dal.LayNhanVienNam();
+            return dal.LayDanhSachChucVu();
         }
+        //Lọc
         public DataTable LocTheoTrinhDo(string tenTrinhDo)
         {
             return dal.LocTheoTrinhDo(tenTrinhDo);
         }
-        public DataTable SapXepTheoLuongGiam()
+        public DataTable LocTheoGioiTinh(string gioiTinh)
         {
-            return dal.SapXepTheoLuongGiam();
+            return dal.LocTheoGioiTinh(gioiTinh);
+        }
+        public DataTable LocTheoChucVu(string chucVu)
+        {
+            return dal.LocTheoChucVu(chucVu);
         }
         public DataTable LayNhanVienTheoPhongBan(string maPhongBan)
         {
             return dal.LayNhanVienTheoPhongBan(maPhongBan);
         }
+        public DataTable LocTheoTrangThai(string trangThai)
+        {
+            return dal.LocTheoTrangThai(trangThai);
+        }
+
     }
 }

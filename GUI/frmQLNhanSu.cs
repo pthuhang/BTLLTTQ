@@ -72,5 +72,10 @@ namespace QUANLYNHANSU.GUI
             HighlightTab(btnHopDong);
         }
 
+        private void btnTaiKhoan_Click(object sender, EventArgs e)
+        {
+            MoFormCon(new frmQLTaiKhoanNhanVien());
+            HighlightTab(btnTaiKhoan);
+        }
     }
 }

@@ -18,18 +18,20 @@ namespace QUANLYNHANSU.GUI
     {
 
         private LoaiCongBLL LoaiCongBll = new LoaiCongBLL();
+
+
         private string currentAction = "";
         public frmQLCLoaiCong()
         {
             InitializeComponent();
         }
-
+        private void HienThiDanhSach()
+        {
+            dgvLoaiCong.DataSource = LoaiCongBll.LayDanhSach();
+        }
         private void frmQLCLoaiCong_Load(object sender, EventArgs e)
         {
             HienThiDanhSach();
-            dgvLoaiCong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvLoaiCong.ReadOnly = true;
-            dgvLoaiCong.AllowUserToAddRows = false;
             EnableForm(false);
 
         }
@@ -39,28 +41,13 @@ namespace QUANLYNHANSU.GUI
             txtTenLC.Enabled = enable;
             txtHeSoCong.Enabled = enable;
         }
-        private void HienThiDanhSach()
-        {
-            DataTable dt = LoaiCongBll.LayDanhSach();
-            dgvLoaiCong.DataSource = dt;
-        }
+        
 
         private void ClearForm()
         {
             txtMaLC.Clear();
             txtTenLC.Clear();
             txtHeSoCong.Clear();
-        }
-
-        private void dgvLoaiCong_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvLoaiCong.Rows[e.RowIndex];
-                txtMaLC.Text = row.Cells["MaloaiCong"].Value.ToString();
-                txtTenLC.Text = row.Cells["TenLoaiCong"].Value.ToString();
-                txtHeSoCong.Text = row.Cells["HeSo"].Value.ToString(); 
-            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -73,7 +60,16 @@ namespace QUANLYNHANSU.GUI
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
         }
+        private void dgvLoaiCong_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            var row = dgvLoaiCong.Rows[e.RowIndex];
+            if (row.Cells["MaLoaiCong"].Value == null) return;
 
+            txtMaLC.Text = row.Cells["MaLoaiCong"].Value.ToString();
+            txtTenLC.Text = row.Cells["TenLoaiCong"].Value?.ToString();
+            txtHeSoCong.Text = row.Cells["HeSo"]?.Value.ToString();
+        }
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (txtMaLC.Text.Trim() == "")
@@ -165,5 +161,6 @@ namespace QUANLYNHANSU.GUI
             this.Close();
         }
 
+        
     }
 }

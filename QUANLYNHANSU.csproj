@@ -79,7 +79,6 @@
     <Compile Include="BLL\PhuCapBLL.cs" />
     <Compile Include="BLL\PhuCap_NhanVienBLL.cs" />
     <Compile Include="BLL\TaiKhoanBLL.cs" />
-    <Compile Include="BLL\TangCaBLL.cs" />
     <Compile Include="BLL\TangCa_NhanVienBLL.cs" />
     <Compile Include="BLL\TrinhDoBLL.cs" />
     <Compile Include="DAL\BangLuongDAL.cs" />
@@ -96,7 +95,6 @@
     <Compile Include="DAL\PhuCapDAL.cs" />
     <Compile Include="DAL\PhuCap_NhanVienDAL.cs" />
     <Compile Include="DAL\TaiKhoanDAL.cs" />
-    <Compile Include="DAL\TangCaDAL.cs" />
     <Compile Include="DAL\TangCa_NhanVienDAL.cs" />
     <Compile Include="DAL\TrinhDoDAL.cs" />
     <Compile Include="GUI\frmBangCong.cs">
@@ -243,6 +241,12 @@
     <Compile Include="GUI\frmQLTPPhat.Designer.cs">
       <DependentUpon>frmQLTPPhat.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmQLTTCaNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLTTCaNhan.Designer.cs">
+      <DependentUpon>frmQLTTCaNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmThongTinCaNhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLTPPhat.resx">
       <DependentUpon>frmQLTPPhat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTTCaNhan.resx">
+      <DependentUpon>frmQLTTCaNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmThongTinCaNhan.resx">
       <DependentUpon>frmThongTinCaNhan.cs</DependentUpon>

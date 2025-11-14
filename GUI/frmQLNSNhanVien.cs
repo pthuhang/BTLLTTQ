@@ -21,17 +21,23 @@ namespace QUANLYNHANSU.GUI
         private TrinhDoBLL bllTD = new TrinhDoBLL();
 
         private string currentAction = "";
+        private bool isLoading;
+
         public frmQLNSNhanVien()
         {
             InitializeComponent();
         }
         private void frmQLNSNhanVien_Load(object sender, EventArgs e)
         {
+            isLoading = true;
+
             cbGioiTinh.Items.AddRange(new string[] { "Nam", "Nữ" });
             cbTrangThai.Items.AddRange(new string[] { "Đang làm việc", "Đã thôi việc" });
+
             cbPhongBan.DataSource = bllPB.LayDanhSach();
             cbPhongBan.DisplayMember = "TenPhongBan";
             cbPhongBan.ValueMember = "MaPhongBan";
+
             cbTrinhDo.DataSource = bllTD.LayDanhSach();
             cbTrinhDo.DisplayMember = "TenTrinhDo";
             cbTrinhDo.ValueMember = "MaTrinhDo";
@@ -40,7 +46,31 @@ namespace QUANLYNHANSU.GUI
 
             EnableForm(false);
             SetDefaultButtonState();
+            LoadComboBoxLoc();
+
+            isLoading = false;
         }
+        private void LoadComboBoxLoc()
+        {
+            DataTable dtTrinhDo = bllTD.LayDanhSach();
+            cbLocTrinhDo.DataSource = dtTrinhDo;
+            cbLocTrinhDo.DisplayMember = "TenTrinhDo";
+            cbLocTrinhDo.ValueMember = "MaTrinhDo";
+            cbLocTrinhDo.SelectedIndex = -1;
+
+            DataTable dtChucVu = bll.LayDanhSachChucVu();
+            cbLocChucVu.DataSource = dtChucVu;
+            cbLocChucVu.DisplayMember = "ChucVu";
+            cbLocChucVu.ValueMember = "ChucVu";
+            cbLocChucVu.SelectedIndex = -1;
+
+            DataTable dtPhongBan = bllPB.LayDanhSach();
+            cbLocPhongBan.DataSource = dtPhongBan;
+            cbLocPhongBan.DisplayMember = "TenPhongBan";
+            cbLocPhongBan.ValueMember = "MaPhongBan";
+            cbLocPhongBan.SelectedIndex = -1;
+        }
+
         private void EnableForm(bool enable)
         {
             // Khóa/Mở toàn bộ control nhập liệu
@@ -60,6 +90,24 @@ namespace QUANLYNHANSU.GUI
             txtMucDongBH.Enabled = enable;
             txtSTK.Enabled = enable;
         }
+        private void ClearForm()
+        {
+            txtMaNV.Clear();
+            txtHoTen.Clear();
+            cbGioiTinh.SelectedIndex = -1;
+            dtpNgaySinh.Value = DateTime.Now;
+            txtSDT.Clear();
+            txtCCCD.Clear();
+            txtDiaChi.Clear();
+            txtEmail.Clear();
+            cbTrangThai.SelectedIndex = -1;
+            cbPhongBan.SelectedIndex = -1;
+            cbTrinhDo.SelectedIndex = -1;
+            txtChucVu.Clear();
+            txtSoBH.Clear();
+            txtMucDongBH.Clear();
+            txtSTK.Clear();
+        }
         private void SetDefaultButtonState()
         {
             // Trạng thái ban đầu: chỉ bật 4 nút chính
@@ -72,6 +120,13 @@ namespace QUANLYNHANSU.GUI
         {
             dgvNhanVien.DataSource = bll.LayDanhSach();
         }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        //thêm, sửa, xóa
 
         private void btnThemMoi_Click(object sender, EventArgs e)
         {
@@ -128,27 +183,9 @@ namespace QUANLYNHANSU.GUI
             EnableForm(false);
             SetDefaultButtonState();
         }
-        private void ClearForm()
-        {
-            txtMaNV.Clear();
-            txtHoTen.Clear();
-            cbGioiTinh.SelectedIndex = -1;
-            dtpNgaySinh.Value = DateTime.Now;
-            txtSDT.Clear();
-            txtCCCD.Clear();
-            txtDiaChi.Clear();
-            txtEmail.Clear();
-            cbTrangThai.SelectedIndex = -1;
-            cbPhongBan.SelectedIndex = -1;
-            cbTrinhDo.SelectedIndex = -1;
-            txtChucVu.Clear();
-            txtSoBH.Clear();
-            txtMucDongBH.Clear();
-            txtSTK.Clear();
-        }
-
         private void dgvNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvNhanVien.Rows[e.RowIndex];
@@ -165,16 +202,15 @@ namespace QUANLYNHANSU.GUI
                 txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
                 txtEmail.Text = row.Cells["Email"].Value.ToString();
                 cbTrangThai.Text = row.Cells["TrangThai"].Value.ToString();
+                cbPhongBan.SelectedValue = row.Cells["MaPhongBan"].Value.ToString();
                 cbTrinhDo.SelectedValue = row.Cells["MaTrinhDo"].Value.ToString();
                 txtChucVu.Text = row.Cells["ChucVu"].Value.ToString();
                 txtSoBH.Text = row.Cells["SoBaoHiemXaHoi"].Value.ToString();
                 txtMucDongBH.Text = row.Cells["MucDong"].Value.ToString();
                 txtSTK.Text = row.Cells["SoTaiKhoan"].Value.ToString();
+
+                btnSua.Enabled = true;
             }
-        }
-        private void btnThoat_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
         private void btnLuu_Click(object sender, EventArgs e)
         {
@@ -256,7 +292,7 @@ namespace QUANLYNHANSU.GUI
             currentAction = "";
             btnLuu.Enabled = false;
         }
-
+        //
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
@@ -285,63 +321,7 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
             }
         }
-        private void btnLocNVNam_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DataTable dt = bll.LayNhanVienNam();
-                if (dt.Rows.Count > 0)
-                {
-                    MessageBox.Show("Có " + dt.Rows.Count + " nhân viên nam!");
-                    dgvNhanVien.DataSource = dt;
-                }
-                else
-                {
-                    MessageBox.Show("Không có nhân viên nam nào!");
-                    dgvNhanVien.DataSource = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi lọc nhân viên nam: " + ex.Message);
-            }
-        }
-
-        private void cmbLocTrinhDo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                // Bỏ qua nếu chưa chọn gì
-                if (cmbLocTrinhDo.SelectedIndex == -1)
-                    return;
-
-                string tenTrinhDo = cmbLocTrinhDo.SelectedItem?.ToString();
-                if (string.IsNullOrEmpty(tenTrinhDo)) return;
-
-                DataTable dt = bll.LocTheoTrinhDo(tenTrinhDo);
-                dgvNhanVien.DataSource = dt;
-                MessageBox.Show($"Tìm thấy {dt.Rows.Count} nhân viên có trình độ này!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi lọc theo trình độ: " + ex.Message);
-            }
-        }
-        private void btnSXLuongGiam_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DataTable dt = bll.SapXepTheoLuongGiam();
-                dgvNhanVien.DataSource = dt;
-
-                MessageBox.Show($"Đã sắp xếp {dt.Rows.Count} nhân viên theo lương giảm dần!",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi sắp xếp theo lương: " + ex.Message);
-            }
-        }
+        //
         private void btnXuatExcel_Click(object sender, EventArgs e)
         {
             try
@@ -391,7 +371,7 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi xuất Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        //
         private void btnXemDanhSach_Click(object sender, EventArgs e)
         {
             try
@@ -402,11 +382,153 @@ namespace QUANLYNHANSU.GUI
                 ClearForm();
                 EnableForm(false);
                 SetDefaultButtonState();
+
+                isLoading = true;
+                cbLocTrinhDo.SelectedIndex = -1;
+                cbLocChucVu.SelectedIndex = -1;
+                cbLocPhongBan.SelectedIndex = -1;
+                cbLocTrangThai.SelectedIndex  = -1;
+                cbLocGioiTinh.SelectedIndex = -1;
+                isLoading = false;
+
                 MessageBox.Show("Đã tải lại danh sách tất cả nhân viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi tải danh sách: " + ex.Message);
+            }
+        }
+        //Lọc
+        private void cmbLocTrinhDo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isLoading) return;
+            cbLocChucVu.SelectedIndex = -1;
+            cbLocPhongBan.SelectedIndex = -1;
+            cbLocTrangThai.SelectedIndex = -1;
+            cbLocGioiTinh.SelectedIndex = -1;
+            try
+            {
+                if (cbLocTrinhDo.SelectedIndex == -1)
+                    return;
+
+                string tenTrinhDo = cbLocTrinhDo.Text;
+
+                if (string.IsNullOrEmpty(tenTrinhDo)) return;
+
+                DataTable dt = bll.LocTheoTrinhDo(tenTrinhDo);
+                dgvNhanVien.DataSource = dt;
+                MessageBox.Show($"Tìm thấy {dt.Rows.Count} nhân viên có trình độ này!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc theo trình độ: " + ex.Message);
+            }
+        }
+        private void cbLocGioiTinh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isLoading) return;
+            cbLocTrinhDo.SelectedIndex = -1;
+            cbLocChucVu.SelectedIndex = -1;
+            cbLocPhongBan.SelectedIndex = -1;
+            cbLocTrangThai.SelectedIndex = -1;
+            try
+            {
+                if (cbLocGioiTinh.SelectedIndex == -1)
+                    return;
+
+                string gioiTinh = cbLocGioiTinh.SelectedItem?.ToString();
+                if (string.IsNullOrEmpty(gioiTinh)) return;
+
+                DataTable dt = bll.LocTheoGioiTinh(gioiTinh);
+                dgvNhanVien.DataSource = dt;
+
+                MessageBox.Show($"Tìm thấy {dt.Rows.Count} nhân viên giới tính {gioiTinh}!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc theo giới tính: " + ex.Message);
+            }
+        }
+
+        private void cbLocChucVu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isLoading) return;
+            cbLocTrinhDo.SelectedIndex = -1;
+            cbLocPhongBan.SelectedIndex = -1;
+            cbLocTrangThai.SelectedIndex = -1;
+            cbLocGioiTinh.SelectedIndex = -1;
+            try
+            {
+                if (cbLocChucVu.SelectedIndex == -1)
+                    return;
+
+                string chucVu = cbLocChucVu.SelectedValue?.ToString();
+
+                if (string.IsNullOrEmpty(chucVu)) return;
+
+                DataTable dt = bll.LocTheoChucVu(chucVu);
+                dgvNhanVien.DataSource = dt;
+
+                MessageBox.Show($"Tìm thấy {dt.Rows.Count} nhân viên có chức vụ {chucVu}!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc theo chức vụ: " + ex.Message);
+            }
+        }
+
+        private void cbLocPhongBan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isLoading) return;
+            cbLocTrinhDo.SelectedIndex = -1;
+            cbLocChucVu.SelectedIndex = -1;
+            cbLocTrangThai.SelectedIndex = -1;
+            cbLocGioiTinh.SelectedIndex = -1;
+            try
+            {
+                if (cbLocPhongBan.SelectedIndex == -1)
+                    return;
+
+                string maPhongBan = cbLocPhongBan.SelectedValue?.ToString();
+
+                if (string.IsNullOrEmpty(maPhongBan))
+                    return;
+
+                DataTable dt = bll.LayNhanVienTheoPhongBan(maPhongBan);
+
+                dgvNhanVien.DataSource = dt;
+
+                MessageBox.Show($"Tìm thấy {dt.Rows.Count} nhân viên thuộc phòng ban này!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc theo phòng ban: " + ex.Message);
+            }
+        }
+
+        private void cbLocTrangThai_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isLoading) return;
+            cbLocTrinhDo.SelectedIndex = -1;
+            cbLocChucVu.SelectedIndex = -1;
+            cbLocPhongBan.SelectedIndex = -1;
+            cbLocGioiTinh.SelectedIndex = -1;
+            try
+            {
+                if (cbLocTrangThai.SelectedIndex == -1)
+                    return;
+
+                string trangThai = cbLocTrangThai.SelectedItem?.ToString();
+                if (string.IsNullOrEmpty(trangThai)) return;
+
+                DataTable dt = bll.LocTheoTrangThai(trangThai);
+                dgvNhanVien.DataSource = dt;
+
+                MessageBox.Show($"Tìm thấy {dt.Rows.Count} nhân viên có trạng thái {trangThai}!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc theo trạng thái: " + ex.Message);
             }
         }
     }

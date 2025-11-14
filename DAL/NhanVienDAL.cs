@@ -77,7 +77,7 @@ namespace QUANLYNHANSU.DAL
                 }
             }
         }
-
+        //
         public void Them(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
@@ -122,7 +122,6 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        // 🧩 Cập nhật nhân viên
         public void Sua(
             string ma, string ten, bool gioiTinh, DateTime ngaySinh, string sdt, string cccd,
             string diaChi, string email, string trangThai, string maPhong, string maTrinhDo,
@@ -172,7 +171,6 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        // 🧩 Xóa nhân viên
         public bool Xoa(string ma)
         {
             const string sql = "DELETE FROM NhanVien WHERE MaNV=@Ma";
@@ -195,7 +193,7 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        // 🧩 Tìm kiếm nhân viên
+        // TÌm kiếm
         public DataTable TimKiem(string maNV, string hoTen)
         {
             string sql = "SELECT * FROM NhanVien WHERE 1=1";
@@ -225,19 +223,8 @@ namespace QUANLYNHANSU.DAL
             }
         }
 
-        // 🧩 Lấy nhân viên nam
-        public DataTable LayNhanVienNam()
-        {
-            const string sql = "SELECT * FROM NhanVien WHERE GioiTinh = 1";
-            using (SqlDataAdapter da = new SqlDataAdapter(sql, conn))
-            {
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
-        }
 
-        // 🧩 Lọc theo trình độ
+        //Lọc
         public DataTable LocTheoTrinhDo(string tenTrinhDo)
         {
             const string sql = @"
@@ -256,20 +243,37 @@ namespace QUANLYNHANSU.DAL
                 }
             }
         }
-
-        // 🧩 Sắp xếp theo lương giảm dần
-        public DataTable SapXepTheoLuongGiam()
+        public DataTable LocTheoGioiTinh(string gioiTinh)
         {
-            const string sql = "SELECT * FROM NhanVien ORDER BY LuongCoBan DESC";
-            using (SqlDataAdapter da = new SqlDataAdapter(sql, conn))
-            {
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
+            int gt = gioiTinh == "Nam" ? 1 : 0;
+
+            string sql = "SELECT * FROM NhanVien WHERE GioiTinh = @gioiTinh";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@gioiTinh", gt);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+        public DataTable LayDanhSachChucVu()
+        {
+            string sql = "SELECT DISTINCT ChucVu FROM NhanVien WHERE ChucVu IS NOT NULL";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+        public DataTable LocTheoChucVu(string chucVu)
+        {
+            string sql = "SELECT * FROM NhanVien WHERE ChucVu LIKE '%' + @chucVu + '%'";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@chucVu", chucVu);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
         }
 
-        // 🧩 Lấy nhân viên theo phòng ban
         public DataTable LayNhanVienTheoPhongBan(string maPhong)
         {
             const string sql = "SELECT * FROM NhanVien WHERE MaPhongBan = @MaPhongBan";
@@ -284,6 +288,17 @@ namespace QUANLYNHANSU.DAL
                 }
             }
         }
+        public DataTable LocTheoTrangThai(string trangThai)
+        {
+            string sql = "SELECT * FROM NhanVien WHERE TrangThai = @trangThai";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@trangThai", trangThai);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
 
 
     }

@@ -11,7 +11,6 @@ namespace QUANLYNHANSU.DAL
 {
     public class TangCa_NhanVienDAL : DBConnection
     {
-        private TangCaDAL tangCaDAL = new TangCaDAL(); 
 
         public DataTable LayDanhSach()
         {
@@ -68,12 +67,12 @@ namespace QUANLYNHANSU.DAL
 
         public bool KiemTraTonTai(DateTime ngayTC, string maNV)
         {
-            string sql = "SELECT COUNT(*) FROM TangCa_NhanVien WHERE MaNV = @MaNV and NgayTangCa = @NgayTC";
+            string sql = "SELECT COUNT(*) FROM TangCa_NhanVien WHERE MaNV = @MaNV AND CAST(NgayTangCa AS DATE) = CAST(@NgayTC AS DATE)";
             using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.Add("@NgayTC", SqlDbType.DateTime).Value = ngayTC;
+                    cmd.Parameters.Add("@NgayTC", SqlDbType.DateTime).Value = ngayTC.Date;
                     cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar).Value = maNV;
                     connection.Open();
                     int count = (int)cmd.ExecuteScalar();

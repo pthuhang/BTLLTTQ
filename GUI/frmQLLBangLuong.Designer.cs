@@ -61,6 +61,9 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvBangLuong = new System.Windows.Forms.DataGridView();
+            this.btnXuatExcel = new System.Windows.Forms.Button();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.panel22 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -73,6 +76,7 @@
             this.panel21.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).BeginInit();
+            this.panel22.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnThoat
@@ -342,6 +346,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel22);
+            this.panel1.Controls.Add(this.panel16);
             this.panel1.Controls.Add(this.panel21);
             this.panel1.Controls.Add(this.panel10);
             this.panel1.Controls.Add(this.panel9);
@@ -406,6 +412,34 @@
             this.dgvBangLuong.Size = new System.Drawing.Size(766, 498);
             this.dgvBangLuong.TabIndex = 22;
             // 
+            // btnXuatExcel
+            // 
+            this.btnXuatExcel.Location = new System.Drawing.Point(3, 26);
+            this.btnXuatExcel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnXuatExcel.Name = "btnXuatExcel";
+            this.btnXuatExcel.Size = new System.Drawing.Size(150, 40);
+            this.btnXuatExcel.TabIndex = 5;
+            this.btnXuatExcel.Text = "Xuất ra Excel";
+            this.btnXuatExcel.UseVisualStyleBackColor = true;
+            this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
+            // 
+            // panel16
+            // 
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel16.Location = new System.Drawing.Point(382, 0);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(40, 90);
+            this.panel16.TabIndex = 27;
+            // 
+            // panel22
+            // 
+            this.panel22.Controls.Add(this.btnXuatExcel);
+            this.panel22.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel22.Location = new System.Drawing.Point(230, 0);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(152, 90);
+            this.panel22.TabIndex = 28;
+            // 
             // frmQLLBangLuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -435,6 +469,7 @@
             this.panel21.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).EndInit();
+            this.panel22.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -473,5 +508,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.Button btnTao;
+        private System.Windows.Forms.Panel panel22;
+        private System.Windows.Forms.Button btnXuatExcel;
+        private System.Windows.Forms.Panel panel16;
     }
 }

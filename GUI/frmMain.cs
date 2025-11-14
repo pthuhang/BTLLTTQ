@@ -43,7 +43,7 @@ namespace QUANLYNHANSU.GUI
         }
         private void HighlightTab(Button selectedButton)
         {
-            Button[] tabs = { btnQLNhanSu, btnQLLuong, btnQLCong, btnThuongPhat, btnQLTaiKhoan };
+            Button[] tabs = { btnQLNhanSu, btnQLLuong, btnQLCong, btnThuongPhat, btnThongTinCaNhan };
 
             foreach (Button btn in tabs)
             {
@@ -63,7 +63,7 @@ namespace QUANLYNHANSU.GUI
             StyleButton(btnQLNhanSu);
             StyleButton(btnQLCong);
             StyleButton(btnQLLuong);
-            StyleButton(btnQLTaiKhoan);
+            StyleButton(btnThongTinCaNhan);
             StyleButton(btnThuongPhat);
         }
 
@@ -89,11 +89,7 @@ namespace QUANLYNHANSU.GUI
             MoFormCon(new frmQLThuongPhat());
             HighlightTab(btnThuongPhat);
         }
-        private void btnQLTaiKhoan_Click_1(object sender, EventArgs e)
-        {
-            MoFormCon(new frmQLTaiKhoan());
-            HighlightTab(btnQLTaiKhoan);
-        }
+        
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
@@ -116,6 +112,10 @@ namespace QUANLYNHANSU.GUI
             label1.Left = (panel3.ClientSize.Width - label1.Width) / 2;
         }
 
-        
+        private void btnThongTinCaNhan_Click(object sender, EventArgs e)
+        {
+            MoFormCon(new frmQLTTCaNhan());
+            HighlightTab(btnThongTinCaNhan);
+        }
     }
 }

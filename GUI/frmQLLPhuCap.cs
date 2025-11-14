@@ -202,7 +202,9 @@ namespace QUANLYNHANSU.GUI
             {
                 txtMaPC.Text = dgvPhuCap.Rows[e.RowIndex].Cells["MaPhuCap"].Value.ToString();
                 txtTenPC.Text = dgvPhuCap.Rows[e.RowIndex].Cells["TenPhuCap"].Value.ToString();
-                txtTienPC.Text = dgvPhuCap.Rows[e.RowIndex].Cells["TienPhuCap"].Value.ToString();
+                //txtTienPC.Text = dgvPhuCap.Rows[e.RowIndex].Cells["TienPhuCap"].Value.ToString();
+                txtTienPC.Text = Convert.ToInt32(dgvPhuCap.Rows[e.RowIndex].Cells["TienPhuCap"].Value).ToString();
+
             }
             tatBtn();
             btnSuaPC.Enabled = true;

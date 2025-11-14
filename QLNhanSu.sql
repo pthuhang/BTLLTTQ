@@ -1,5 +1,5 @@
 ﻿
-
+select * from LoaiCong
 
 --create database QLNhanSu
 --use QLNhanSu
@@ -94,11 +94,6 @@ GO
 -- =========================
 -- BẢNG TĂNG CA
 -- =========================
-CREATE TABLE TangCa (
-    MaTangCa VARCHAR(10) PRIMARY KEY NOT NULL,
-    NgayTangCa DATETIME NOT NULL
-);
-GO
 
 
 -- =========================
@@ -208,16 +203,9 @@ DROP COLUMN HeSoCong;
 -- =========================
 -- BẢNG TĂNG CA - NHÂN VIÊN
 -- =========================
-CREATE TABLE TangCa_NhanVien (
-    MaTangCa VARCHAR(10),
-    MaNV VARCHAR(10),
-    SoGioTangCa INT CHECK (SoGioTangCa >= 0),
-    PRIMARY KEY (MaTangCa, MaNV),
-    FOREIGN KEY (MaTangCa) REFERENCES TangCa(MaTangCa),
-    FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
-);
-GO
 
+GO
+select * from TangCa_NhanVien
 
 -- =========================
 -- BẢNG PHỤ CẤP - NHÂN VIÊN
