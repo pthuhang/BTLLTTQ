@@ -1,4 +1,5 @@
 ﻿using QUANLYNHANSU.BLL;
+using QUANLYNHANSU.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -141,12 +142,27 @@ namespace QUANLYNHANSU.DAL
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-        public DataTable LocLoaiCongNV(string maNV, string ngay, string thang, string nam)
+        public DataTable LocCongNV(string maNV)
         {
             string sql = "SELECT * FROM LoaiCong_NhanVien WHERE 1=1";
 
             if (!string.IsNullOrEmpty(maNV))
                 sql += " AND MaNV LIKE @MaNV";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                if (!string.IsNullOrEmpty(maNV))
+                    cmd.Parameters.AddWithValue("@MaNV", "%" + maNV + "%");
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+        public DataTable LocLoaiCongNV(string ngay, string thang, string nam)
+        {
+            string sql = "SELECT * FROM LoaiCong_NhanVien WHERE 1=1";
+
+            
             if (!string.IsNullOrEmpty(ngay))
                 sql += " AND DAY(NgayLam) = @Ngay";
             if (!string.IsNullOrEmpty(thang))
@@ -156,8 +172,6 @@ namespace QUANLYNHANSU.DAL
 
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                if (!string.IsNullOrEmpty(maNV))
-                    cmd.Parameters.AddWithValue("@MaNV", "%" + maNV + "%");
                 if (!string.IsNullOrEmpty(ngay))
                     cmd.Parameters.AddWithValue("@Ngay", ngay);
                 if (!string.IsNullOrEmpty(thang))
@@ -170,6 +184,17 @@ namespace QUANLYNHANSU.DAL
                 da.Fill(dt);
                 return dt;
             }
+        }
+
+        public string LayNhanVienTheoMa(string maNV)
+        {
+            string sql = "SELECT HoTen FROM NhanVien WHERE MaNV = @MaNV";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@MaNV", maNV);
+            conn.Open();
+            object result = cmd.ExecuteScalar();
+            conn.Close();
+            return result != null ? result.ToString() : null;
         }
 
     }

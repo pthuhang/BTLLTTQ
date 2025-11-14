@@ -43,9 +43,17 @@ namespace QUANLYNHANSU.BLL
         {
             lcnv.XoaVaCapNhatLoaiCong(maLoaiCong, maNV);
         }
-        public DataTable LocLoaiCongNV(string maNV, string ngay, string thang, string nam)
+        public DataTable LocCongNV(string maNV)
         {
-            return lcnv.LocLoaiCongNV(maNV, ngay, thang, nam);
+            return lcnv.LocCongNV(maNV);
+        }
+        public DataTable LocLoaiCongNV( string ngay, string thang, string nam)
+        {
+            return lcnv.LocLoaiCongNV( ngay, thang, nam);
+        }
+        public string LayTenNhanVien(string maNV)
+        {
+            return lcnv.LayNhanVienTheoMa(maNV);
         }
 
     }

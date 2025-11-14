@@ -1,4 +1,5 @@
-﻿using QUANLYNHANSU.BLL;
+﻿using Microsoft.Office.Interop.Excel;
+using QUANLYNHANSU.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataTable = System.Data.DataTable;
 using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace QUANLYNHANSU.GUI
 {
@@ -28,6 +31,17 @@ namespace QUANLYNHANSU.GUI
         {
             this.Close();
         }
+        private void LoadLoaiCong()
+        {
+            DataTable dtLoaiCong = lcBll.LayDanhSach();
+            if (dtLoaiCong != null && dtLoaiCong.Rows.Count > 0)
+            {
+                cbLoaiCong.DataSource = dtLoaiCong;
+                cbLoaiCong.DisplayMember = "TenLoaiCong";  // cột hiển thị
+                cbLoaiCong.ValueMember = "MaLoaiCong";     // giá trị thực
+                cbLoaiCong.SelectedIndex = -1;
+            }
+        }
 
         private void frmQLCDuLieuChamCong_Load(object sender, EventArgs e)
         {
@@ -35,6 +49,7 @@ namespace QUANLYNHANSU.GUI
             EnableForm(false);
             dgvChamCong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvChamCong.ReadOnly = true;
+            LoadLoaiCong();
         }
         private void LoadDanhSach()
         {
@@ -43,18 +58,19 @@ namespace QUANLYNHANSU.GUI
         private void EnableForm(bool enable)
         {
             txtMaNV.Enabled = enable;
-            txtMaLoaiCong.Enabled = enable;
+            cbLoaiCong.Enabled = enable;
             dtpNgayChamCong.Enabled = enable;
             dtpGioVao.Enabled = enable;
             dtpGioRa.Enabled = enable;
-            txtHeSo.Enabled = enable;
+
         }
         private void ClearForm()
         {
             txtMaNV.Clear();
-            txtHoTenNV.Clear();
-            txtMaLoaiCong.Clear();
-            txtHeSo.Clear();
+
+            txtTenNV.Clear();
+            cbLoaiCong.SelectedIndex = -1;
+
             dtpNgayChamCong.Value = DateTime.Now;
             dtpGioVao.Value = DateTime.Now;
             dtpGioRa.Value = DateTime.Now;
@@ -65,13 +81,13 @@ namespace QUANLYNHANSU.GUI
 
             DataGridViewRow row = dgvChamCong.Rows[e.RowIndex];
 
-            txtMaLoaiCong.Text = row.Cells["MaLoaiCong"].Value.ToString();
+            cbLoaiCong.SelectedValue = row.Cells["MaLoaiCong"].Value.ToString();
             txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
-            txtHoTenNV.Text = nvBll.LayNhanVienTheoMa(txtMaNV.Text)?.Rows[0]["HoTen"].ToString();
+            txtTenNV.Text = nvBll.LayNhanVienTheoMa(txtMaNV.Text)?.Rows[0]["HoTen"].ToString();
             dtpNgayChamCong.Value = Convert.ToDateTime(row.Cells["NgayLam"].Value);
             dtpGioVao.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioVao"].Value);
             dtpGioRa.Value = DateTime.Today.Add((TimeSpan)row.Cells["GioRa"].Value);
-            txtHeSo.Text = row.Cells["HeSo"].Value.ToString();
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -81,7 +97,7 @@ namespace QUANLYNHANSU.GUI
             ClearForm();
 
             txtMaNV.Enabled = true;
-            txtMaLoaiCong.Enabled = true;
+            cbLoaiCong.Enabled = true;
 
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
@@ -89,7 +105,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (txtMaNV.Text.Trim() == "" || txtMaLoaiCong.Text.Trim() == "")
+            if (txtMaNV.Text.Trim() == "" || cbLoaiCong.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn dòng để sửa.");
                 return;
@@ -98,8 +114,7 @@ namespace QUANLYNHANSU.GUI
             EnableForm(true);
 
             txtMaNV.Enabled = false;
-            txtMaLoaiCong.Enabled = false;
-            txtHeSo.Enabled = false;
+            cbLoaiCong.Enabled = false;
 
             btnThem.Enabled = false;
             btnXoa.Enabled = false;
@@ -107,7 +122,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (txtMaNV.Text.Trim() == "" || txtMaLoaiCong.Text.Trim() == "")
+            if (txtMaNV.Text.Trim() == "" || cbLoaiCong.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn dòng để xóa.");
                 return;
@@ -116,7 +131,7 @@ namespace QUANLYNHANSU.GUI
             if (MessageBox.Show("Bạn có chắc muốn xóa?", "Xóa", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
-            lcnvBll.Xoa(txtMaLoaiCong.Text.Trim(), txtMaNV.Text.Trim());
+            lcnvBll.Xoa(cbLoaiCong.Text.Trim(), txtMaNV.Text.Trim());
             LoadDanhSach();
             ClearForm();
         }
@@ -124,7 +139,8 @@ namespace QUANLYNHANSU.GUI
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string maNV = txtMaNV.Text.Trim();
-            string maLoai = txtMaLoaiCong.Text.Trim();
+            string maLoai = cbLoaiCong.SelectedValue?.ToString();
+
 
             if (maNV == "" || maLoai == "")
             {
@@ -136,11 +152,6 @@ namespace QUANLYNHANSU.GUI
             TimeSpan gioVao = dtpGioVao.Value.TimeOfDay;
             TimeSpan gioRa = dtpGioRa.Value.TimeOfDay;
 
-            if (!decimal.TryParse(txtHeSo.Text.Trim(), out decimal heSo))
-            {
-                MessageBox.Show("Hệ số không hợp lệ.");
-                return;
-            }
 
             if (currentAction == "Them")
             {
@@ -240,15 +251,59 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi xuất Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnXem_Click(object sender, EventArgs e)
+        {
+            string maNV = txtMaNV.Text.Trim();
+            if (string.IsNullOrEmpty(maNV))
+            {
+                MessageBox.Show("Vui lòng nhập Mã nhân viên!",
+                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                string tenNV =  lcnvBll.LayTenNhanVien(maNV);
+                if (!string.IsNullOrEmpty(tenNV))
+                {
+                    txtTenNV.Text = tenNV;
+                }
+                else
+                {
+                    txtTenNV.Text = "";
+                }
+
+                // ✅ Khóa ô nhập tên nhân viên
+                txtTenNV.ReadOnly = true;
+
+                DataTable dt = lcnvBll.LocCongNV(maNV);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy dữ liệu phù hợp!",
+                                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvChamCong.DataSource = null;
+                    return;
+                }
+
+                dgvChamCong.DataSource = dt;
+                MessageBox.Show($"Đã tìm thấy {dt.Rows.Count} dòng dữ liệu phù hợp.",
+                                "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc dữ liệu: " + ex.Message,
+                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnLoc_Click(object sender, EventArgs e)
         {
-            string maNV = txtMaNVLoc.Text.Trim();
+            
             string ngay = txtNgay.Text.Trim();
             string thang = txtThang.Text.Trim();
             string nam = txtNam.Text.Trim();
 
             // Kiểm tra nếu người dùng không nhập gì
-            if (string.IsNullOrEmpty(maNV) && string.IsNullOrEmpty(ngay) &&
+            if ( string.IsNullOrEmpty(ngay) &&
                 string.IsNullOrEmpty(thang) && string.IsNullOrEmpty(nam))
             {
                 MessageBox.Show("Vui lòng nhập Mã nhân viên hoặc Ngày/Tháng/Năm để lọc!",
@@ -259,7 +314,7 @@ namespace QUANLYNHANSU.GUI
             try
             {
                 // Gọi hàm lọc từ BLL
-                DataTable dt = lcnvBll.LocLoaiCongNV(maNV, ngay, thang, nam);
+                DataTable dt = lcnvBll.LocLoaiCongNV(ngay, thang, nam);
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
@@ -280,6 +335,6 @@ namespace QUANLYNHANSU.GUI
             }
         }
 
-
+        
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnThoat = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
@@ -37,6 +37,7 @@
             this.btnXem = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel20 = new System.Windows.Forms.Panel();
+            this.btnTao = new System.Windows.Forms.Button();
             this.bnTaoBL = new System.Windows.Forms.Button();
             this.panel19 = new System.Windows.Forms.Panel();
             this.cbNam = new System.Windows.Forms.ComboBox();
@@ -60,7 +61,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvBangLuong = new System.Windows.Forms.DataGridView();
-            this.btnTao = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -75,15 +75,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnThoat
             // 
-            this.button1.Location = new System.Drawing.Point(2, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 40);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Thoát";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnThoat.Location = new System.Drawing.Point(2, 26);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(150, 40);
+            this.btnThoat.TabIndex = 19;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -169,6 +169,16 @@
             this.panel20.Size = new System.Drawing.Size(380, 100);
             this.panel20.TabIndex = 12;
             // 
+            // btnTao
+            // 
+            this.btnTao.Location = new System.Drawing.Point(316, 20);
+            this.btnTao.Name = "btnTao";
+            this.btnTao.Size = new System.Drawing.Size(58, 37);
+            this.btnTao.TabIndex = 4;
+            this.btnTao.Text = "Tạo";
+            this.btnTao.UseVisualStyleBackColor = true;
+            this.btnTao.Click += new System.EventHandler(this.btnTao_Click);
+            // 
             // bnTaoBL
             // 
             this.bnTaoBL.Location = new System.Drawing.Point(135, 20);
@@ -201,7 +211,7 @@
             "2025"});
             this.cbNam.Location = new System.Drawing.Point(135, 14);
             this.cbNam.Name = "cbNam";
-            this.cbNam.Size = new System.Drawing.Size(121, 24);
+            this.cbNam.Size = new System.Drawing.Size(167, 24);
             this.cbNam.TabIndex = 10;
             // 
             // label4
@@ -241,7 +251,7 @@
             "12"});
             this.cbThang.Location = new System.Drawing.Point(135, 13);
             this.cbThang.Name = "cbThang";
-            this.cbThang.Size = new System.Drawing.Size(121, 24);
+            this.cbThang.Size = new System.Drawing.Size(167, 24);
             this.cbThang.TabIndex = 8;
             // 
             // label3
@@ -294,7 +304,7 @@
             // 
             this.txtMaNV.Location = new System.Drawing.Point(135, 13);
             this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(134, 22);
+            this.txtMaNV.Size = new System.Drawing.Size(167, 22);
             this.txtMaNV.TabIndex = 6;
             // 
             // label1
@@ -361,7 +371,7 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.button1);
+            this.panel9.Controls.Add(this.btnThoat);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel9.Location = new System.Drawing.Point(614, 0);
             this.panel9.Name = "panel9";
@@ -395,16 +405,6 @@
             this.dgvBangLuong.RowTemplate.Height = 24;
             this.dgvBangLuong.Size = new System.Drawing.Size(766, 498);
             this.dgvBangLuong.TabIndex = 22;
-            // 
-            // btnTao
-            // 
-            this.btnTao.Location = new System.Drawing.Point(316, 20);
-            this.btnTao.Name = "btnTao";
-            this.btnTao.Size = new System.Drawing.Size(58, 37);
-            this.btnTao.TabIndex = 4;
-            this.btnTao.Text = "Tạo";
-            this.btnTao.UseVisualStyleBackColor = true;
-            this.btnTao.Click += new System.EventHandler(this.btnTao_Click);
             // 
             // frmQLLBangLuong
             // 
@@ -443,7 +443,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnXem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel1;

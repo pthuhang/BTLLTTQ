@@ -20,6 +20,8 @@ namespace QUANLYNHANSU.GUI
         }
         private void frmQLLBangLuong_Load(object sender, EventArgs e)
         {
+            cbThang.Enabled = false;
+            cbNam.Enabled = false;
             dgvBangLuong.DataSource = bll.LayDanhSachBangLuong();
             btnTao.Enabled = false;
         }
