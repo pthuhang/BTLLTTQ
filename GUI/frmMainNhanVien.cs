@@ -29,7 +29,7 @@ namespace QUANLYNHANSU.GUI
         {
             InitializeComponent();
         }
-        
+
         private void HighlightTab(Button selectedButton)
         {
             Button[] tabs = { btnThongTinCaNhan, btnBangCong, btnBangLuong, btnHopDong, btnBoSungKhauTru };
@@ -62,7 +62,7 @@ namespace QUANLYNHANSU.GUI
         private void btnThongTinCaNhan_Click(object sender, EventArgs e)
         {
             MoFormCon(new frmThongTinCaNhan(tenDangNhap));
-                HighlightTab(btnThongTinCaNhan);
+            HighlightTab(btnThongTinCaNhan);
         }
 
         private void btnBangCong_Click(object sender, EventArgs e)
@@ -113,8 +113,5 @@ namespace QUANLYNHANSU.GUI
                 frm.Show();
             }
         }
-
-
-}
-
+    }
 }

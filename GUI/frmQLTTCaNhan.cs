@@ -14,10 +14,17 @@ namespace QUANLYNHANSU.GUI
     {
         private string tenDangNhap;
         private string maNV;
+        public frmQLTTCaNhan(string tenDangNhap, string maNV)
+        {
+            InitializeComponent();
+            this.tenDangNhap = tenDangNhap;
+            this.maNV = maNV;
+        }
         public frmQLTTCaNhan()
         {
             InitializeComponent();
         }
+
         private void HighlightTab(Button selectedButton)
         {
             Button[] tabs = { btnThongTinCaNhan, btnBangCong, btnBangLuong, btnHopDong, btnBoSungKhauTru };

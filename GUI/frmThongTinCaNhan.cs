@@ -168,14 +168,12 @@ namespace QUANLYNHANSU.GUI
         {
             if (isPasswordVisible)
             {
-                // Đang hiện → ẩn lại
                 txtMatKhau.UseSystemPasswordChar = true;
                 btnShowHide.Text = "👁"; // biểu tượng mắt mở
                 isPasswordVisible = false;
             }
             else
             {
-                // Đang ẩn → hiện lên
                 txtMatKhau.UseSystemPasswordChar = false;
                 btnShowHide.Text = "🙈"; // biểu tượng mắt nhắm
                 isPasswordVisible = true;

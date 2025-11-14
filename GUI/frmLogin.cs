@@ -65,7 +65,7 @@ namespace QUANLYNHANSU.GUI
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 if (vaiTro.Equals("Quản trị viên", StringComparison.OrdinalIgnoreCase))
-                    new frmMain(tenDangNhap).Show();
+                    new frmMain(tenDangNhap, maNV).Show();
                 else
                     new frmMainNhanVien(maNV,tenDangNhap).Show();
             }

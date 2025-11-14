@@ -13,10 +13,12 @@ namespace QUANLYNHANSU.GUI
     public partial class frmMain : Form
     {
         private string tenDangNhap;
-        public frmMain(string tenDangNhap)
+        private string maNV;
+        public frmMain(string tenDangNhap, string maNV)
         {
             InitializeComponent();
             this.tenDangNhap = tenDangNhap;
+            this.maNV = maNV;
 
             label1.Text = "Xin chào, " + tenDangNhap + "!";
             label1.Left = (panel3.ClientSize.Width - label1.Width) / 2;
@@ -114,7 +116,7 @@ namespace QUANLYNHANSU.GUI
 
         private void btnThongTinCaNhan_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmQLTTCaNhan());
+            MoFormCon(new frmQLTTCaNhan(tenDangNhap, maNV));
             HighlightTab(btnThongTinCaNhan);
         }
     }
