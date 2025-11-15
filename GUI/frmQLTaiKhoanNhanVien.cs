@@ -1,8 +1,10 @@
 ﻿using QUANLYNHANSU.BLL;
+using QUANLYNHANSU.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,10 +23,11 @@ namespace QUANLYNHANSU.GUI
         }
         private void frmQLTaiKhoanNhanVien_Load(object sender, EventArgs e)
         {
-            cbVaiTro.Items.AddRange(new string[] { "Admin", "Nhân viên" });
+            txtMaNgDung.ReadOnly = true;
+            cbVaiTro.Items.AddRange(new string[] { "Quản trị viên", "Người dùng" });
             HienThiDanhSach();
             EnableForm(false);
-            SetDefaultButtonState();
+            batBtn();
 
         }
         private void HienThiDanhSach()
@@ -52,7 +55,7 @@ namespace QUANLYNHANSU.GUI
             txtMatKhau.Clear();
             cbVaiTro.SelectedIndex = -1;
         }
-        private void SetDefaultButtonState()
+        private void batBtn()
         {
             btnThem.Enabled = true;
             btnSua.Enabled = true;
@@ -60,6 +63,8 @@ namespace QUANLYNHANSU.GUI
             btnLuu.Enabled = false;
             btnThoat.Enabled = true;
         }
+
+        //--=--Thêm, sửa, xóa
         private void btnThem_Click(object sender, EventArgs e)
         {
             currentAction = "Them";
@@ -68,7 +73,7 @@ namespace QUANLYNHANSU.GUI
             btnLuu.Enabled = true;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
-            txtMaNgDung.Focus();
+            txtMaNV.Focus();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -115,39 +120,39 @@ namespace QUANLYNHANSU.GUI
 
             currentAction = "";
             EnableForm(false);
-            SetDefaultButtonState();
+            batBtn();
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (!ValidateTaiKhoan()) return;
             try
             {
-                string maND = txtMaNgDung.Text.Trim();
                 string maNV = txtMaNV.Text.Trim();
                 string tenDN = txtTenDangNhap.Text.Trim();
                 string matKhau = txtMatKhau.Text.Trim();
                 string vaiTro = cbVaiTro.Text;
+                MessageBox.Show("MaNV = '" + maNV + "'");
 
-                if (string.IsNullOrWhiteSpace(maND) || string.IsNullOrWhiteSpace(tenDN))
+
+                string maND = tkBLL.TaoMaTK(maNV);
+
+                if (!tkBLL.KiemTraNhanVien(maNV))
                 {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                    MessageBox.Show("Nhân viên này không tồn tại.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (currentAction == "Them")
                 {
-                    DataTable dt = tkBLL.LayDanhSach();
-                    bool daTonTai = dt.AsEnumerable().Any(r => r.Field<string>("MaNguoiDung") == maND);
-                    if (daTonTai)
-                    {
-                        MessageBox.Show("Mã người dùng đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    bool nhanVienDaCoTK = dt.AsEnumerable()
-               .Any(r => r.Field<string>("MaNV") == maNV);
-                    if (nhanVienDaCoTK)
+                    if (tkBLL.KiemTraTonTai(maNV))
                     {
                         MessageBox.Show("Nhân viên này đã có tài khoản! Không thể tạo thêm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (tkBLL.KiemTraTenDangNhap(tenDN, maND))
+                    {
+                        MessageBox.Show("Tên đăng nhập này đã được sử dụng.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     tkBLL.Them(maND, maNV, tenDN, matKhau, vaiTro);
@@ -155,6 +160,12 @@ namespace QUANLYNHANSU.GUI
                 }
                 else if (currentAction == "Sua")
                 {
+                    if (tkBLL.KiemTraTenDangNhap(tenDN, maND))
+                    {
+                        MessageBox.Show("Tên đăng nhập đã được sử dụng bởi tài khoản khác.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     tkBLL.CapNhat(maND, maNV, tenDN, matKhau, vaiTro);
                     MessageBox.Show("Cập nhật thông tin tài khoản thành công!");
                 }
@@ -171,9 +182,10 @@ namespace QUANLYNHANSU.GUI
                 MessageBox.Show("Lỗi khi lưu tài khoản: " + ex.Message);
             }
 
+
             ClearForm();
             EnableForm(false);
-            SetDefaultButtonState();
+            batBtn();
             currentAction = "";
         }
         private void dgvTaiKhoan_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -192,6 +204,82 @@ namespace QUANLYNHANSU.GUI
         {
             this.Close();
         }
+        private bool ValidateTaiKhoan()
+        {
+            ePLoiValidate.Clear();
+            bool ok = true;
+
+            // TenDangNhap
+            if (string.IsNullOrWhiteSpace(txtTenDangNhap.Text))
+            {
+                ePLoiValidate.SetError(txtTenDangNhap, "Tên đăng nhập không được để trống!");
+                ok = false;
+            }
+            else if (txtTenDangNhap.Text.Length > 30)
+            {
+                ePLoiValidate.SetError(txtTenDangNhap, "Tên đăng nhập không vượt quá 30 ký tự!");
+                ok = false;
+            }
+
+            // MatKhau
+            if (string.IsNullOrWhiteSpace(txtMatKhau.Text))
+            {
+                ePLoiValidate.SetError(txtMatKhau, "Mật khẩu không được để trống!");
+                ok = false;
+            }
+            else if (txtMatKhau.Text.Length > 50)
+            {
+                ePLoiValidate.SetError(txtMatKhau, "Mật khẩu không vượt quá 50 ký tự!");
+                ok = false;
+            }
+
+            //MaNV
+            if (string.IsNullOrWhiteSpace(txtMaNV.Text))
+            {
+                ePLoiValidate.SetError(txtMaNV, "Mã nhân viên không được để trống!");
+                ok = false;
+            }
+            else if (txtMaNV.Text.Length > 10)
+            {
+                ePLoiValidate.SetError(txtMaNV, "Mã nhân viên không vượt quá 10 ký tự!");
+                ok = false;
+            }
+
+            // VaiTro 
+            // VaiTro (bắt buộc chọn)
+            if (string.IsNullOrWhiteSpace(cbVaiTro.Text))
+            {
+                ePLoiValidate.SetError(cbVaiTro, "Vui lòng chọn vai trò!");
+                ok = false;
+            }
+
+
+            return ok;
+        }
+
+        private void dgvTaiKhoanNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= dgvTaiKhoanNhanVien.Rows.Count)
+                return;
+
+            DataGridViewRow row = dgvTaiKhoanNhanVien.Rows[e.RowIndex];
+
+            txtMaNgDung.Text = row.Cells["MaNguoiDung"].Value?.ToString() ?? "";
+            txtTenDangNhap.Text = row.Cells["TenDangNhap"].Value?.ToString() ?? "";
+            txtMatKhau.Text = row.Cells["MatKhau"].Value?.ToString() ?? "";
+            txtMaNV.Text = row.Cells["MaNV"].Value?.ToString() ?? "";
+
+            string vaiTro = row.Cells["VaiTro"].Value?.ToString() ?? "";
+            if (!string.IsNullOrEmpty(vaiTro))
+            {
+                cbVaiTro.SelectedItem = cbVaiTro.Items.Cast<string>().FirstOrDefault(x => x == vaiTro);
+            }
+            else
+            {
+                cbVaiTro.SelectedIndex = -1;
+            }
+        }
 
     }
 }
+

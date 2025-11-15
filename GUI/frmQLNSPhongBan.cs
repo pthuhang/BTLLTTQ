@@ -21,29 +21,15 @@ namespace QUANLYNHANSU.GUI
         {
             InitializeComponent();
         }
-
-        private void frmQLNSPhongBan_Load(object sender, EventArgs e)
-        {
-            PhongBanBLL bllPB = new PhongBanBLL();
-            cbTenPhongTimKiem.DataSource = bllPB.LayDanhSach(); // trả về List hoặc DataTable
-            cbTenPhongTimKiem.DisplayMember = "TenPhongBan";
-            cbTenPhongTimKiem.ValueMember = "MaPhongBan";
-            cbTenPhongTimKiem.SelectedIndex = -1;
-            HienThiDanhSach();
-            EnableForm(false);
-            btnLuu.Enabled = false;
-            SetDefaultButtonState();
-
-        }
-
         private void EnableForm(bool enabled)
         {
             txtMaPB.Enabled = enabled;
             txtTenPB.Enabled = enabled;
             txtMaTruongPhong.Enabled = enabled;
         }
-        private void SetDefaultButtonState()
+        private void batBtn()
         {
+            btnLuu.Enabled = true;
             btnThem.Enabled = true;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -54,13 +40,33 @@ namespace QUANLYNHANSU.GUI
             dgvPhongBan.DataSource = bll.LayDanhSach();
             dgvPhongBan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        private void ClearForm()
+        {
+            txtMaPB.Clear();
+            txtTenPB.Clear();
+            txtMaTruongPhong.Clear();
+            txtMaPB.Focus();
+        }
+        private void frmQLNSPhongBan_Load(object sender, EventArgs e)
+        {
+            PhongBanBLL bllPB = new PhongBanBLL();
+            cbTenPhongTimKiem.DataSource = bllPB.LayDanhSach();
+            cbTenPhongTimKiem.DisplayMember = "TenPhongBan";
+            cbTenPhongTimKiem.ValueMember = "MaPhongBan";
+            cbTenPhongTimKiem.SelectedIndex = -1;
+
+            HienThiDanhSach();
+            EnableForm(false);
+            btnLuu.Enabled = false;
+            batBtn();
+        }
+
         private void btnThem_Click(object sender, EventArgs e)
         {
-
             currentAction = "Them";
             EnableForm(true);
             ClearForm();
-            btnLuu.Enabled = true;
+            batBtn();
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
         }
@@ -111,35 +117,43 @@ namespace QUANLYNHANSU.GUI
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        private void ClearForm()
-        {
-            txtMaPB.Clear();
-            txtTenPB.Clear();
-            txtMaTruongPhong.Clear();
-            txtMaPB.Focus();
-        }
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (!ValidatePhongBan())
+                return;
             try
             {
                 string maPB = txtMaPB.Text.Trim();
                 string tenPB = txtTenPB.Text.Trim();
                 string maNVTP = txtMaTruongPhong.Text.Trim();
 
-                if (string.IsNullOrEmpty(maPB) || string.IsNullOrEmpty(tenPB))
-                {
-                    MessageBox.Show("Vui lòng nhập đầy đủ Mã phòng ban và Tên phòng ban!",
-                        "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
 
                 if (currentAction == "Them")
                 {
+                    if (bll.KiemTraTonTaiMa(maPB))
+                    {
+                        MessageBox.Show("Mã phòng ban đã tồn tại!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtMaPB.Focus();
+                        return;
+                    }
+
+                    if (bll.KiemTraTonTaiTen(tenPB, maPB))
+                    {
+                        MessageBox.Show("Tên phòng ban đã tồn tại!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtTenPB.Focus();
+                        return;
+                    }
                     bll.Them(maPB, tenPB, maNVTP);
                     MessageBox.Show("Thêm phòng ban thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (currentAction == "Sua")
                 {
+                    if (bll.KiemTraTonTaiTen(tenPB, maPB))
+                    {
+                        MessageBox.Show("Tên phòng ban đã tồn tại!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtTenPB.Focus();
+                        return;
+                    }
                     bll.CapNhat(maPB, tenPB, maNVTP);
                     MessageBox.Show("Cập nhật phòng ban thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -148,9 +162,7 @@ namespace QUANLYNHANSU.GUI
                 ClearForm();
                 EnableForm(false);
                 btnLuu.Enabled = false;
-                btnThem.Enabled = true;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
+                batBtn();
                 currentAction = "";
             }
             catch (Exception ex)
@@ -178,29 +190,82 @@ namespace QUANLYNHANSU.GUI
             this.Close();
         }
 
-        private void cbTenPhongTimKiem_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTenPhongTimKiem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                // Bỏ qua nếu chưa chọn gì
-                if (cbTenPhongTimKiem.SelectedIndex == -1)
-                    return;
+            if (cbTenPhongTimKiem.SelectedIndex == -1) return;
 
-                string maPhongBan = cbTenPhongTimKiem.SelectedValue?.ToString();
-                if (string.IsNullOrEmpty(maPhongBan))
-                    return;
+            string maPhongBan = cbTenPhongTimKiem.SelectedValue?.ToString();
+            if (string.IsNullOrEmpty(maPhongBan)) return;
 
-                DataTable dt = bllNV.LayNhanVienTheoPhongBan(maPhongBan);
+            cbTenPhongTimKiem.Enabled = false;
+            dgvNVPhongBan.DataSource = null;
 
-                dgvNVPhongBan.AutoGenerateColumns = true;
-                dgvNVPhongBan.DataSource = dt;
+            // Chạy query ở background thread
+            DataTable dt = await Task.Run(() => bllNV.LayNhanVienTheoPhongBan(maPhongBan));
 
-                //lblThongBao.Text = $"🔹 Có {dt.Rows.Count} nhân viên trong phòng này.";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi hiển thị nhân viên theo phòng ban: " + ex.Message);
-            }
+            dgvNVPhongBan.DataSource = dt;
+            cbTenPhongTimKiem.Enabled = true;
+            //try
+            //{
+            //    if (cbTenPhongTimKiem.SelectedIndex == -1)
+            //        return;
+
+            //    string maPhongBan = cbTenPhongTimKiem.SelectedValue?.ToString();
+            //    if (string.IsNullOrEmpty(maPhongBan))
+            //        return;
+
+            //    DataTable dt = bllNV.LayNhanVienTheoPhongBan(maPhongBan);
+
+            //    dgvNVPhongBan.AutoGenerateColumns = true;
+            //    dgvNVPhongBan.DataSource = dt;
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Lỗi khi hiển thị nhân viên theo phòng ban: " + ex.Message);
+            //}
         }
+
+
+        //-----VALIDATE-----
+        private bool ValidatePhongBan()
+        {
+            ePLoiValidate.Clear();
+            bool ok = true;
+
+            // Mã phòng ban
+            if (string.IsNullOrWhiteSpace(txtMaPB.Text))
+            {
+                ePLoiValidate.SetError(txtMaPB, "Mã phòng ban không được để trống!");
+                ok = false;
+            }
+            else if (txtMaPB.Text.Length > 10)
+            {
+                ePLoiValidate.SetError(txtMaPB, "Mã phòng ban không vượt quá 10 ký tự!");
+                ok = false;
+            }
+
+            // Tên phòng ban
+            if (string.IsNullOrWhiteSpace(txtTenPB.Text))
+            {
+                ePLoiValidate.SetError(txtTenPB, "Tên phòng ban không được để trống!");
+                ok = false;
+            }
+            else if (txtTenPB.Text.Length > 50)
+            {
+                ePLoiValidate.SetError(txtTenPB, "Tên phòng ban không vượt quá 50 ký tự!");
+                ok = false;
+            }
+
+            // Mã trưởng phòng (có thể null)
+            if (!string.IsNullOrWhiteSpace(txtMaTruongPhong.Text) && txtMaTruongPhong.Text.Length > 10)
+            {
+                ePLoiValidate.SetError(txtMaTruongPhong, "Mã trưởng phòng không vượt quá 10 ký tự!");
+                ok = false;
+            }
+
+            return ok;
+        }
+
     }
 }

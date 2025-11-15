@@ -18,111 +18,219 @@ namespace QUANLYNHANSU.DAL
             da.Fill(dt);
             return dt;
         }
+        //Tọ mã
+        public string TaoMaTaiKhoan(string maNV)
+        {
+            if (string.IsNullOrEmpty(maNV))
+                throw new ArgumentException("Mã nhân viên không được rỗng");
+
+            string phanSo = new string(maNV.Where(char.IsDigit).ToArray());
+
+            phanSo = phanSo.PadLeft(4, '0');
+
+            string maTK = $"TK{phanSo}";
+
+            return maTK;
+        }
         public DataTable LayTaiKhoanTheoTenDangNhap(string tenDangNhap)
         {
             string sql = @"select * from TaiKhoan Where TenDangNhap=@tenDangNhap";
-            using(SqlCommand cmd = new SqlCommand(sql, conn))
+
+            DataTable dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
             {
-                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+                cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
                 return dt;
             }
         }
-        //Thêm, sửa, xóa
-        public void Them(string maNguoiDung, string tenDangNhap, string matKhau, string maNV, string vaiTro)
+
+        //
+        public bool KiemTraNhanVienTonTai(string maNV)
         {
-            string sql = "INSERT INTO TaiKhoan VALUES(@MaNguoiDung, @TenDangNhap, @MatKhau, @MaNV, @VaiTro)";
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            string sql = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = @MaNV";
+
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
             {
-                cmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDung);
-                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-                cmd.Parameters.AddWithValue("@MaNV", maNV);
-                cmd.Parameters.AddWithValue("@VaiTro", vaiTro);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV.Trim();
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
             }
         }
-        public void Sua(string maNguoiDung, string tenDangNhap, string matKhau, string maNV, string vaiTro)
+
+        public bool KiemTraTonTaiTaiKhoan(string maNV)
+        {
+            string sql = @"SELECT COUNT(*) FROM TaiKhoan WHERE MaNV = @MaNV";
+
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
+
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+        public bool KiemTraTonTaiTenDangNhap(string tenDangNhap, string maNguoiDungHienTai = null)
+        {
+            string sql = @"SELECT COUNT(*) 
+                   FROM TaiKhoan 
+                   WHERE TenDangNhap = @TenDangNhap";
+
+            if (!string.IsNullOrEmpty(maNguoiDungHienTai))
+                sql += " AND MaNguoiDung <> @MaNguoiDung";
+
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+
+                if (!string.IsNullOrEmpty(maNguoiDungHienTai))
+                    cmd.Parameters.Add("@MaNguoiDung", SqlDbType.VarChar, 10).Value = maNguoiDungHienTai;
+
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+
+
+        //Thêm, sửa, xóa
+        public bool Them(string maNguoiDung, string tenDangNhap, string matKhau, string maNV, string vaiTro)
+        {
+            string sql = "INSERT INTO TaiKhoan VALUES(@MaNguoiDung,@MaNV, @TenDangNhap, @MatKhau, @VaiTro)";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@MaNguoiDung", SqlDbType.VarChar, 10).Value = maNguoiDung;
+                    cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
+                    cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                    cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar, 50).Value = matKhau;
+                    cmd.Parameters.Add("@VaiTro", SqlDbType.NVarChar, 20).Value = vaiTro;
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi thêm tài khoản: " + ex.Message);
+            }
+        }
+        public bool Sua(string maNguoiDung, string tenDangNhap, string matKhau, string maNV, string vaiTro)
         {
             string sql = @"UPDATE TaiKhoan 
                            SET TenDangNhap=@TenDangNhap, MatKhau=@MatKhau, MaNV=@MaNV, VaiTro=@VaiTro
                            WHERE MaNguoiDung=@MaNguoiDung";
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            try
             {
-                cmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDung);
-                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-                cmd.Parameters.AddWithValue("@MaNV", maNV);
-                cmd.Parameters.AddWithValue("@VaiTro", vaiTro);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@MaNguoiDung", SqlDbType.VarChar, 10).Value = maNguoiDung;
+                    cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                    cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar, 50).Value = matKhau;
+                    cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
+                    cmd.Parameters.Add("@VaiTro", SqlDbType.NVarChar, 20).Value = vaiTro;
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi sửa tài khoản: " + ex.Message);
             }
         }
-        public void Xoa(string maNguoiDung)
+        public bool Xoa(string maNguoiDung)
         {
             string sql = "DELETE FROM TaiKhoan WHERE MaNguoiDung=@MaNguoiDung";
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            try
             {
-                cmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDung);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@MaNguoiDung", SqlDbType.VarChar, 10).Value = maNguoiDung;
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi xóa tài khoản: " + ex.Message);
             }
         }
         //Kiểm tra 
         public DataRow KiemTraDangNhap(string tenDangNhap, string matKhau)
         {
             string sql = "SELECT * FROM TaiKhoan WHERE TenDangNhap=@TenDangNhap AND MatKhau=@MatKhau";
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
             {
-                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar, 50).Value = matKhau;
+
                 DataTable dt = new DataTable();
-                da.Fill(dt);
-                if (dt.Rows.Count > 0) return dt.Rows[0];
-                return null;
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+
+                return dt.Rows.Count > 0 ? dt.Rows[0] : null;
             }
         }
         public bool UpdateOne(string maNguoiDung, string maNhanVien, string tenDangNhap, string matKhau, string vaiTro)
         {
-            
-                string query = @"UPDATE TaiKhoan 
-                             SET MaNV=@MaNV, TenDangNhap=@TenDangNhap, MatKhau=@MatKhau, VaiTro=@VaiTro
-                             WHERE MaNguoiDung=@MaNguoiDung";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDung);
-                cmd.Parameters.AddWithValue("@MaNV", maNhanVien);
-                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-                cmd.Parameters.AddWithValue("@VaiTro", vaiTro);
-                conn.Open();
+            string sql = @"UPDATE TaiKhoan 
+                    SET MaNV=@MaNV, TenDangNhap=@TenDangNhap, MatKhau=@MatKhau, VaiTro=@VaiTro
+                    WHERE MaNguoiDung=@MaNguoiDung";
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.Add("@MaNguoiDung", SqlDbType.VarChar, 10).Value = maNguoiDung;
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNhanVien;
+                cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar, 50).Value = matKhau;
+                cmd.Parameters.Add("@VaiTro", SqlDbType.NVarChar, 20).Value = vaiTro;
+
+                con.Open();
                 return cmd.ExecuteNonQuery() > 0;
-            
+            }
+
         }
         public bool CapNhatTaiKhoan(string tenDangNhap, string matKhau, string vaiTro)
         {
             string sql = @"UPDATE TaiKhoan 
                    SET MatKhau = @MatKhau, VaiTro = @VaiTro
                    WHERE TenDangNhap = @TenDangNhap";
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            try
             {
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-                cmd.Parameters.AddWithValue("@VaiTro", vaiTro);
-                cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+                using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar, 50).Value = matKhau;
+                    cmd.Parameters.Add("@VaiTro", SqlDbType.NVarChar, 20).Value = vaiTro;
+                    cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
 
-                conn.Open();
-                int rows = cmd.ExecuteNonQuery();
-                conn.Close();
-
-                return rows > 0;
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi cập nhật tài khoản: " + ex.Message);
             }
         }
 

@@ -24,6 +24,7 @@
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnLuu = new System.Windows.Forms.Button();
@@ -31,12 +32,15 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
+            this.panel19 = new System.Windows.Forms.Panel();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel18 = new System.Windows.Forms.Panel();
+            this.panel17 = new System.Windows.Forms.Panel();
             this.txtHSLuong = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.txtLuongCoBan = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
             this.txtLanKi = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -74,11 +78,10 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.btnXemHD = new System.Windows.Forms.Button();
             this.dgvHopDong = new System.Windows.Forms.DataGridView();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.txtLuongCoBan = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.ePLoiValidate = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel19.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel18.SuspendLayout();
             this.panel13.SuspendLayout();
@@ -93,7 +96,7 @@
             this.panel4.SuspendLayout();
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHopDong)).BeginInit();
-            this.panel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ePLoiValidate)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -186,16 +189,16 @@
             this.panel2.Size = new System.Drawing.Size(700, 775);
             this.panel2.TabIndex = 3;
             // 
-            // panel17
+            // panel19
             // 
-            this.panel17.Controls.Add(this.txtHSLuong);
-            this.panel17.Controls.Add(this.label5);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel17.Location = new System.Drawing.Point(90, 617);
-            this.panel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(550, 65);
-            this.panel17.TabIndex = 15;
+            this.panel19.Controls.Add(this.txtMaNV);
+            this.panel19.Controls.Add(this.label6);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel19.Location = new System.Drawing.Point(90, 682);
+            this.panel19.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(550, 65);
+            this.panel19.TabIndex = 16;
             // 
             // txtMaNV
             // 
@@ -215,16 +218,16 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "Mã nhân viên";
             // 
-            // panel18
+            // panel17
             // 
-            this.panel18.Controls.Add(this.txtLuongCoBan);
-            this.panel18.Controls.Add(this.label14);
-            this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel18.Location = new System.Drawing.Point(90, 552);
-            this.panel18.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(550, 65);
-            this.panel18.TabIndex = 14;
+            this.panel17.Controls.Add(this.txtHSLuong);
+            this.panel17.Controls.Add(this.label5);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel17.Location = new System.Drawing.Point(90, 617);
+            this.panel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(550, 65);
+            this.panel17.TabIndex = 15;
             // 
             // txtHSLuong
             // 
@@ -243,6 +246,36 @@
             this.label5.Size = new System.Drawing.Size(82, 16);
             this.label5.TabIndex = 1;
             this.label5.Text = "Hệ số lương ";
+            // 
+            // panel18
+            // 
+            this.panel18.Controls.Add(this.txtLuongCoBan);
+            this.panel18.Controls.Add(this.label14);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel18.Location = new System.Drawing.Point(90, 552);
+            this.panel18.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(550, 65);
+            this.panel18.TabIndex = 14;
+            // 
+            // txtLuongCoBan
+            // 
+            this.txtLuongCoBan.Location = new System.Drawing.Point(140, 20);
+            this.txtLuongCoBan.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLuongCoBan.Name = "txtLuongCoBan";
+            this.txtLuongCoBan.Size = new System.Drawing.Size(132, 22);
+            this.txtLuongCoBan.TabIndex = 4;
+            this.txtLuongCoBan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(30, 23);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(88, 16);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Lương cơ bản";
             // 
             // panel13
             // 
@@ -287,7 +320,6 @@
             this.txtNoiDung.Name = "txtNoiDung";
             this.txtNoiDung.Size = new System.Drawing.Size(359, 78);
             this.txtNoiDung.TabIndex = 5;
-            this.txtNoiDung.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label12
             // 
@@ -607,35 +639,9 @@
             this.dgvHopDong.TabIndex = 15;
             this.dgvHopDong.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHopDong_CellClick);
             // 
-            // panel19
+            // ePLoiValidate
             // 
-            this.panel19.Controls.Add(this.txtMaNV);
-            this.panel19.Controls.Add(this.label6);
-            this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel19.Location = new System.Drawing.Point(90, 682);
-            this.panel19.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(550, 65);
-            this.panel19.TabIndex = 16;
-            // 
-            // txtLuongCoBan
-            // 
-            this.txtLuongCoBan.Location = new System.Drawing.Point(140, 20);
-            this.txtLuongCoBan.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLuongCoBan.Name = "txtLuongCoBan";
-            this.txtLuongCoBan.Size = new System.Drawing.Size(132, 22);
-            this.txtLuongCoBan.TabIndex = 4;
-            this.txtLuongCoBan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(30, 23);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(88, 16);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "Lương cơ bản";
+            this.ePLoiValidate.ContainerControl = this;
             // 
             // frmQLNSHopDong
             // 
@@ -654,6 +660,8 @@
             this.Load += new System.EventHandler(this.frmQLNSHopDong_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
             this.panel18.ResumeLayout(false);
@@ -678,8 +686,7 @@
             this.panel4.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHopDong)).EndInit();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ePLoiValidate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -738,5 +745,6 @@
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.TextBox txtLuongCoBan;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ErrorProvider ePLoiValidate;
     }
 }

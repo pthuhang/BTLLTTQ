@@ -24,6 +24,7 @@
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
@@ -63,6 +64,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvNVPhongBan = new System.Windows.Forms.DataGridView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.ePLoiValidate = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -74,6 +76,7 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhongBan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNVPhongBan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ePLoiValidate)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -381,7 +384,7 @@
             this.txtMaTruongPhong.Location = new System.Drawing.Point(200, 201);
             this.txtMaTruongPhong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaTruongPhong.Name = "txtMaTruongPhong";
-            this.txtMaTruongPhong.Size = new System.Drawing.Size(323, 22);
+            this.txtMaTruongPhong.Size = new System.Drawing.Size(309, 22);
             this.txtMaTruongPhong.TabIndex = 30;
             // 
             // label2
@@ -398,7 +401,7 @@
             this.txtTenPB.Location = new System.Drawing.Point(200, 135);
             this.txtTenPB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTenPB.Name = "txtTenPB";
-            this.txtTenPB.Size = new System.Drawing.Size(323, 22);
+            this.txtTenPB.Size = new System.Drawing.Size(309, 22);
             this.txtTenPB.TabIndex = 28;
             // 
             // label1
@@ -415,7 +418,7 @@
             this.txtMaPB.Location = new System.Drawing.Point(200, 75);
             this.txtMaPB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaPB.Name = "txtMaPB";
-            this.txtMaPB.Size = new System.Drawing.Size(323, 22);
+            this.txtMaPB.Size = new System.Drawing.Size(309, 22);
             this.txtMaPB.TabIndex = 26;
             // 
             // panel7
@@ -482,6 +485,10 @@
             this.dgvNVPhongBan.Size = new System.Drawing.Size(743, 662);
             this.dgvNVPhongBan.TabIndex = 6;
             // 
+            // ePLoiValidate
+            // 
+            this.ePLoiValidate.ContainerControl = this;
+            // 
             // frmQLNSPhongBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -510,6 +517,7 @@
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhongBan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNVPhongBan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ePLoiValidate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,5 +563,6 @@
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.ErrorProvider ePLoiValidate;
     }
 }

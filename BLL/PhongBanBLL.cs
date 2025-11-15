@@ -20,16 +20,24 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayNhanVienTheoMaPhongBan(ma);
         }
+        //
+        public bool KiemTraTonTaiMa(string maPB)
+        {
+            return dal.KiemTraTonTaiMa(maPB);
+        }
+        public bool KiemTraTonTaiTen(string maPB, string tenPB)
+        {
+            return dal.KiemTraTonTaiTen(maPB, tenPB);
+        }
+        //
         public void Them(string maPB, string tenPB, string tenTP)
         {
             dal.Them(maPB, tenPB, tenTP);
         }
-
         public void CapNhat(string maPB, string tenPB, string tenTP)
         {
             dal.Sua(maPB, tenPB, tenTP);
         }
-
         public void Xoa(string maPB)
         {
             dal.Xoa(maPB);

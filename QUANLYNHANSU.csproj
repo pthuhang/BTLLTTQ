@@ -205,12 +205,6 @@
     <Compile Include="GUI\frmQLNSPhongBan.Designer.cs">
       <DependentUpon>frmQLNSPhongBan.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\frmQLTaiKhoan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmQLTaiKhoan.Designer.cs">
-      <DependentUpon>frmQLTaiKhoan.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\frmQLTaiKhoanNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,9 +312,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLNSPhongBan.resx">
       <DependentUpon>frmQLNSPhongBan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmQLTaiKhoan.resx">
-      <DependentUpon>frmQLTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLTaiKhoanNhanVien.resx">
       <DependentUpon>frmQLTaiKhoanNhanVien.cs</DependentUpon>

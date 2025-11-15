@@ -16,7 +16,6 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayDanhSachNhanVien();
         }
-
         public DataTable LayNhanVienTheoMa(string maNV)
         {
             return dal.LayNhanVienTheoMa(maNV);
@@ -24,6 +23,24 @@ namespace QUANLYNHANSU.BLL
         public DataTable LayNhanVienTheoTenDangNhap(string tenDangNhap)
         {
             return dal.LayNhanVienTheoTenDangNhap(tenDangNhap);
+        }
+        //Tạo  mã nhân vien mới
+        public string SinhMaNhanVienMoi()
+        {
+            string maxMa = dal.LayMaNhanVienLonNhat();  // "NV0123"
+
+            if (maxMa == null)
+                return "NV0001";
+
+            int number = int.Parse(maxMa.Substring(2));
+            number++;
+
+            return "NV" + number.ToString("D4"); 
+        }
+
+        public bool KiemTraTonTai(string cot, string giaTri)
+        {
+            return dal.KiemTraTonTai(cot, giaTri);
         }
         public DataRow KiemTraDangNhap(string tenDangNhap, string matKhau)
         {

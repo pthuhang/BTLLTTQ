@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QUANLYNHANSU.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -47,23 +48,72 @@ namespace QUANLYNHANSU.DAL
                 return dt;
             }
         }
-        // ✅ Kiểm tra mã nhân viên tồn tại trong bảng NhanVien
-        public bool KiemTraMaNVTonTai(string maNV)
+        //
+        public bool KiemTraHopDongTonTai(string maNV, DateTime ngayBatDau, DateTime ngayKetThuc, string maHDHienTai = null)
         {
-            string sql = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = @MaNV";
+            string sql = @"
+                SELECT COUNT(*) 
+                FROM HopDong 
+                WHERE MaNV = @MaNV
+                  AND ((NgayBatDau <= @KetThuc AND NgayKetThuc >= @BatDau))";
+
+            if (!string.IsNullOrEmpty(maHDHienTai))
+            {
+                sql += " AND MaHopDong <> @MaHD";
+            }
+
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(sql, con))
             {
-                cmd.Parameters.AddWithValue("@MaNV", maNV);
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
+                cmd.Parameters.Add("@BatDau", SqlDbType.Date).Value = ngayBatDau;
+                cmd.Parameters.Add("@KetThuc", SqlDbType.Date).Value = ngayKetThuc;
+
+                if (!string.IsNullOrEmpty(maHDHienTai))
+                {
+                    cmd.Parameters.Add("@MaHD", SqlDbType.VarChar, 10).Value = maHDHienTai;
+                }
+
                 con.Open();
                 int count = (int)cmd.ExecuteScalar();
                 con.Close();
+
                 return count > 0;
             }
         }
 
-        // ✅ Thêm hợp đồng mới
+        public bool KiemTraNhanVienTonTai(string maNV)
+        {
+            string sql = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = @MaNV";
 
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
+
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                con.Close();
+
+                return count > 0; 
+            }
+        }
+
+        //----
+        public string TaoMaHopDong(string maNV, DateTime ngayBatDau, DateTime ngayKetThuc)
+        {
+            string maNVPart = maNV.Length >= 4 ? maNV.Substring(maNV.Length - 4) : maNV.PadLeft(4, '0');
+
+            string namBD = ngayBatDau.Year.ToString().Substring(2, 2);
+            string namKT = ngayKetThuc.Year.ToString().Substring(2, 2);
+
+            string maHD = $"HD{maNVPart}{namBD}{namKT}";
+
+            return maHD;
+        }
+
+
+        //-----Thêm, sửa, xóa----
         public void Them(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
             string sql = @"INSERT INTO HopDong 
@@ -72,26 +122,39 @@ namespace QUANLYNHANSU.DAL
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(sql, con))
             {
-                cmd.Parameters.AddWithValue("@Ma", ma);
-                cmd.Parameters.AddWithValue("@ThoiHan", thoiHan ?? "");
-                cmd.Parameters.AddWithValue("@BatDau", batDau);
-                cmd.Parameters.AddWithValue("@KetThuc", ketThuc);
+                cmd.Parameters.Add("@Ma", SqlDbType.VarChar, 10).Value = ma;
 
-                cmd.Parameters.AddWithValue("@NoiDung", noiDung);
-                cmd.Parameters.AddWithValue("@LanKi", lanKi);
+                if (string.IsNullOrEmpty(thoiHan))
+                    cmd.Parameters.Add("@ThoiHan", SqlDbType.NVarChar, 50).Value = DBNull.Value;
+                else
+                    cmd.Parameters.Add("@ThoiHan", SqlDbType.NVarChar, 50).Value = thoiHan;
 
-                cmd.Parameters.AddWithValue("@HeSoLuong", heSoLuong);
-                cmd.Parameters.AddWithValue("@MaNV", maNV);
-                cmd.Parameters.AddWithValue("@LuongCB", luongCB);
+                cmd.Parameters.Add("@BatDau", SqlDbType.Date).Value = batDau;
+                cmd.Parameters.Add("@KetThuc", SqlDbType.Date).Value = ketThuc;
+
+                if (string.IsNullOrEmpty(noiDung))
+                    cmd.Parameters.Add("@NoiDung", SqlDbType.NVarChar, 300).Value = DBNull.Value;
+                else
+                    cmd.Parameters.Add("@NoiDung", SqlDbType.NVarChar, 300).Value = noiDung;
+
+                if (string.IsNullOrEmpty(lanKi))
+                    cmd.Parameters.Add("@LanKi", SqlDbType.Int).Value = DBNull.Value;
+                else
+                    cmd.Parameters.Add("@LanKi", SqlDbType.Int).Value = int.Parse(lanKi);
+
+                cmd.Parameters.Add("@HeSoLuong", SqlDbType.Float).Value = heSoLuong;
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
+
+                var pLuongCB = cmd.Parameters.Add("@LuongCB", SqlDbType.Decimal);
+                pLuongCB.Value = luongCB;
+                pLuongCB.Precision = 18;
+                pLuongCB.Scale = 2;
 
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
         }
-
-        // ✅ Sửa hợp đồng
-
         public void Sua(string ma, string thoiHan, DateTime batDau, DateTime ketThuc, string noiDung, string lanKi, float heSoLuong, decimal luongCB, string maNV)
         {
             string sql = @"UPDATE HopDong 
@@ -118,45 +181,47 @@ namespace QUANLYNHANSU.DAL
                 con.Close();
             }
         }
-
-        // ✅ Xóa hợp đồng
-        public void Xoa(string ma)
+        public void Xoa(string maHD)
         {
-            string sql = "DELETE FROM HopDong WHERE MaHopDong=@Ma";
+            string sql = "DELETE FROM HopDong WHERE MaHopDong=@MaHD";
             using (SqlConnection con = new SqlConnection(conn.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(sql, con))
             {
-                cmd.Parameters.AddWithValue("@Ma", ma);
+                cmd.Parameters.Add("@MaHD", SqlDbType.VarChar, 10).Value = maHD;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
         }
-        //Tìm kiếm hợp đồng
         public DataTable TimKiemHopDong(string maHopDong, string maNV)
         {
+            DataTable dt = new DataTable();
             string sql = @"SELECT *
                    FROM HopDong
                    WHERE (@MaHopDong = '' OR MaHopDong = @MaHopDong)
-                   AND (@MaNV = '' OR MaNV = @MaNV)";
+                     AND (@MaNV = '' OR MaNV = @MaNV)";
 
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@MaHopDong", maHopDong);
-            cmd.Parameters.AddWithValue("@MaNV", maNV);
+            using (SqlConnection con = new SqlConnection(conn.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.Add("@MaHopDong", SqlDbType.VarChar, 10).Value = maHopDong;
+                cmd.Parameters.Add("@MaNV", SqlDbType.VarChar, 10).Value = maNV;
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+            }
             return dt;
         }
-        //Thông báo hợp đồng sắp hết hạn
+
         public DataTable LayHopDongSapHetHan(int soNgay)
         {
             string sql = @"
-        SELECT *
-        FROM HopDong
-        WHERE DATEDIFF(day, GETDATE(), NgayKetThuc) <= @SoNgay
-              AND DATEDIFF(day, GETDATE(), NgayKetThuc) >= 0";
+                SELECT *
+                FROM HopDong
+                WHERE DATEDIFF(day, GETDATE(), NgayKetThuc) <= @SoNgay
+                      AND DATEDIFF(day, GETDATE(), NgayKetThuc) >= 0";
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@SoNgay", soNgay);

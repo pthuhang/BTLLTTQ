@@ -24,14 +24,29 @@ namespace QUANLYNHANSU.GUI
         }
         private void frmQLNSHopDong_Load(object sender, EventArgs e)
         {
+            txtMaHD.ReadOnly = true;
+            txtThoiHan.ReadOnly = true;
             HienThiDanhSach();
             dgvHopDong.ReadOnly = true;
             dgvHopDong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvHopDong.AllowUserToAddRows = false;
 
             EnableForm(false);
-            SetDefaultButtonState();
+            batBtn();
             btnLuu.Enabled = false;
+        }
+        private void ClearForm()
+        {
+            txtMaHD.Clear();
+            txtThoiHan.Clear();
+            txtHSLuong.Clear();
+            txtMaNV.Clear();
+            txtLanKi.Clear();
+            txtNoiDung.Clear();
+            txtLuongCoBan.Clear();
+            dtpNgayBD.Value = DateTime.Now;
+            dtpNgayKT.Value = DateTime.Now;
+            txtMaHD.Focus();
         }
         private void EnableForm(bool enable)
         {
@@ -45,8 +60,9 @@ namespace QUANLYNHANSU.GUI
             dtpNgayKT.Enabled=enable;
             txtLuongCoBan.Enabled=enable;
         }
-        private void SetDefaultButtonState()
+        private void batBtn()
         {
+            btnLuu.Enabled = true;
             btnThem.Enabled = true;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -69,6 +85,8 @@ namespace QUANLYNHANSU.GUI
 
             dgvHopDong.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+        //-----THÊM, SỬA, XÓA-----
         private void btnThem_Click(object sender, EventArgs e)
         {
             currentAction = "Them";
@@ -78,6 +96,8 @@ namespace QUANLYNHANSU.GUI
             btnLuu.Enabled = true;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
+
+            dtpNgayBD.Focus();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
@@ -89,7 +109,7 @@ namespace QUANLYNHANSU.GUI
 
             currentAction = "Sua";
             EnableForm(true);
-            txtMaHD.Enabled = false; // không cho sửa mã hợp đồng
+            txtMaHD.ReadOnly = true; 
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
             btnXoa.Enabled = false;
@@ -123,25 +143,13 @@ namespace QUANLYNHANSU.GUI
                 }
             }
         }
-        private void ClearForm()
-        {
-            txtMaHD.Clear();
-            txtThoiHan.Clear();
-            txtHSLuong.Clear();
-            txtMaNV.Clear();
-            txtLanKi.Clear();
-            txtNoiDung.Clear();
-            txtLuongCoBan.Clear();
-            dtpNgayBD.Value = DateTime.Now;
-            dtpNgayKT.Value = DateTime.Now;
-            txtMaHD.Focus();
-        }
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (!ValidateHopDong())
+                return;
             try
             {
-                string maHD = txtMaHD.Text.Trim();
-                string thoiHan = txtThoiHan.Text.Trim();
+
                 string maNV = txtMaNV.Text.Trim();
                 string noiDung = txtNoiDung.Text.Trim();
                 string lanKi = txtLanKi.Text.Trim();
@@ -149,48 +157,46 @@ namespace QUANLYNHANSU.GUI
                 DateTime ngayKT = dtpNgayKT.Value;
                 decimal luongCB = Convert.ToDecimal(txtLuongCoBan.Text.Trim());
 
+                int tongThang = ((ngayKT.Year - ngayBD.Year) * 12) + ngayKT.Month - ngayBD.Month;
+                int nam = tongThang / 12;
+                int thang = tongThang % 12;
 
-                if (string.IsNullOrEmpty(maHD) || string.IsNullOrEmpty(maNV))
+                string thoiHan = (nam > 0 ? nam + " năm " : "") + (thang > 0 ? thang + " tháng" : "");
+                txtThoiHan.Text = thoiHan;
+
+                float heSoLuong = 0;
+                if (!float.TryParse(txtHSLuong.Text.Trim(), out heSoLuong))
                 {
-                    MessageBox.Show("Vui lòng nhập Mã hợp đồng và Mã nhân viên!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Hệ số lương không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (!float.TryParse(txtHSLuong.Text.Trim(), out float heSoLuong))
+                string maHD = bll.TaoMaHD(maNV, ngayBD, ngayKT);
+
+                if (!bll.KiemTraNhanVienTonTai(maNV))
                 {
-                    MessageBox.Show("Hệ số lương không hợp lệ!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nhân viên không tồn tại!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                if (ngayKT < ngayBD)
-                {
-                    MessageBox.Show("Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu!", "Lỗi ngày", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
                 // Xử lý theo hành động
                 if (currentAction == "Them")
                 {
-                    if (bll.TonTaiNV(maHD))
+                    if (bll.KiemTraHopDongTonTai(maNV, ngayBD, ngayKT))
                     {
-                        MessageBox.Show($"Mã hợp đồng '{maHD}' đã tồn tại!", "Trùng mã", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Nhân viên đã có hợp đồng trong khoảng thời gian này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-
-                    if (!dal.KiemTraMaNVTonTai(maNV))
-                    {
-                        MessageBox.Show($"Mã nhân viên '{maNV}' không tồn tại trong hệ thống!", "Lỗi khóa ngoại", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-
                     bll.Them(maHD, thoiHan, ngayBD, ngayKT,noiDung, lanKi, heSoLuong, luongCB, maNV);
 
                     MessageBox.Show("Thêm hợp đồng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (currentAction == "Sua")
                 {
-
+                    if (bll.KiemTraHopDongTonTai(maNV, ngayBD, ngayKT, maHD))
+                    {
+                        MessageBox.Show("Nhân viên đã có hợp đồng trùng khoảng thời gian này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     bll.CapNhat(maHD, thoiHan, ngayBD, ngayKT,noiDung, lanKi, heSoLuong,luongCB, maNV);
 
                     MessageBox.Show("Cập nhật hợp đồng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -205,9 +211,7 @@ namespace QUANLYNHANSU.GUI
                 ClearForm();
                 EnableForm(false);
                 btnLuu.Enabled = false;
-                btnThem.Enabled = true;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
+                batBtn();
                 currentAction = "";
 
             }
@@ -239,7 +243,7 @@ namespace QUANLYNHANSU.GUI
             }
         }
 
-        //Tìm kiếm hợp đồng
+        //Tìm kiếm
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             string maHD = txtMaHDTimKiem.Text.Trim(); 
@@ -249,7 +253,7 @@ namespace QUANLYNHANSU.GUI
 
             if (dt.Rows.Count > 0)
             {
-                dgvHopDong.DataSource = dt; // hiển thị kết quả lên DataGridView
+                dgvHopDong.DataSource = dt; 
             }
             else
             {
@@ -258,6 +262,7 @@ namespace QUANLYNHANSU.GUI
             }
         }
 
+        // LỌC
         private void btnHopDongSapHetHan_Click(object sender, EventArgs e)
         {
             try
@@ -290,8 +295,7 @@ namespace QUANLYNHANSU.GUI
                 txtMaHDTimKiem.Clear();
                 ClearForm();
                 EnableForm(false);
-                SetDefaultButtonState();
-                MessageBox.Show("Đã tải lại danh sách tất cả hợp đồng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                batBtn();
             }
             catch (Exception ex)
             {
@@ -299,9 +303,69 @@ namespace QUANLYNHANSU.GUI
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        //-----Validate-----
+        private bool ValidateHopDong()
         {
+            ePLoiValidate.Clear();
+            bool ok = true;
 
+            // Thời hạn
+            if (!string.IsNullOrWhiteSpace(txtThoiHan.Text) && txtThoiHan.Text.Length > 50)
+            {
+                ePLoiValidate.SetError(txtThoiHan, "Thời hạn không vượt quá 50 ký tự!");
+                ok = false;
+            }
+
+            // Ngày bắt đầu
+            if (!dtpNgayBD.Checked)
+            {
+                ePLoiValidate.SetError(dtpNgayBD, "Vui lòng chọn ngày bắt đầu hợp đồng!");
+                ok = false;
+            }
+
+            // Ngày kết thúc
+            if (dtpNgayKT.Checked && dtpNgayKT.Value < dtpNgayBD.Value)
+            {
+                ePLoiValidate.SetError(dtpNgayKT, "Ngày kết thúc phải sau ngày bắt đầu!");
+                ok = false;
+            }
+
+            // Nội dung
+            if (!string.IsNullOrWhiteSpace(txtNoiDung.Text) && txtNoiDung.Text.Length > 300)
+            {
+                ePLoiValidate.SetError(txtNoiDung, "Nội dung không vượt quá 300 ký tự!");
+                ok = false;
+            }
+
+            // Hệ số lương
+            if (!string.IsNullOrWhiteSpace(txtHSLuong.Text))
+            {
+                if (!float.TryParse(txtHSLuong.Text, out float hs) || hs < 0)
+                {
+                    ePLoiValidate.SetError(txtHSLuong, "Hệ số lương phải là số >= 0!");
+                    ok = false;
+                }
+            }
+
+            // Lương cơ bản
+            if (!string.IsNullOrWhiteSpace(txtLuongCoBan.Text))
+            {
+                if (!decimal.TryParse(txtLuongCoBan.Text, out decimal luong) || luong < 0)
+                {
+                    ePLoiValidate.SetError(txtLuongCoBan, "Lương cơ bản phải >= 0!");
+                    ok = false;
+                }
+            }
+
+            // Mã nhân viên (có thể null, nhưng nếu nhập phải <=10 ký tự)
+            if (!string.IsNullOrWhiteSpace(txtMaNV.Text) && txtMaNV.Text.Length > 10)
+            {
+                ePLoiValidate.SetError(txtMaNV, "Mã nhân viên không vượt quá 10 ký tự!");
+                ok = false;
+            }
+
+            return ok;
         }
+
     }
 }

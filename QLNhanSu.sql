@@ -1,6 +1,6 @@
 ﻿
-select * from LoaiCong
-
+select * from TaiKhoan
+insert into TaiKhoan values('TK02', 'staff', '123', 'NV03', N'Người dùng')
 --create database QLNhanSu
 --use QLNhanSu
 -- =========================
@@ -55,6 +55,7 @@ CREATE TABLE NhanVien (
     FOREIGN KEY (MaPhongBan) REFERENCES PhongBan(MaPhongBan),
     FOREIGN KEY (MaTrinhDo) REFERENCES TrinhDo(MaTrinhDo)
 );
+
 
 
 
@@ -141,10 +142,12 @@ CREATE TABLE TaiKhoan (
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
 GO
-
+--MaNV, VaiTro không được null
+select * from NhanVien where MaNV='NV03'
 INSERT INTO TaiKhoan VALUES ('TK01', 'admin', '123', 'NV01', N'Quản trị viên');
 INSERT INTO TaiKhoan VALUES ('TK02', 'staff', '123', 'NV02', N'Người dùng');
 GO
+sp_help 'NhanVien';
 
 
 -- =========================
@@ -166,6 +169,8 @@ CREATE TABLE BangLuong (
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
 GO
+SELECT TOP 1 *
+FROM NhanVien
 
 
 -- =========================
@@ -265,4 +270,92 @@ CREATE TABLE TangCa_NhanVien (
     PRIMARY KEY (MaNV, NgayTangCa),
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
+
+
+---15/11
+
+SELECT 
+    name AS ConstraintName,
+    OBJECT_NAME(parent_object_id) AS TableName
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('dbo.PhuCap_NhanVien');
+
+ALTER TABLE PhuCap_NhanVien
+DROP CONSTRAINT FK__PhuCap_Nha__MaNV__02084FDA;
+
+ALTER TABLE PhuCap_NhanVien
+ADD CONSTRAINT FK_PhuCap_Nha_MaNV_02084FDA
+FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+ON DELETE CASCADE;
+--
+-- TangCa_NhanVien
+SELECT 
+    name AS ConstraintName,
+    OBJECT_NAME(parent_object_id) AS TableName
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('dbo.TangCa_NhanVien');
+ALTER TABLE TangCa_NhanVien
+DROP CONSTRAINT [FK__TangCa_Nha__MaNV__3D2915A8]; 
+ALTER TABLE TangCa_NhanVien
+ADD CONSTRAINT FK_TangCa_NhanVien_NhanVien
+FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+ON DELETE CASCADE;
+
+-- Khen_NhanVien
+SELECT 
+    name AS ConstraintName,
+    OBJECT_NAME(parent_object_id) AS TableName
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('dbo.Khen_NhanVien');
+ALTER TABLE Khen_NhanVien
+DROP CONSTRAINT [FK__Khen_NhanV__MaNV__05D8E0BE];
+ALTER TABLE Khen_NhanVien
+ADD CONSTRAINT FK_Khen_NhanVien_NhanVien
+FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+ON DELETE CASCADE;
+
+-- KiLuat_NhanVien
+SELECT 
+    name AS ConstraintName,
+    OBJECT_NAME(parent_object_id) AS TableName
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('dbo.KiLuat_NhanVien');
+ALTER TABLE KiLuat_NhanVien
+DROP CONSTRAINT [FK__KiLuat_Nha__MaNV__09A971A2];
+ALTER TABLE KiLuat_NhanVien
+ADD CONSTRAINT FK_KiLuat_NhanVien_NhanVien
+FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+ON DELETE CASCADE;
+
+-- LoaiCong_NhanVien
+SELECT 
+    name AS ConstraintName,
+    OBJECT_NAME(parent_object_id) AS TableName
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('dbo.LoaiCong_NhanVien');
+ALTER TABLE LoaiCong_NhanVien
+DROP CONSTRAINT [FK__LoaiCong_N__MaNV__797309D9];
+ALTER TABLE LoaiCong_NhanVien
+ADD CONSTRAINT FK_LoaiCong_NhanVien_NhanVien
+FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+ON DELETE CASCADE;
+
+--HopDong
+SELECT 
+    name AS ConstraintName,
+    OBJECT_NAME(parent_object_id) AS TableName
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('dbo.HopDong');
+
+ALTER TABLE HopDong
+DROP CONSTRAINT FK__HopDong__MaNV__571DF1D5;
+
+ALTER TABLE HopDong
+ADD CONSTRAINT FK_HopDong_NhanVien
+FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
+ON DELETE CASCADE;
+
+
+
+
 

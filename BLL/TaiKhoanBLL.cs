@@ -12,6 +12,10 @@ namespace QUANLYNHANSU.BLL
     public class TaiKhoanBLL
     {
         private TaiKhoanDAL dal = new TaiKhoanDAL();
+        public string TaoMaTK(string maNV)
+        {
+            return dal.TaoMaTaiKhoan(maNV);
+        }
         //
         public DataRow DangNhap(string tenDangNhap, string matKhau)
         {
@@ -30,6 +34,20 @@ namespace QUANLYNHANSU.BLL
         {
             return dal.LayTaiKhoanTheoTenDangNhap(tenDangNhap);
         }
+        //
+        public bool KiemTraNhanVien(string maNV)
+        {
+            return dal.KiemTraNhanVienTonTai(maNV);
+        }
+        public bool KiemTraTonTai(string maNV)
+        {
+            return dal.KiemTraTonTaiTaiKhoan(maNV);
+        }
+        public bool KiemTraTenDangNhap(string tenDangNhap, string maNguoiDungHienTai = null)
+        {
+            return dal.KiemTraTonTaiTenDangNhap(tenDangNhap, maNguoiDungHienTai);
+        }
+        //
         public void Them(string maND, string tenDN, string matKhau, string maNV, string vaiTro)
         {
             dal.Them(maND, tenDN, matKhau, maNV, vaiTro);
